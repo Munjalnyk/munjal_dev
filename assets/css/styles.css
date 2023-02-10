@@ -182,7 +182,7 @@ img {
 @media screen and (min-width: 767px) {
   .nav_menu{
     position: fixed;
-    bottom: -100%;
+    bottom: 0;
     left: 0;
     width: 100%;
     background-color: var(--body-color);
@@ -217,7 +217,7 @@ img {
 .nav__close{
   position: absolute;
   right: 1.3rem;
-  bottom: .5rem;
+  bottom: 0.5rem;
   font-size: 1.5rem;
   cursor: pointer;
   color: var(--first-color);
