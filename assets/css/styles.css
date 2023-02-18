@@ -401,7 +401,9 @@ img {
 .button--white:hover {
     background-color: #fff;
 }
-
+.button--invalid {
+    transform: translateX(-50%);
+  }
 /*==================== ABOUT ====================*/
 .about__img {
     width: 200px;

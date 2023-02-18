@@ -132,36 +132,29 @@ var swiperTestimonial = new Swiper(".testimonial__container", {
         },
     },
 });
-const submitButton = document.getElementById("submit");
-const requiredFields = document.querySelectorAll("input[required], textarea[required]");
-
-submitButton.addEventListener("mousemove", function(event) {
-  for (let field of requiredFields) {
-    if (!field.value) {
-      const buttonWidth = submitButton.offsetWidth;
-      const buttonHeight = submitButton.offsetHeight;
-      const mouseX = event.clientX;
-      const mouseY = event.clientY;
-  
-      const buttonX = submitButton.getBoundingClientRect().left + window.pageXOffset;
-      const buttonY = submitButton.getBoundingClientRect().top + window.pageYOffset;
-  
-      const offsetX = (mouseX - buttonX - (buttonWidth / 2)) * 0.1;
-      const offsetY = (mouseY - buttonY - (buttonHeight / 2)) * 0.1;
-  
-      submitButton.style.transform = "translate(" + offsetX + "px, " + offsetY + "px)";
+$(document).ready(function() {
+    // When the submit button is clicked
+    $('#submit-button').click(function(e) {
+      // Check if any required fields are empty
+      var emptyFields = $('input[required], textarea[required]').filter(function() {
+        return $(this).val() === '';
+      });
       
-      return;
-    }
-  }
+      if (emptyFields.length) {
+        // Prevent the form from submitting
+        e.preventDefault();
+        
+        // Add a class to the submit button to move it sideways
+        $('#submit-button').addClass('button--invalid');
+        
+        // Remove the class when the user focuses on a required field
+        $('input[required], textarea[required]').on('focus', function() {
+          $('#submit-button').removeClass('button--invalid');
+        });
+      }
+    });
+  });
   
-  submitButton.style.transform = "";
-});
-
-submitButton.addEventListener("mouseleave", function(event) {
-  submitButton.style.transform = "";
-});
-
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll("section[id]");
 
