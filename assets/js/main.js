@@ -139,7 +139,7 @@ function mouseOver(){
     const name = document.forms['suForm']['name'].value;
     const email = document.forms['suForm']['email'].value;
     const pass = document.forms['suForm']['pass'].value;
-    const tick = document.querySelector('#check');
+    
 
     const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
