@@ -1,3 +1,10 @@
+var typed = new Typed(".multiple-text", {
+    strings: ["Electrical Engineer", "Web Developer", "Embedded Systems Engineer", "Server and Network Administrator"],
+    typeSpeed: 100,
+    backSpeed: 100,
+    loop: true,
+});
+
 /*==================== MENU SHOW Y HIDDEN ====================*/
 const navMenu = document.getElementById("nav-menu");
 const navToggle = document.getElementById("nav-toggle");
