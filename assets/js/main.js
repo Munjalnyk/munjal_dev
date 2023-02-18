@@ -1,7 +1,8 @@
 var typed = new Typed(".multiple-text", {
     strings: ["Electrical Engineer", "Web Developer", "Embedded Systems Engineer", "Server and Network Administrator"],
-    typeSpeed: 100,
+    typeSpeed: 60,
     backSpeed: 100,
+    backDelay: 1000,
     loop: true,
 });
 
