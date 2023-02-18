@@ -186,7 +186,7 @@ function buttonMoveLeft(){
 function buttonMoveRight(){
 
     const button = document.getElementById('submit-btn');
-    button.style.transform = 'translateX(160%)';
+    button.style.transform = 'translateX(130%)';
 
 };
 
