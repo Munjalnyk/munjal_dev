@@ -402,7 +402,7 @@ img {
     background-color: #fff;
 }
 #submit-btn {
-    width: 100px;
+    width: 170px;
     padding: 0 30px;
     background-color: #5271FF;
     border: 1px solid transparent;
@@ -417,6 +417,7 @@ img {
     float: right;
     margin: 35px 5% 12px 0;
     cursor: default;
+    align-items: center;
   }
 /*==================== ABOUT ====================*/
 .about__img {
