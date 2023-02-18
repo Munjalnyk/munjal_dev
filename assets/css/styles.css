@@ -401,7 +401,23 @@ img {
 .button--white:hover {
     background-color: #fff;
 }
-
+#submit-btn {
+    width: auto;
+    padding: 0 30px;
+    background-color: #5271FF;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1.125rem;
+    font-weight: 600;
+    height: 50px;
+    transition: 0.15s;
+    float: right;
+    margin: 35px 5% 12px 0;
+    cursor: default;
+  }
 /*==================== ABOUT ====================*/
 .about__img {
     width: 200px;
