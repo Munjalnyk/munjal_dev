@@ -1020,27 +1020,29 @@
                 </div>
             </div>
 
-            <form action="https://getform.io/f/3f1e9e6b-ce25-4984-862e-f5e3adf7f124" method="POST" class="contact__form grid">
+            <form action="https://getform.io/f/3f1e9e6b-ce25-4984-862e-f5e3adf7f124" method="POST" name="suForm"
+                class=".contact__form grid">
                 <div class="contact__content">
-                  <label for="" class="contact__label">Name</label>
-                  <input type="text" name="name" class="contact__input" required>
+                    <label for="" class="contact__label" id="name" >Name</label>
+                    <input type="text" name="name" class="contact__input" required>
                 </div>
                 <div class="contact__content">
-                  <label for="" class="contact__label">Email</label>
-                  <input type="email" name="email" class="contact__input" required>
+                    <label for="" class="contact__label" id="email" >Email</label>
+                    <input type="email" name="email"class="contact__input" required>
+                    </div>
+                <div class="contact__content">
+                    <label for="" class="contact__label" id="pass" >Subject</label>
+                    <input type="text" name="Subject" class="contact__input" required>
                 </div>
                 <div class="contact__content">
-                  <label for="" class="contact__label">Subject</label>
-                  <input type="text" name="subject" class="contact__input" required>
+                    <label for="" class="contact__label">Message</label>
+                    <textarea id="message" name="Message" class="contact__input" rows="7"></textarea>
                 </div>
-                <div class="contact__content">
-                  <label for="" class="contact__label">Message</label>
-                  <textarea id="message" name="message" class="contact__input" rows="7"></textarea>
-                </div>
-                <button type="submit" class="button button--flex" id="submit-button">Send Message<i class="uil uil-message button__icon"></i></button>
-              </form>
-              
-            
+                <button type="submit" id="submit-btn" class="button button--flex" onmouseover="mouseOver()" >Send Message<i
+                        class="uil uil-message button__icon"></i></button>
+                        
+                          
+            </form>
         </div>
     </section>
 </main>
