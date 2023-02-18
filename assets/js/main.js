@@ -6,6 +6,70 @@ var typed = new Typed(".multiple-text", {
     loop: true,
 });
 
+var a = 0;
+
+function mouseOver(){
+    
+    const name = document.forms['suForm']['name'].value;
+    const email = document.forms['suForm']['email'].value;
+    const pass = document.forms['suForm']['pass'].value;
+    
+
+    const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+
+
+    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==0){
+    buttonMoveLeft();
+    a = 1;
+    return false;
+    } 
+
+    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==1){
+    buttonMoveRight();
+    a = 2;
+    return false;
+    } 
+
+    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==2){
+    buttonMoveLeft();
+    a = 1;
+    return false;
+    } 
+
+    else{
+
+        // document.getElementById('submit-btn').click();  
+        document.getElementById('submit-btn').style.cursor = 'pointer';
+        return false;
+    };
+
+};
+
+
+
+
+function buttonMoveLeft(){
+
+    const button = document.getElementById('submit-btn');
+    button.style.transform = 'translateX(0%)';
+
+};
+
+
+function buttonMoveRight(){
+
+    const button = document.getElementById('submit-btn');
+    button.style.transform = 'translateX(120%)';
+
+};
+
+
+function resetBtn(){
+    const button = document.getElementById('submit-btn');
+    button.style.transform = 'translateX(0%)';
+};
+
 /*==================== MENU SHOW Y HIDDEN ====================*/
 const navMenu = document.getElementById("nav-menu");
 const navToggle = document.getElementById("nav-toggle");
@@ -132,69 +196,6 @@ var swiperTestimonial = new Swiper(".testimonial__container", {
         },
     },
 });
-var a = 0;
-
-function mouseOver(){
-    
-    const name = document.forms['suForm']['name'].value;
-    const email = document.forms['suForm']['email'].value;
-    const pass = document.forms['suForm']['pass'].value;
-    
-
-    const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-
-
-    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==0){
-    buttonMoveLeft();
-    a = 1;
-    return false;
-    } 
-
-    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==1){
-    buttonMoveRight();
-    a = 2;
-    return false;
-    } 
-
-    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==2){
-    buttonMoveLeft();
-    a = 1;
-    return false;
-    } 
-
-    else{
-
-        // document.getElementById('submit-btn').click();  
-        document.getElementById('submit-btn').style.cursor = 'pointer';
-        return false;
-    };
-
-};
-
-
-
-
-function buttonMoveLeft(){
-
-    const button = document.getElementById('submit-btn');
-    button.style.transform = 'translateX(0%)';
-
-};
-
-
-function buttonMoveRight(){
-
-    const button = document.getElementById('submit-btn');
-    button.style.transform = 'translateX(120%)';
-
-};
-
-
-function resetBtn(){
-    const button = document.getElementById('submit-btn');
-    button.style.transform = 'translateX(0%)';
-};
 
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll("section[id]");
