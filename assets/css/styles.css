@@ -404,7 +404,7 @@ img {
 #submit-btn {
     width: 170px;
     padding: 0 30px;
-    background-color: #5271FF;
+    background-color: var(--first-color);
     border: 1px solid transparent;
     border-radius: .75rem;
     color: #FFFFFF;
