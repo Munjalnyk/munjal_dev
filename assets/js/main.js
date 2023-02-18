@@ -132,22 +132,7 @@ var swiperTestimonial = new Swiper(".testimonial__container", {
         },
     },
 });
-const button = document.getElementById('move-btn');
-document.addEventListener('mousemove', function(event) {
-  const x = event.clientX;
-  const y = event.clientY;
-  const buttonRect = button.getBoundingClientRect();
-  const buttonX = buttonRect.left + (buttonRect.width / 2);
-  const buttonY = buttonRect.top + (buttonRect.height / 2);
-  const deltaX = x - buttonX;
-  const deltaY = y - buttonY;
-  const distance = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-  const maxDistance = 200;
-  const moveAmount = (distance / maxDistance) * 10;
-  const moveX = (deltaX / distance) * moveAmount;
-  const moveY = (deltaY / distance) * moveAmount;
-  button.style.transform = `translate(${moveX}px, ${moveY}px)`;
-});
+
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll("section[id]");
 

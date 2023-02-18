@@ -68,18 +68,7 @@
         --smaller-font-size: 0.813rem;
     }
 }
-#move-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    transition: all 0.2s ease-in-out;
-  }
+
 /*========== Variables Dark theme ==========*/
 body.dark-theme {
     --first-color-second: hsl(var(--hue-color), 30%, 8%);
