@@ -245,11 +245,21 @@ window.addEventListener("scroll", scrollUp);
 const themeButton = document.getElementById("theme-button");
 const darkTheme = "dark-theme";
 const iconTheme = "uil-sun";
-const video = document.getElementById("my-video");
-var currentHour = new Date().getHours();
-var themeToggleCount = 0;
-var videoTimer;
+let clickCount = 0;
+let videoTimeout;
 
+const playVideo = () => {
+  const videoContainer = document.getElementById("video-container");
+  const video = document.getElementById("my-video");
+
+  videoContainer.style.display = "block";
+  video.play();
+
+  videoTimeout = setTimeout(() => {
+    video.pause();
+    videoContainer.style.display = "none";
+  }, 10000);
+};
 
 // Previously selected theme (if user selected)
 const selectedTheme = localStorage.getItem("selected-theme");
@@ -291,17 +301,11 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
    // Increment theme toggle count and check if it has reached 4
-   themeToggleCount++;
-   if (themeToggleCount == 4) {
-       // Play video in full screen mode
-       video.requestFullscreen();
-       
-       // Set timer to stop video after 10 seconds
-       videoTimer = setTimeout(() => {
-           video.pause();
-           video.currentTime = 0;
-           document.exitFullscreen();
-           themeToggleCount = 0; // Reset theme toggle count
-       }, 10000);
+   clickCount++;
+
+        if (clickCount === 4) {
+          clickCount = 0;
+          playVideo();
+        }
    }
-});
+);
