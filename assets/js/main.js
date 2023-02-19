@@ -294,7 +294,7 @@ const themeButton = document.getElementById("theme-button");
             document.exitFullscreen();
             videoPlayer.style.display = "none";
             clickCount = 0;
-          }, 13000);
+          }, 10000);
         }
         // Add or remove the dark / icon theme
         document.body.classList.toggle(darkTheme);
