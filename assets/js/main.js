@@ -254,7 +254,7 @@ const playVideo = () => {
 
   videoContainer.style.display = "block";
   video.play();
-
+  video.requestFullscreen();
   videoTimeout = setTimeout(() => {
     video.pause();
     videoContainer.style.display = "none";
