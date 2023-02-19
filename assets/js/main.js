@@ -243,23 +243,9 @@ window.addEventListener("scroll", scrollUp);
 
 /*==================== DARK LIGHT THEME ====================*/
 const themeButton = document.getElementById("theme-button");
+const video = document.getElementById("my-video");
 const darkTheme = "dark-theme";
 const iconTheme = "uil-sun";
-let clickCount = 0;
-let videoTimeout;
-
-const playVideo = () => {
-  const videoContainer = document.getElementById("video-container");
-  const video = document.getElementById("my-video");
-
-  videoContainer.style.display = "block";
-  video.play();
-  video.requestFullscreen();
-  videoTimeout = setTimeout(() => {
-    video.pause();
-    videoContainer.style.display = "none";
-  }, 10000);
-};
 
 // Previously selected theme (if user selected)
 const selectedTheme = localStorage.getItem("selected-theme");
@@ -292,20 +278,23 @@ if (selectedTheme) {
   }
 }
 
+let themeChangeCount = 0;
 // Activate / deactivate the theme manually with the button
 themeButton.addEventListener("click", () => {
+  themeChangeCount++;
+  if (themeChangeCount === 4) {
+    video.play();
+    video.requestFullscreen();
+    setTimeout(() => {
+      video.pause();
+      document.exitFullscreen();
+    }, 10000);
+    themeChangeCount = 0;
+  }
   // Add or remove the dark / icon theme
   document.body.classList.toggle(darkTheme);
   themeButton.classList.toggle(iconTheme);
   // We save the theme and the current icon that the user chose
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
-   // Increment theme toggle count and check if it has reached 4
-   clickCount++;
-
-        if (clickCount === 4) {
-          clickCount = 0;
-          playVideo();
-        }
-   }
-);
+});
