@@ -197,8 +197,12 @@ var swiperTestimonial = new Swiper(".testimonial__container", {
     },
 });
 function showPopup() {
-    alert("Thanks for exploring! This website cointains easter-eggs. If you find one, feel free to contact me!");
-  }
+    document.getElementById("popup").style.display = "block";
+}
+
+function hidePopup() {
+    document.getElementById("popup").style.display = "none";
+}
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll("section[id]");
 
