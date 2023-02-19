@@ -243,7 +243,6 @@ window.addEventListener("scroll", scrollUp);
 
 /*==================== DARK LIGHT THEME ====================*/
 const themeButton = document.getElementById("theme-button");
-const video = document.getElementById("my-video");
 const darkTheme = "dark-theme";
 const iconTheme = "uil-sun";
 
@@ -278,22 +277,24 @@ if (selectedTheme) {
   }
 }
 
-let themeChangeCount = 0;
 // Activate / deactivate the theme manually with the button
+let clickCount = 0;
 themeButton.addEventListener("click", () => {
-  themeChangeCount++;
-  if (themeChangeCount === 4) {
+  clickCount++;
+  if (clickCount === 4) {
+    const video = document.getElementById("my-video");
     video.play();
     video.requestFullscreen();
     setTimeout(() => {
       video.pause();
       document.exitFullscreen();
     }, 10000);
-    themeChangeCount = 0;
   }
+  
   // Add or remove the dark / icon theme
   document.body.classList.toggle(darkTheme);
   themeButton.classList.toggle(iconTheme);
+  
   // We save the theme and the current icon that the user chose
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
