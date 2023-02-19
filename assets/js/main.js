@@ -286,8 +286,9 @@ const themeButton = document.getElementById("theme-button");
         if (clickCount === 4) {
           videoPlayer = document.getElementById("my-video");
           videoPlayer.style.display = "block";
-          video.style.objectFit = "contain";
+          
           videoPlayer.play();
+          video.style.objectFit = "contain";
           videoPlayer.requestFullscreen();
           setTimeout(() => {
             videoPlayer.pause();
