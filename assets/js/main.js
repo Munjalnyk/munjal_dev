@@ -288,8 +288,9 @@ const themeButton = document.getElementById("theme-button");
           videoPlayer.style.display = "block";
           
           videoPlayer.play();
-          video.style.objectFit = "contain";
+          
           videoPlayer.requestFullscreen();
+          video.style.objectFit = "contain";
           setTimeout(() => {
             videoPlayer.pause();
             videoPlayer.currentTime = 0;
