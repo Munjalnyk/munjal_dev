@@ -286,18 +286,18 @@ const themeButton = document.getElementById("theme-button");
         if (clickCount === 4) {
           videoPlayer = document.getElementById("my-video");
           videoPlayer.style.display = "block";
-          
+          videoPlayer.style.objectFit = "contain !important";
           videoPlayer.play();
           
           videoPlayer.requestFullscreen();
-          video.style.objectFit = "contain !important";
+          
           setTimeout(() => {
             videoPlayer.pause();
             videoPlayer.currentTime = 0;
             document.exitFullscreen();
             videoPlayer.style.display = "none";
             clickCount = 0;
-          }, 10000);
+          }, 7000);
         }
         // Add or remove the dark / icon theme
         document.body.classList.toggle(darkTheme);
