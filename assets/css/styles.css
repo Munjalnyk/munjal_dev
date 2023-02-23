@@ -55,6 +55,9 @@
     --z-fixed: 100;
     --z-modal: 1000;
 }
+.swiper-pagination-bullet-active {
+    background-color: hsl(0, 100%, 50%);
+  }
 ::selection {
     background-color: hsl(282, 100%, 50%);
     color: white;
