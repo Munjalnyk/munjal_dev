@@ -917,7 +917,11 @@ img {
 .swiper-button-next1 {
     right: 0;
 }
-
+.testimonial__slider {
+    overflow: visible; /* Add this line */
+    position: relative;
+    padding: var(--mb-3) 0;
+  }
 .swiper-container.testimonial__slider {
     margin-bottom: 4rem;
 }
