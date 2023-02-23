@@ -913,11 +913,11 @@ img {
     content: "";
 }
 .swiper-button-prev1 {
-    left: -0.8rem;
+    left: -0.5rem;
 }
 
 .swiper-button-next1 {
-    right: -2.8rem;
+    right: -12.8rem;
 }
 
 .swiper-container .swiper-pagination-testimonial {
