@@ -906,19 +906,21 @@ img {
   .swiper-button-next1, .swiper-button-prev1 {
     position: relative;
     z-index: 1;
+    left: -0.5rem;
+    right: -43.5rem;
   }
 
 .swiper-button-prev1::after,
 .swiper-button-next1::after {
     content: "";
 }
-.swiper-button-prev1 {
+/* .swiper-button-prev1 {
     left: -0.5rem;
 }
 
 .swiper-button-next1 {
     right: -43.5rem;
-}
+} */
 
 .swiper-container .swiper-pagination-testimonial {
     width: auto;
