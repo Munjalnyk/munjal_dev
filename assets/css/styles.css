@@ -803,11 +803,11 @@ img {
 }
 
 .swiper-button-prev {
-    left: -0.5rem;
+    left: -0.9rem;
 }
 
 .swiper-button-next {
-    right: -0.5rem;
+    right: -0.9rem;
 }
 
 .swiper-container-horizontal > .swiper-pagination-bullets {
