@@ -905,11 +905,11 @@ img {
     content: "";
 }
 .swiper-button-prev1 {
-    left: -0.5rem;
+    left: 0rem;
 }
 
 .swiper-button-next1 {
-    right: -43.5rem;
+    right: 0rem;
 }
 
 .swiper-container .swiper-pagination-testimonial {
