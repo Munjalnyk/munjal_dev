@@ -924,6 +924,7 @@ img {
   }
 .swiper-container.testimonial__slider {
     margin-bottom: 4rem;
+    overflow: visible;
 }
 
 .swiper-container .swiper-pagination-testimonial {
