@@ -8,36 +8,36 @@ var typed = new Typed(".multiple-text", {
 
 var a = 0;
 
-function mouseOver(){
-    
+function mouseOver() {
+
     const name = document.forms['suForm']['name'].value;
     const email = document.forms['suForm']['email'].value;
     const pass = document.forms['suForm']['pass'].value;
-    
+
 
     const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 
 
-    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==0){
-    buttonMoveLeft();
-    a = 1;
-    return false;
-    } 
+    if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 0) {
+        buttonMoveLeft();
+        a = 1;
+        return false;
+    }
 
-    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==1){
-    buttonMoveRight();
-    a = 2;
-    return false;
-    } 
+    if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 1) {
+        buttonMoveRight();
+        a = 2;
+        return false;
+    }
 
-    if((name == "" || !email.match(emailCheck) || pass == "" == false) && a==2){
-    buttonMoveLeft();
-    a = 1;
-    return false;
-    } 
+    if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 2) {
+        buttonMoveLeft();
+        a = 1;
+        return false;
+    }
 
-    else{
+    else {
 
         // document.getElementById('submit-btn').click();  
         document.getElementById('submit-btn').style.cursor = 'pointer';
@@ -49,7 +49,7 @@ function mouseOver(){
 
 
 
-function buttonMoveLeft(){
+function buttonMoveLeft() {
 
     const button = document.getElementById('submit-btn');
     button.style.transform = 'translateX(0%)';
@@ -57,7 +57,7 @@ function buttonMoveLeft(){
 };
 
 
-function buttonMoveRight(){
+function buttonMoveRight() {
 
     const button = document.getElementById('submit-btn');
     button.style.transform = 'translateX(120%)';
@@ -65,7 +65,7 @@ function buttonMoveRight(){
 };
 
 
-function resetBtn(){
+function resetBtn() {
     const button = document.getElementById('submit-btn');
     button.style.transform = 'translateX(0%)';
 };
@@ -250,66 +250,66 @@ window.addEventListener("scroll", scrollUp);
 
 /*==================== DARK LIGHT THEME ====================*/
 const themeButton = document.getElementById("theme-button");
-      const darkTheme = "dark-theme";
-      const iconTheme = "uil-sun";
+const darkTheme = "dark-theme";
+const iconTheme = "uil-sun";
 
-      // Previously selected theme (if user selected)
-      const selectedTheme = localStorage.getItem("selected-theme");
-      const selectedIcon = localStorage.getItem("selected-icon");
+// Previously selected theme (if user selected)
+const selectedTheme = localStorage.getItem("selected-theme");
+const selectedIcon = localStorage.getItem("selected-icon");
 
-      // We obtain the current theme that the interface has by validating the dark-theme class
-      const getCurrentTheme = () =>
-        document.body.classList.contains(darkTheme) ? "dark" : "light";
-      const getCurrentIcon = () =>
-        themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
+// We obtain the current theme that the interface has by validating the dark-theme class
+const getCurrentTheme = () =>
+    document.body.classList.contains(darkTheme) ? "dark" : "light";
+const getCurrentIcon = () =>
+    themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
 
-      // We validate if the user previously chose a theme
-      if (selectedTheme) {
-        // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-        document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
-          darkTheme
-        );
-        themeButton.classList[selectedIcon === "uil-moon" ? "add" : "remove"](
-          iconTheme
-        );
-      } else {
-        // If there's no preference stored, set the theme based on the time of day
-        const hour = new Date().getHours();
-        if (hour >= 6 && hour < 18) {
-          document.body.classList.add("light-theme");
-          themeButton.classList.add("uil-sun");
-        } else {
-          document.body.classList.add("dark-theme");
-          themeButton.classList.add("uil-moon");
-        }
-      }
+// We validate if the user previously chose a theme
+if (selectedTheme) {
+    // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
+    document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
+        darkTheme
+    );
+    themeButton.classList[selectedIcon === "uil-moon" ? "add" : "remove"](
+        iconTheme
+    );
+} else {
+    // If there's no preference stored, set the theme based on the time of day
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 18) {
+        document.body.classList.add("light-theme");
+        themeButton.classList.add("uil-sun");
+    } else {
+        document.body.classList.add("dark-theme");
+        themeButton.classList.add("uil-moon");
+    }
+}
 
-      let clickCount = 0;
-      let videoPlayer;
+let clickCount = 0;
+let videoPlayer;
 
-      // Activate / deactivate the theme manually with the button
-      themeButton.addEventListener("click", () => {
-        clickCount++;
-        if (clickCount === 4) {
-          videoPlayer = document.getElementById("my-video");
-          videoPlayer.style.display = "block";
-          videoPlayer.style.objectFit = "contain";
-          videoPlayer.play();
-          
-          videoPlayer.requestFullscreen();
-          
-          setTimeout(() => {
+// Activate / deactivate the theme manually with the button
+themeButton.addEventListener("click", () => {
+    clickCount++;
+    if (clickCount === 4) {
+        videoPlayer = document.getElementById("my-video");
+        videoPlayer.style.display = "block";
+        videoPlayer.style.objectFit = "contain";
+        videoPlayer.play();
+
+        videoPlayer.requestFullscreen();
+
+        setTimeout(() => {
             videoPlayer.pause();
             videoPlayer.currentTime = 0;
             document.exitFullscreen();
             videoPlayer.style.display = "none";
             clickCount = 0;
-          }, 9000);
-        }
-        // Add or remove the dark / icon theme
-        document.body.classList.toggle(darkTheme);
-        themeButton.classList.toggle(iconTheme);
-        // We save the theme and the current icon that the user chose
-        localStorage.setItem("selected-theme", getCurrentTheme());
-        localStorage.setItem("selected-icon", getCurrentIcon());
-      });
+        }, 9000);
+    }
+    // Add or remove the dark / icon theme
+    document.body.classList.toggle(darkTheme);
+    themeButton.classList.toggle(iconTheme);
+    // We save the theme and the current icon that the user chose
+    localStorage.setItem("selected-theme", getCurrentTheme());
+    localStorage.setItem("selected-icon", getCurrentIcon());
+});
