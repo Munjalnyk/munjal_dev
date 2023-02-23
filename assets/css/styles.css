@@ -859,11 +859,10 @@ img {
     width: 232px;
     justify-self: right;
 }
-.call-us-selector:before {
-    content: url('assets/img/about.jpg');
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 100px; /* adjust this value as needed */
+#call-us-container {
+    position: absolute;
+    top: 100px; /* adjust this value as needed */
+    left: 50px; /* adjust this value as needed */
   }
 /*==================== TESTIMONIAL ====================*/
 .testimonial__container {
