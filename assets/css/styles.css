@@ -863,7 +863,7 @@ img {
     content: url('assets/img/about.jpg');
     display: inline-block;
     vertical-align: middle;
-    margin-right: 10px; /* adjust this value as needed */
+    margin-right: 100px; /* adjust this value as needed */
   }
 /*==================== TESTIMONIAL ====================*/
 .testimonial__container {
