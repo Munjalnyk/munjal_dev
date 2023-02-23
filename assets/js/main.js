@@ -185,8 +185,8 @@ var swiperTestimonial = new Swiper(".testimonial__container", {
     grabCursor: true,
     spaceBetween: 48,
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next1",
+        prevEl: ".swiper-button-prev1",
     },
     pagination: {
         el: ".swiper-pagination",

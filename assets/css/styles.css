@@ -889,6 +889,14 @@ img {
 .testimonial__icon-star {
     color: var(--first-color);
 }
+.testmo__button:hover .button__icon {
+    transform: translateX(0.25rem);
+}
+
+.swiper-button-prev1::after,
+.swiper-button-next1::after {
+    content: "";
+}
 .swiper-button-prev1 {
     left: -0.8rem;
 }
