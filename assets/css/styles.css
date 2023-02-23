@@ -859,11 +859,11 @@ img {
     width: 232px;
     justify-self: right;
 }
-.call-us-selector {
-    background-image: url('assets/img/about.jpg');
-    background-repeat: no-repeat;
-    background-position: left center;
-    padding-left: 50px; /* adjust this value to match the width of your logo */
+.call-us-selector:before {
+    content: url('assets/img/about.jpg');
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px; /* adjust this value as needed */
   }
 /*==================== TESTIMONIAL ====================*/
 .testimonial__container {
