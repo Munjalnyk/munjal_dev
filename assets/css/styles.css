@@ -859,7 +859,12 @@ img {
     width: 232px;
     justify-self: right;
 }
-
+.call-us-selector {
+    background-image: url('assets/img/about.jpg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 50px; /* adjust this value to match the width of your logo */
+  }
 /*==================== TESTIMONIAL ====================*/
 .testimonial__container {
     position: relative;
