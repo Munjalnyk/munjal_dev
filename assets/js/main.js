@@ -184,7 +184,10 @@ var swiperTestimonial = new Swiper(".testimonial__container", {
     loop: true,
     grabCursor: true,
     spaceBetween: 48,
-
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
     pagination: {
         el: ".swiper-pagination",
         clickable: true,
