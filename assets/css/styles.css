@@ -861,8 +861,9 @@ img {
 }
 #call-us-container {
     position: absolute;
-    top: 100px; /* adjust this value as needed */
-    left: 50px; /* adjust this value as needed */
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 /*==================== TESTIMONIAL ====================*/
 .testimonial__container {
