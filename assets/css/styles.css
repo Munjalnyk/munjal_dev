@@ -811,6 +811,9 @@ img {
 .swiper-container-horizontal > .swiper-pagination-bullets {
     bottom: -2.5rem;
 }
+.swiper-pagination-bullet {
+    background-color: hsl(51, 100%, 50%);
+}
 
 .swiper-pagination-bullet-active {
     background-color: hsl(0, 100%, 50%);
