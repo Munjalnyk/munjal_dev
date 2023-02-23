@@ -184,7 +184,14 @@ img {
     z-index: var(--z-fixed);
     background-color: var(--body-color);
 }
-
+.header-callus {
+    position: fixed;
+    font-size: 16px;
+    line-height: 17px;
+    z-index: 99999;
+    left: 20px;
+    bottom: 50px;
+  }
 /*==================== NAV ====================*/
 .nav {
     max-width: 968px;
