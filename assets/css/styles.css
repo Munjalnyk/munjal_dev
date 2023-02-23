@@ -55,7 +55,10 @@
     --z-fixed: 100;
     --z-modal: 1000;
 }
-
+::selection {
+    background-color: hsl(282, 100%, 50%);
+    color: white;
+  }
 /* Font size for large devices */
 @media screen and (min-width: 968px) {
     :root {
