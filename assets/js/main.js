@@ -39,7 +39,7 @@ function mouseOver() {
         b++;
         return false;
     }
-    if (b == 5) {
+    if (b == 2) {
         b = 0;
         window.location.href = "https://munjal.dev/game.html";
     }
