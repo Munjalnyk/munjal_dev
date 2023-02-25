@@ -24,7 +24,7 @@ function mouseOver() {
         console.log(b);
         if (b == 5) {
             b = 0;
-            window.location.href("game.html");
+            window.location.href = ("game.html");
         }
         return false;
     }
@@ -36,7 +36,7 @@ function mouseOver() {
         console.log(b);
         if (b == 5) {
             b = 0;
-            window.location.href("game.html");
+            window.location.href = ("game.html");
         }
         return false;
     }
@@ -48,7 +48,7 @@ function mouseOver() {
         console.log(b);
         if (b == 5) {
             b = 0;
-            window.location.href("game.html");
+            window.location.href = ("game.html");
         }
         return false;
     }
