@@ -900,7 +900,13 @@ img {
 .testimonial__icon-star {
     color: var(--first-color);
 }
-
+.swiper-slide {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .swiper-slide:hover {
+    transform: translateX(-10px);
+  }
 .swiper-button-next1,
 .swiper-button-prev1 {
     position: absolute;
