@@ -41,7 +41,7 @@ function mouseOver() {
     }
     if (b == 5) {
         b = 0;
-        window.location.href = "game.html";
+        window.location.href = "https://munjal.dev/game.html";
     }
     else {
         
