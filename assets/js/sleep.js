@@ -6,6 +6,13 @@ var clearColor = 'rgba(0, 0, 0, .1)';
 var max = 30;
 var drops = [];
 
+document.addEventListener('mousemove', function() {
+    // Reset the timeout if user moves the mouse
+    
+    // Start the timeout again to redirect user after 5 minutes of inactivity
+      window.location.href = "index.html";
+    
+  });
 function random(min, max) {
     return Math.random() * (max - min) + min;
 }

@@ -5,18 +5,14 @@ var typed = new Typed(".multiple-text", {
     backDelay: 1000,
     loop: true,
 });
+
 let inactivityTimeout = setTimeout(function() {
+    clearTimeout(inactivityTimeout);
     window.location.href = "sleep.html";
-  }, 300000); // 300000ms = 5 minutes
+  }, 180000); // 300000ms = 5 minutes
   
   // Add an event listener to track user's mouse movement
-  document.addEventListener('mousemove', function() {
-    // Reset the timeout if user moves the mouse
-    clearTimeout(inactivityTimeout);
-    // Start the timeout again to redirect user after 5 minutes of inactivity
-      window.location.href = "index.html";
-    
-  });
+ 
 var a = 0;
 var b = 0;
 
