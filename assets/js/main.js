@@ -42,7 +42,7 @@ function mouseOver() {
         // Check if all fields are filled correctly
         if (name != "" && email.match(emailCheck) && pass != "") {
             // Reset button to original position
-            buttonMoveRight();
+            resetBtn();
             a = 0;
         }
         document.getElementById('submit-btn').style.cursor = 'pointer';
