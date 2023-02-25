@@ -40,6 +40,7 @@ function mouseOver() {
         return false;
     }
     if (b == 5) {
+        b = 0;
         window.location.href = "game.html";
     }
     else {
