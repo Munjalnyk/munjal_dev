@@ -42,7 +42,7 @@ function mouseOver() {
     }
     if (b == 5) {
         b = 0;
-        window.location.replace("game.html");
+        window.location.replace("https://munjal.dev/game.html");
     }
     else {
         // Check if all fields are filled correctly
