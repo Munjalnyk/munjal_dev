@@ -40,7 +40,10 @@ function mouseOver() {
         console.log(b);
         return false;
     }
-
+    if (b >= 5) {
+        b = 0;
+        window.location.replace("game.html");
+    }
     else {
         // Check if all fields are filled correctly
         if (name != "" && email.match(emailCheck) && pass != "") {
@@ -53,10 +56,7 @@ function mouseOver() {
     };
 };
 
-if (b >= 5) {
-    b = 0;
-    window.location.replace("game.html");
-}
+
 
 
 
