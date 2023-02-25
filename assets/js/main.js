@@ -7,7 +7,7 @@ var typed = new Typed(".multiple-text", {
 });
 
 var a = 0;
-let b = 0;
+var b = 0;
 
 function mouseOver() {
 
@@ -40,7 +40,7 @@ function mouseOver() {
         console.log(b);
         return false;
     }
-    if (b >= 5) {
+    if (b == 5) {
         b = 0;
         window.location.replace("game.html");
     }
