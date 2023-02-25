@@ -22,7 +22,7 @@ function mouseOver() {
         a = 1;
         b++;
         console.log(b);
-        if (b == 5) {
+        if (b == 7) {
             b = 0;
             window.location.href = ("game.html");
         }
@@ -34,7 +34,7 @@ function mouseOver() {
         a = 2;
         b++;
         console.log(b);
-        if (b == 5) {
+        if (b == 7) {
             b = 0;
             window.location.href = ("game.html");
         }
@@ -46,7 +46,7 @@ function mouseOver() {
         a = 1;
         b++;
         console.log(b);
-        if (b == 5) {
+        if (b == 7) {
             b = 0;
             window.location.href = ("game.html");
         }
