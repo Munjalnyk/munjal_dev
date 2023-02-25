@@ -18,7 +18,7 @@ function mouseOver() {
     const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     if ((name == "" || !email.match(emailCheck) || pass == "") && a == 0) {
-        buttonMoveLeft();
+        buttonMoveRight();
         a = 1;
         b++;
         console.log(b);
@@ -26,7 +26,7 @@ function mouseOver() {
     }
 
     if ((name == "" || !email.match(emailCheck) || pass == "") && a == 1) {
-        buttonMoveRight();
+        buttonMoveLeft();
         a = 2;
         b++;
         console.log(b);
@@ -34,7 +34,7 @@ function mouseOver() {
     }
 
     if ((name == "" || !email.match(emailCheck) || pass == "") && a == 2) {
-        buttonMoveLeft();
+        buttonMoveRight();
         a = 1;
         b++;
         console.log(b);
