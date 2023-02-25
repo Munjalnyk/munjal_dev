@@ -21,6 +21,7 @@ function mouseOver() {
         buttonMoveLeft();
         a = 1;
         b++;
+        console.log(b);
         return false;
     }
 
@@ -28,6 +29,7 @@ function mouseOver() {
         buttonMoveRight();
         a = 2;
         b++;
+        console.log(b);
         return false;
     }
 
@@ -35,6 +37,7 @@ function mouseOver() {
         buttonMoveLeft();
         a = 1;
         b++;
+        console.log(b);
         return false;
     }
 
