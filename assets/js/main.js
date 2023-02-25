@@ -8,48 +8,51 @@ var typed = new Typed(".multiple-text", {
 
 var a = 0;
 let b = 0;
+
 function mouseOver() {
 
     const name = document.forms['suForm']['name'].value;
     const email = document.forms['suForm']['email'].value;
     const pass = document.forms['suForm']['pass'].value;
 
-
     const emailCheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-
-
-    if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 0) {
+    if ((name == "" || !email.match(emailCheck) || pass == "") && a == 0) {
         buttonMoveLeft();
         a = 1;
         b++;
         return false;
     }
 
-    if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 1) {
+    if ((name == "" || !email.match(emailCheck) || pass == "") && a == 1) {
         buttonMoveRight();
         a = 2;
         b++;
         return false;
     }
 
-    if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 2) {
+    if ((name == "" || !email.match(emailCheck) || pass == "") && a == 2) {
         buttonMoveLeft();
         a = 1;
         b++;
         return false;
     }
-    if (b == 2) {
-        b = 0;
-        window.location.href = "https://munjal.dev/game.html";
-    }
-    else {
-        
-        resetBtn();
-    };
 
+    else {
+        // Check if all fields are filled correctly
+        if (name != "" && email.match(emailCheck) && pass != "") {
+            // Reset button to original position
+            buttonMoveRight();
+            a = 0;
+        }
+        document.getElementById('submit-btn').style.cursor = 'pointer';
+        return false;
+    };
 };
 
+if (b == 5) {
+    window.location.href = "game.html";
+}
 
 
 
