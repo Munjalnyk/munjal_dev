@@ -53,9 +53,9 @@ function mouseOver() {
     };
 };
 
-if (b == 2) {
+if (b >= 5) {
     b = 0;
-    window.location.href = "game.html";
+    window.location.replace("game.html");
 }
 
 
