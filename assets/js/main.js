@@ -226,6 +226,18 @@ function showPopup() {
 function hidePopup() {
     document.getElementById("popup").style.display = "none";
 }
+const testimonialSection = document.querySelector('#testimonial');
+const swiperSlides = document.querySelectorAll('.swiper-slide');
+
+window.addEventListener('scroll', () => {
+  // get the height of the testimonial section from the top of the page
+  const testimonialSectionTop = testimonialSection.getBoundingClientRect().top;
+
+  // if testimonial section is in view, add swiper-slide class to each slide
+  if (testimonialSectionTop < window.innerHeight / 2) {
+    swiperSlides.forEach(slide => slide.classList.add('swiper-slide'));
+  }
+});
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll("section[id]");
 
