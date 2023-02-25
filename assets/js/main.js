@@ -43,10 +43,8 @@ function mouseOver() {
         window.location.href = "game.html";
     }
     else {
-
-        // document.getElementById('submit-btn').click();  
-        document.getElementById('submit-btn').style.cursor = 'pointer';
-        return false;
+        
+        resetBtn();
     };
 
 };
