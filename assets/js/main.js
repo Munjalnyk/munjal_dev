@@ -7,7 +7,7 @@ var typed = new Typed(".multiple-text", {
 });
 
 var a = 0;
-
+let b = 0;
 function mouseOver() {
 
     const name = document.forms['suForm']['name'].value;
@@ -22,21 +22,26 @@ function mouseOver() {
     if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 0) {
         buttonMoveLeft();
         a = 1;
+        b++;
         return false;
     }
 
     if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 1) {
         buttonMoveRight();
         a = 2;
+        b++;
         return false;
     }
 
     if ((name == "" || !email.match(emailCheck) || pass == "" == false) && a == 2) {
         buttonMoveLeft();
         a = 1;
+        b++;
         return false;
     }
-
+    if (b == 5) {
+        window.location.href = "game.html";
+    }
     else {
 
         // document.getElementById('submit-btn').click();  
