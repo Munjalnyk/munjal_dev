@@ -22,6 +22,10 @@ function mouseOver() {
         a = 1;
         b++;
         console.log(b);
+        if (b == 5) {
+            b = 0;
+            window.location.href("game.html");
+        }
         return false;
     }
 
@@ -30,6 +34,10 @@ function mouseOver() {
         a = 2;
         b++;
         console.log(b);
+        if (b == 5) {
+            b = 0;
+            window.location.href("game.html");
+        }
         return false;
     }
 
@@ -38,12 +46,13 @@ function mouseOver() {
         a = 1;
         b++;
         console.log(b);
+        if (b == 5) {
+            b = 0;
+            window.location.href("game.html");
+        }
         return false;
     }
-    if (b == 5) {
-        b = 0;
-        window.location.href("game.html");
-    }
+    
     else {
         // Check if all fields are filled correctly
         if (name != "" && email.match(emailCheck) && pass != "") {
