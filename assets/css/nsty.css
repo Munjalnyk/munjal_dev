@@ -1,36 +1,26 @@
-body {
-    margin: 0;
-    padding: 0;
-}
-#game-board {
+#container {
     position: relative;
-    height: 100vh;
-    background-color: #333;
-}
-#slider {
-    position: absolute;
-    bottom: 0;
-    width: 20%;
-    height: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-}
-#ball {
+    width: 400px;
+    height: 500px;
+    margin: 0 auto;
+  }
+  #ball {
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translate(-50%, 0%);
-    width: 50px;
-    height: 50px;
-    background-color: red;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    animation: drop 2s infinite;
-}
-@keyframes drop {
-    from {
-        top: 0;
-    }
-    to {
-        top: calc(100vh - 50px);
-    }
-}
+    background-color: red;
+    transform: translate(-50%, 0);
+  }
+  #slider {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 80px;
+    height: 20px;
+    background-color: gray;
+    border-radius: 10px;
+    transform: translate(-50%, 0);
+  }
