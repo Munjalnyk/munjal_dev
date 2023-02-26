@@ -8,7 +8,37 @@
     <title>Live Chat</title>
 </head>
 <body>
-<call-us-selector phonesystem-url="https://1184.3cx.cloud" style="text-align: center; display: flex; justify-content: center; align-items: center; top: 50px;" party="munjalnayak"></call-us-selector>
-      <script defer="defer" src="https://downloads-global.3cx.com/downloads/livechatandtalk/v1/callus.js"></script>
+<call-us 
+phonesystem-url="https://1184.3cx.cloud" 
+style="position:fixed;font-size:16px;line-height:17px;z-index: 99999;--call-us-main-accent-color:#d312f5;--call-us-main-background-color:#FFFFFF;--call-us-plate-background-color:#16d894;--call-us-plate-font-color:#d2f9f1;--call-us-main-font-color:#292929;--call-us-agent-bubble-color:#29292910; text-align: center; display: flex; justify-content: center; align-items: center;" 
+id="wp-live-chat-by-3CX" 
+minimized="true" 
+animation-style="slideup" 
+party="munjalnayak" 
+minimized-style="bubbleright" 
+allow-call="true" 
+allow-video="false" 
+allow-soundnotifications="true" 
+enable-mute="true" 
+enable-onmobile="true" 
+offline-enabled="true" 
+enable="true" 
+ignore-queueownership="false" 
+authentication="both" 
+show-operator-actual-name="true" 
+aknowledge-received="true" 
+gdpr-enabled="false" 
+message-userinfo-format="both" 
+message-dateformat="both" 
+lang="browser" 
+button-icon-type="default" 
+authentication-message="Could I have your Name and Email" 
+greeting-visibility="none" 
+greeting-offline-visibility="none" 
+chat-delay="2000" 
+enable-direct-call="false" 
+enable-ga="false" 
+></call-us>
+<script defer src="https://downloads-global.3cx.com/downloads/livechatandtalk/v1/callus.js" id="tcx-callus-js" charset="utf-8"></script>
 </body>
 </html>
