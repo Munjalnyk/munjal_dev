@@ -1121,6 +1121,12 @@ img {
         justify-content: center
     }
 }
+.conta11iner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set height to fill viewport */
+}
 @media screen and (min-width:768px) {
     .container {
         margin-left: auto;
