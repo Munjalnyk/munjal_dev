@@ -5,15 +5,7 @@ body {
   body, body * {
     cursor: none;
   }
-  .link_404 {
-    color: #fff !important;
-    padding: 10px 20px;
-    background: #9821c7;
-    margin: 20px 0;
-    display: inline-block;
-    text-align: center;
-    align-self: center;
-  }
+ 
   .shapes {
     position: relative;
     height: 100vh;
@@ -64,6 +56,15 @@ body {
     color: #000;
     margin: 0;
     text-align: center;
+  }
+  .link_404 {
+    color: #fff !important;
+    padding: 10px 20px;
+    background: #9821c7;
+    margin: 20px 0;
+    display: inline-block;
+    text-align: center;
+    align-self: center;
   }
   @media (min-width: 419px) {
     h1 {
