@@ -104,6 +104,7 @@ h2 {
   transform: translate(-50%, -50%);
   max-width: 100%;
   height: auto;
+  z-index: 1;
 }
 
 .four_zero_four_bg h1 {
