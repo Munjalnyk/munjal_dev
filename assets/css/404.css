@@ -67,15 +67,7 @@ h2 {
   text-align: center;
   margin-bottom: 20px; /* Add this line */
 }
-.image-404 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  height: auto;
-  z-index: 1;
-}
+
 .link_404 {
   color: #fff !important;
   padding: 10px 20px;
