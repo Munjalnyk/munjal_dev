@@ -48,7 +48,7 @@ body, body * {
   flex-direction: column; /* Add this line */
   height: 100vh;
   width: 100vw;
-  background: #fff;
+  background: #f225f9;
   mix-blend-mode: screen;
 }
 
