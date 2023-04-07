@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Motor Parameters</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="number"] {
+            width: 150px;
+        }
+
+        button {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #a02cc7;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ddd;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        #logoutButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #loginForm div {
+            margin: 10px 0;
+        }
+
+        #loginForm label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        #loginForm input {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        #loginButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 95px;
+        }
+
+        #loginButton:hover {
+            background-color: #0062cc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Smart Industrial Automation: Controlling with IoT Technology</h1>
+    <p>Made by Munjal Nayak and Vaibhav Singh: Collaborative Effort at Eleics Design</p>
+    <form id="loginForm">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <button type="submit" id="loginButton">Login</button>
+        </div>
+    </form>
+
+    <div id="buttons" style="display: none">
+        <button id="connectButton">Connect</button>
+        <button id="sendButton" value='{"start_log": "1"}' disabled>Start Logging</button>
+        <button id="sendButton1" value='{"start_log": "0"}' disabled>Stop Logging</button>
+        <button id="sendButton2" value='{"start_vfd": "1"}' disabled>Start VFD</button>
+        <button id="sendButton3" value='{"start_vfd": "0"}' disabled>Stop VFD</button>
+        <br><br>
+        <label for="vfdSpeed">VFD Speed:</label>
+        <input type="number" id="vfdSpeed" name="vfdSpeed" min="0" max="5000" step="1000">
+        <button id="sendButton4" disabled>Set VFD Speed</button>
+        <button id="logoutButton" disabled>Logout</button>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const url = 'wss://db9a6ee2.ala.us-east-1.emqxsl.com:8084/mqtt';
+
+                const options = {
+                    clean: true,
+                    connectTimeout: 4000,
+                    clientId: 'io013',
+                    username: 'munjal',
+                    password: 'NAYAK.munjal@1',
+                };
+                let client;
+                const connectButton = document.getElementById("connectButton");
+                const sendButton = document.getElementById("sendButton");
+                const sendButton1 = document.getElementById("sendButton1");
+                const sendButton2 = document.getElementById("sendButton2");
+                const sendButton3 = document.getElementById("sendButton3");
+                const sendButton4 = document.getElementById("sendButton4");
+                const vfdSpeedInput = document.getElementById("vfdSpeed");
+                const loginForm = document.getElementById("loginForm");
+                const usernameInput = document.getElementById("username");
+                const passwordInput = document.getElementById("password");
+                const loginButton = document.getElementById("loginButton");
+                const logoutButton = document.getElementById("logoutButton");
+                // Add a click event listener to the login button
+                // Check if there is a stored username and password
+                const storedUsername = localStorage.getItem("username");
+                const storedPassword = localStorage.getItem("password");
+
+                if (storedUsername && storedPassword) {
+                    // Set the input fields to the stored values
+                    usernameInput.value = storedUsername;
+                    passwordInput.value = storedPassword;
+
+                    // Simulate a click on the login button
+                    loginButton.click();
+                }
+
+                // Add a click event listener to the login button
+                loginButton.addEventListener("click", function (event) {
+                    // Prevent the default form submission
+                    event.preventDefault();
+
+                    // Get the username and password values
+                    const username = usernameInput.value;
+                    const password = passwordInput.value;
+
+                    // Perform some validation on the input values
+                    if (!username || !password) {
+                        alert("Please enter both username and password.");
+                        return;
+                    }
+
+                    // Check if the username and password are correct
+                    if (username === "munjal" && password === "nayak") {
+                        console.log("Login successful");
+
+                        // Store the username and password locally
+                        localStorage.setItem("username", username);
+                        localStorage.setItem("password", password);
+                        usernameInput.value = "";
+                        passwordInput.value = "";
+                        // Show the buttons and enable them
+                        const buttonsContainer = document.getElementById("buttons");
+                        buttonsContainer.style.display = "block";
+                        connectButton.disabled = false;
+                        logoutButton.disabled = false;
+
+                        // Hide the login form
+                        loginForm.style.display = "none";
+
+                    }
+                    if (username === "vaibhav" && password === "singh") {
+                        console.log("Login successful");
+
+                        // Store the username and password locally
+                        localStorage.setItem("username", username);
+                        localStorage.setItem("password", password);
+                        usernameInput.value = "";
+                        passwordInput.value = "";
+                        // Show the buttons and enable them
+                        const buttonsContainer = document.getElementById("buttons");
+                        buttonsContainer.style.display = "block";
+                        connectButton.disabled = false;
+                        logoutButton.disabled = false;
+
+                        // Hide the login form
+                        loginForm.style.display = "none";
+
+                    }
+                    else {
+                        console.log("Invalid username or password");
+                        alert("Invalid username or password. Please try again.");
+                    }
+
+                    // Clear the input fields
+                    usernameInput.value = "";
+                    passwordInput.value = "";
+                });
+                logoutButton.addEventListener("click", function (event) {
+                    // Prevent the default button behavior
+                    event.preventDefault();
+
+                    // Remove the login status from local storage
+                    localStorage.removeItem("loggedIn");
+                    localStorage.removeItem("username");
+                    localStorage.removeItem("password");
+
+                    // Reload the page
+                    location.reload();
+                });
+                function connect() {
+                    client = mqtt.connect(url, options);
+
+                    client.on('connect', function () {
+                        console.log('Connected');
+                        connectButton.textContent = 'Disconnect';
+                        sendButton.disabled = false;
+                        sendButton1.disabled = false;
+                        sendButton2.disabled = false;
+                        sendButton3.disabled = false;
+                        sendButton4.disabled = false;
+                        client.subscribe('io011/in', function (err) {
+                            if (!err) {
+                                console.log('Subscribed to io011/in');
+                            }
+                        });
+                    });
+
+                    client.on('offline', function () {
+                        console.log('Offline');
+                        connectButton.textContent = 'Connect';
+                        sendButton.disabled = true;
+                        sendButton1.disabled = true;
+                        sendButton2.disabled = true;
+                        sendButton3.disabled = true;
+                        sendButton4.disabled = true;
+                    });
+
+                    // Receive messages
+                    client.on('message', function (topic, message) {
+                        // message is Buffer
+                        console.log(message.toString());
+                    });
+                }
+
+                function disconnect() {
+                    client.end();
+                    console.log('Disconnected');
+                    connectButton.textContent = 'Connect';
+                    sendButton.disabled = true;
+                    sendButton1.disabled = true;
+                    sendButton2.disabled = true;
+                    sendButton3.disabled = true;
+                    sendButton4.disabled = true;
+                }
+
+                connectButton.addEventListener('click', function () {
+                    if (client && client.connected) {
+                        disconnect();
+                    } else {
+                        connect();
+                    }
+                });
+
+                // Handle send button click events
+                sendButton.addEventListener('click', function () {
+                    const message = JSON.parse(sendButton.value);
+                    // Publish a message to a topic
+                    client.publish('io011/in', JSON.stringify(message));
+                    console.log(`Published message: ${JSON.stringify(message)}`);
+                });
+                sendButton1.addEventListener('click', function () {
+                    const message = JSON.parse(sendButton1.value);
+                    // Publish a message to a topic
+                    client.publish('io011/in', JSON.stringify(message));
+                    console.log(`Published message: ${JSON.stringify(message)}`);
+                });
+                sendButton2.addEventListener('click', function () {
+                    const message = JSON.parse(sendButton2.value);
+                    // Publish a message to a topic
+                    client.publish('io011/in', JSON.stringify(message));
+                    console.log(`Published message: ${JSON.stringify(message)}`);
+                });
+                sendButton3.addEventListener('click', function () {
+                    const message = JSON.parse(sendButton3.value);
+                    // Publish a message to a topic
+                    client.publish('io011/in', JSON.stringify(message));
+                    console.log(`Published message: ${JSON.stringify(message)}`);
+                });
+                sendButton4.addEventListener('click', function () {
+                    const vfdSpeed = document.getElementById("vfdSpeed").value;
+                    const message = { "vfd_speed": vfdSpeed };
+                    // Publish a message to a topic
+                    client.publish('io011/in', JSON.stringify(message));
+                    console.log(`Published message: ${JSON.stringify(message)}`);
+                });
+            });
+        </script>
+</body>
+
+</html>
