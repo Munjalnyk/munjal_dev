@@ -247,6 +247,7 @@
                         sendButton2.disabled = false;
                         sendButton3.disabled = false;
                         sendButton4.disabled = false;
+                        sendButton5.disabled = false;
                         client.subscribe('io011/in', function (err) {
                             if (!err) {
                                 console.log('Subscribed to io011/in');
@@ -262,6 +263,8 @@
                         sendButton2.disabled = true;
                         sendButton3.disabled = true;
                         sendButton4.disabled = true;
+                        sendButton5.disabled = false;
+
                     });
 
                     // Receive messages
@@ -280,6 +283,8 @@
                     sendButton2.disabled = true;
                     sendButton3.disabled = true;
                     sendButton4.disabled = true;
+                    sendButton5.disabled = false;
+
                 }
 
                 connectButton.addEventListener('click', function () {
