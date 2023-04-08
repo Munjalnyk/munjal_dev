@@ -122,6 +122,7 @@
         <label for="vfdSpeed">VFD Speed:</label>
         <input type="number" id="vfdSpeed" name="vfdSpeed" min="0" max="5000" step="1000">
         <button id="sendButton4" disabled>Set VFD Speed</button>
+        <button id="sendButton5" value='{"vfd_dir": "1"}' disabled>Change VFD DIR</button>
         <button id="logoutButton" disabled>Logout</button>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -141,6 +142,7 @@
                 const sendButton2 = document.getElementById("sendButton2");
                 const sendButton3 = document.getElementById("sendButton3");
                 const sendButton4 = document.getElementById("sendButton4");
+                const sendButton5 = document.getElementById("sendButton5");
                 const vfdSpeedInput = document.getElementById("vfdSpeed");
                 const loginForm = document.getElementById("loginForm");
                 const usernameInput = document.getElementById("username");
@@ -316,6 +318,12 @@
                 sendButton4.addEventListener('click', function () {
                     const vfdSpeed = document.getElementById("vfdSpeed").value;
                     const message = { "vfd_speed": vfdSpeed };
+                    // Publish a message to a topic
+                    client.publish('io011/in', JSON.stringify(message));
+                    console.log(`Published message: ${JSON.stringify(message)}`);
+                });
+                sendButton5.addEventListener('click', function () {
+                    const message = JSON.parse(sendButton5.value);
                     // Publish a message to a topic
                     client.publish('io011/in', JSON.stringify(message));
                     console.log(`Published message: ${JSON.stringify(message)}`);
