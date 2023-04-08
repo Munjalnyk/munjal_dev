@@ -216,6 +216,24 @@
                         loginForm.style.display = "none";
 
                     }
+                    else if (username === "vipin" && password === "shukla") {
+                        console.log("Login successful");
+
+                        // Store the username and password locally
+                        // localStorage.setItem("username", username);
+                        // localStorage.setItem("password", password);
+                        usernameInput.value = "";
+                        passwordInput.value = "";
+                        // Show the buttons and enable them
+                        const buttonsContainer = document.getElementById("buttons");
+                        buttonsContainer.style.display = "block";
+                        connectButton.disabled = false;
+                        logoutButton.disabled = false;
+
+                        // Hide the login form
+                        loginForm.style.display = "none";
+
+                    }
                     else {
                         console.log("Invalid username or password");
                         alert("Invalid username or password. Please try again.");
