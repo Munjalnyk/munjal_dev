@@ -91,22 +91,24 @@
         #loginButton:hover {
             background-color: #0062cc;
         }
+
         table {
-			border-collapse: collapse;
-			width: 50%;
+            border-collapse: collapse;
+            width: 50%;
             margin: auto;
-		}
+        }
 
-		th, td {
-			padding: 8px;
-			text-align: left;
-			border-bottom: 1px solid #ddd;
-		}
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-		th {
-			background-color: #f2f2f2;
-			font-weight: bold;
-		}
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -152,242 +154,242 @@
             </tbody>
         </table>
 </body>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const url = 'wss://db9a6ee2.ala.us-east-1.emqxsl.com:8084/mqtt';
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const url = 'wss://db9a6ee2.ala.us-east-1.emqxsl.com:8084/mqtt';
 
-                const options = {
-                    clean: true,
-                    connectTimeout: 4000,
-                    clientId: 'io013',
-                    username: 'munjal',
-                    password: 'NAYAK.munjal@1',
-                };
-                let client;
-                const connectButton = document.getElementById("connectButton");
-                const sendButton = document.getElementById("sendButton");
-                const sendButton1 = document.getElementById("sendButton1");
-                const sendButton2 = document.getElementById("sendButton2");
-                const sendButton3 = document.getElementById("sendButton3");
-                const sendButton4 = document.getElementById("sendButton4");
-                const sendButton5 = document.getElementById("sendButton5");
-                const vfdSpeedInput = document.getElementById("vfdSpeed");
-                const loginForm = document.getElementById("loginForm");
-                const usernameInput = document.getElementById("username");
-                const passwordInput = document.getElementById("password");
-                const loginButton = document.getElementById("loginButton");
-                const logoutButton = document.getElementById("logoutButton");
-                // Add a click event listener to the login button
-                // Check if there is a stored username and password
-                const storedUsername = localStorage.getItem("username");
-                const storedPassword = localStorage.getItem("password");
+        const options = {
+            clean: true,
+            connectTimeout: 4000,
+            clientId: 'io013',
+            username: 'munjal',
+            password: 'NAYAK.munjal@1',
+        };
+        let client;
+        const connectButton = document.getElementById("connectButton");
+        const sendButton = document.getElementById("sendButton");
+        const sendButton1 = document.getElementById("sendButton1");
+        const sendButton2 = document.getElementById("sendButton2");
+        const sendButton3 = document.getElementById("sendButton3");
+        const sendButton4 = document.getElementById("sendButton4");
+        const sendButton5 = document.getElementById("sendButton5");
+        const vfdSpeedInput = document.getElementById("vfdSpeed");
+        const loginForm = document.getElementById("loginForm");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const loginButton = document.getElementById("loginButton");
+        const logoutButton = document.getElementById("logoutButton");
+        // Add a click event listener to the login button
+        // Check if there is a stored username and password
+        const storedUsername = localStorage.getItem("username");
+        const storedPassword = localStorage.getItem("password");
 
-                if (storedUsername && storedPassword) {
-                    // Set the input fields to the stored values
-                    const buttonsContainer = document.getElementById("buttons");
-                        buttonsContainer.style.display = "block";
-                        connectButton.disabled = false;
-                        logoutButton.disabled = false;
+        if (storedUsername && storedPassword) {
+            // Set the input fields to the stored values
+            const buttonsContainer = document.getElementById("buttons");
+            buttonsContainer.style.display = "block";
+            connectButton.disabled = false;
+            logoutButton.disabled = false;
 
-                        // Hide the login form
-                        loginForm.style.display = "none";
-                }
+            // Hide the login form
+            loginForm.style.display = "none";
+        }
 
-                // Add a click event listener to the login button
-                loginButton.addEventListener("click", function (event) {
-                    // Prevent the default form submission
-                    event.preventDefault();
+        // Add a click event listener to the login button
+        loginButton.addEventListener("click", function (event) {
+            // Prevent the default form submission
+            event.preventDefault();
 
-                    // Get the username and password values
-                    const username = usernameInput.value;
-                    const password = passwordInput.value;
+            // Get the username and password values
+            const username = usernameInput.value;
+            const password = passwordInput.value;
 
-                    // Perform some validation on the input values
-                    if (!username || !password) {
-                        alert("Please enter both username and password.");
-                        return;
+            // Perform some validation on the input values
+            if (!username || !password) {
+                alert("Please enter both username and password.");
+                return;
+            }
+
+            // Check if the username and password are correct
+            if (username === "munjal" && password === "nayak") {
+                console.log("Login successful");
+
+                // Store the username and password locally
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                usernameInput.value = "";
+                passwordInput.value = "";
+                // Show the buttons and enable them
+                const buttonsContainer = document.getElementById("buttons");
+                buttonsContainer.style.display = "block";
+                connectButton.disabled = false;
+                logoutButton.disabled = false;
+
+                // Hide the login form
+                loginForm.style.display = "none";
+
+            }
+            else if (username === "vaibhav" && password === "singh") {
+                console.log("Login successful");
+
+                // Store the username and password locally
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                usernameInput.value = "";
+                passwordInput.value = "";
+                // Show the buttons and enable them
+                const buttonsContainer = document.getElementById("buttons");
+                buttonsContainer.style.display = "block";
+                connectButton.disabled = false;
+                logoutButton.disabled = false;
+
+                // Hide the login form
+                loginForm.style.display = "none";
+
+            }
+            else if (username === "vipin" && password === "shukla") {
+                console.log("Login successful");
+
+                // Store the username and password locally
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                usernameInput.value = "";
+                passwordInput.value = "";
+                // Show the buttons and enable them
+                const buttonsContainer = document.getElementById("buttons");
+                buttonsContainer.style.display = "block";
+                connectButton.disabled = false;
+                logoutButton.disabled = false;
+
+                // Hide the login form
+                loginForm.style.display = "none";
+
+            }
+            else {
+                console.log("Invalid username or password");
+                alert("Invalid username or password. Please try again.");
+            }
+
+            // Clear the input fields
+            usernameInput.value = "";
+            passwordInput.value = "";
+        });
+        logoutButton.addEventListener("click", function (event) {
+            // Prevent the default button behavior
+            event.preventDefault();
+
+            // Remove the login status from local storage
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
+
+            // Reload the page
+            location.reload();
+        });
+        function connect() {
+            client = mqtt.connect(url, options);
+
+            client.on('connect', function () {
+                console.log('Connected');
+                connectButton.textContent = 'Disconnect';
+                sendButton.disabled = false;
+                sendButton1.disabled = false;
+                sendButton2.disabled = false;
+                sendButton3.disabled = false;
+                sendButton4.disabled = false;
+                sendButton5.disabled = false;
+                client.subscribe('io011/in', function (err) {
+                    if (!err) {
+                        console.log('Subscribed to io011/in');
                     }
-
-                    // Check if the username and password are correct
-                    if (username === "munjal" && password === "nayak") {
-                        console.log("Login successful");
-
-                        // Store the username and password locally
-                         localStorage.setItem("username", username);
-                         localStorage.setItem("password", password);
-                        usernameInput.value = "";
-                        passwordInput.value = "";
-                        // Show the buttons and enable them
-                        const buttonsContainer = document.getElementById("buttons");
-                        buttonsContainer.style.display = "block";
-                        connectButton.disabled = false;
-                        logoutButton.disabled = false;
-
-                        // Hide the login form
-                        loginForm.style.display = "none";
-
-                    }
-                    else if (username === "vaibhav" && password === "singh") {
-                        console.log("Login successful");
-
-                        // Store the username and password locally
-                         localStorage.setItem("username", username);
-                         localStorage.setItem("password", password);
-                        usernameInput.value = "";
-                        passwordInput.value = "";
-                        // Show the buttons and enable them
-                        const buttonsContainer = document.getElementById("buttons");
-                        buttonsContainer.style.display = "block";
-                        connectButton.disabled = false;
-                        logoutButton.disabled = false;
-
-                        // Hide the login form
-                        loginForm.style.display = "none";
-
-                    }
-                    else if (username === "vipin" && password === "shukla") {
-                        console.log("Login successful");
-
-                        // Store the username and password locally
-                        localStorage.setItem("username", username);
-                        localStorage.setItem("password", password);
-                        usernameInput.value = "";
-                        passwordInput.value = "";
-                        // Show the buttons and enable them
-                        const buttonsContainer = document.getElementById("buttons");
-                        buttonsContainer.style.display = "block";
-                        connectButton.disabled = false;
-                        logoutButton.disabled = false;
-
-                        // Hide the login form
-                        loginForm.style.display = "none";
-
-                    }
-                    else {
-                        console.log("Invalid username or password");
-                        alert("Invalid username or password. Please try again.");
-                    }
-
-                    // Clear the input fields
-                    usernameInput.value = "";
-                    passwordInput.value = "";
-                });
-                logoutButton.addEventListener("click", function (event) {
-                    // Prevent the default button behavior
-                    event.preventDefault();
-
-                    // Remove the login status from local storage
-                    localStorage.removeItem("loggedIn");
-                    localStorage.removeItem("username");
-                    localStorage.removeItem("password");
-
-                    // Reload the page
-                    location.reload();
-                });
-                function connect() {
-                    client = mqtt.connect(url, options);
-
-                    client.on('connect', function () {
-                        console.log('Connected');
-                        connectButton.textContent = 'Disconnect';
-                        sendButton.disabled = false;
-                        sendButton1.disabled = false;
-                        sendButton2.disabled = false;
-                        sendButton3.disabled = false;
-                        sendButton4.disabled = false;
-                        sendButton5.disabled = false;
-                        client.subscribe('io011/in', function (err) {
-                            if (!err) {
-                                console.log('Subscribed to io011/in');
-                            }
-                        });
-                    });
-
-                    client.on('offline', function () {
-                        console.log('Offline');
-                        connectButton.textContent = 'Connect';
-                        sendButton.disabled = true;
-                        sendButton1.disabled = true;
-                        sendButton2.disabled = true;
-                        sendButton3.disabled = true;
-                        sendButton4.disabled = true;
-                        sendButton5.disabled = true;
-
-                    });
-
-                    // Receive messages
-                    client.on('message', function (topic, message) {
-                        // message is Buffer
-                        console.log(message.toString());
-                    });
-                }
-
-                function disconnect() {
-                    client.end();
-                    console.log('Disconnected');
-                    connectButton.textContent = 'Connect';
-                    sendButton.disabled = true;
-                    sendButton1.disabled = true;
-                    sendButton2.disabled = true;
-                    sendButton3.disabled = true;
-                    sendButton4.disabled = true;
-                    sendButton5.disabled = true;
-
-                }
-
-                connectButton.addEventListener('click', function () {
-                    if (client && client.connected) {
-                        disconnect();
-                    } else {
-                        connect();
-                    }
-                });
-
-                // Handle send button click events
-                sendButton.addEventListener('click', function () {
-                    const message = JSON.parse(sendButton.value);
-                    // Publish a message to a topic
-                    client.publish('io011/in', JSON.stringify(message));
-                    console.log(`Published message: ${JSON.stringify(message)}`);
-                });
-                sendButton1.addEventListener('click', function () {
-                    const message = JSON.parse(sendButton1.value);
-                    // Publish a message to a topic
-                    client.publish('io011/in', JSON.stringify(message));
-                    console.log(`Published message: ${JSON.stringify(message)}`);
-                });
-                sendButton2.addEventListener('click', function () {
-                    const message = JSON.parse(sendButton2.value);
-                    // Publish a message to a topic
-                    client.publish('io011/in', JSON.stringify(message));
-                    console.log(`Published message: ${JSON.stringify(message)}`);
-                });
-                sendButton3.addEventListener('click', function () {
-                    const message = JSON.parse(sendButton3.value);
-                    // Publish a message to a topic
-                    client.publish('io011/in', JSON.stringify(message));
-                    console.log(`Published message: ${JSON.stringify(message)}`);
-                });
-                sendButton4.addEventListener('click', function () {
-                    const vfdSpeed = document.getElementById("vfdSpeed").value;
-                    const message = { "vfd_speed": vfdSpeed };
-                    // Publish a message to a topic
-                    client.publish('io011/in', JSON.stringify(message));
-                    console.log(`Published message: ${JSON.stringify(message)}`);
-                });
-                sendButton5.addEventListener('click', function () {
-                    const message = JSON.parse(sendButton5.value);
-                    // Publish a message to a topic
-                    client.publish('io011/in', JSON.stringify(message));
-                    console.log(`Published message: ${JSON.stringify(message)}`);
                 });
             });
-              // Retrieve the JSON object from the PHP website
-        fetch('https://yoroco.ml/get_data.php')
-            .then(response => response.json())
-            .then(data => {
-                // Display the data on the page
-                document.getElementById('motor-data').innerHTML = `
+
+            client.on('offline', function () {
+                console.log('Offline');
+                connectButton.textContent = 'Connect';
+                sendButton.disabled = true;
+                sendButton1.disabled = true;
+                sendButton2.disabled = true;
+                sendButton3.disabled = true;
+                sendButton4.disabled = true;
+                sendButton5.disabled = true;
+
+            });
+
+            // Receive messages
+            client.on('message', function (topic, message) {
+                // message is Buffer
+                console.log(message.toString());
+            });
+        }
+
+        function disconnect() {
+            client.end();
+            console.log('Disconnected');
+            connectButton.textContent = 'Connect';
+            sendButton.disabled = true;
+            sendButton1.disabled = true;
+            sendButton2.disabled = true;
+            sendButton3.disabled = true;
+            sendButton4.disabled = true;
+            sendButton5.disabled = true;
+
+        }
+
+        connectButton.addEventListener('click', function () {
+            if (client && client.connected) {
+                disconnect();
+            } else {
+                connect();
+            }
+        });
+
+        // Handle send button click events
+        sendButton.addEventListener('click', function () {
+            const message = JSON.parse(sendButton.value);
+            // Publish a message to a topic
+            client.publish('io011/in', JSON.stringify(message));
+            console.log(`Published message: ${JSON.stringify(message)}`);
+        });
+        sendButton1.addEventListener('click', function () {
+            const message = JSON.parse(sendButton1.value);
+            // Publish a message to a topic
+            client.publish('io011/in', JSON.stringify(message));
+            console.log(`Published message: ${JSON.stringify(message)}`);
+        });
+        sendButton2.addEventListener('click', function () {
+            const message = JSON.parse(sendButton2.value);
+            // Publish a message to a topic
+            client.publish('io011/in', JSON.stringify(message));
+            console.log(`Published message: ${JSON.stringify(message)}`);
+        });
+        sendButton3.addEventListener('click', function () {
+            const message = JSON.parse(sendButton3.value);
+            // Publish a message to a topic
+            client.publish('io011/in', JSON.stringify(message));
+            console.log(`Published message: ${JSON.stringify(message)}`);
+        });
+        sendButton4.addEventListener('click', function () {
+            const vfdSpeed = document.getElementById("vfdSpeed").value;
+            const message = { "vfd_speed": vfdSpeed };
+            // Publish a message to a topic
+            client.publish('io011/in', JSON.stringify(message));
+            console.log(`Published message: ${JSON.stringify(message)}`);
+        });
+        sendButton5.addEventListener('click', function () {
+            const message = JSON.parse(sendButton5.value);
+            // Publish a message to a topic
+            client.publish('io011/in', JSON.stringify(message));
+            console.log(`Published message: ${JSON.stringify(message)}`);
+        });
+    });
+    // Retrieve the JSON object from the PHP website
+    fetch('https://yoroco.ml/get_data.php')
+        .then(response => response.json())
+        .then(data => {
+            // Display the data on the page
+            document.getElementById('motor-data').innerHTML = `
 					<tr>
 						<td>Voltage Phase 1</td>
 						<td>${data.voltage_phase_1}</td>
@@ -477,8 +479,17 @@
 						<td>${data.freq}</td>
                     </tr>
                     `;
-            })
-            .catch(error => console.log(error));
-        </script>
+        })
+        .catch(error => console.log(error));
+    const intervalTime = 15000;
+
+    // Set the interval function to refresh the page
+    const refreshPage = () => {
+        location.reload();
+    }
+
+    // Set the interval to run the refresh function
+    setInterval(refreshPage, intervalTime);
+</script>
 
 </html>
