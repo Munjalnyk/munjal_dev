@@ -184,11 +184,13 @@
 
                 if (storedUsername && storedPassword) {
                     // Set the input fields to the stored values
-                    usernameInput.value = storedUsername;
-                    passwordInput.value = storedPassword;
+                    const buttonsContainer = document.getElementById("buttons");
+                        buttonsContainer.style.display = "block";
+                        connectButton.disabled = false;
+                        logoutButton.disabled = false;
 
-                    // Simulate a click on the login button
-                    loginButton.click();
+                        // Hide the login form
+                        loginForm.style.display = "none";
                 }
 
                 // Add a click event listener to the login button
@@ -211,8 +213,8 @@
                         console.log("Login successful");
 
                         // Store the username and password locally
-                        // localStorage.setItem("username", username);
-                        // localStorage.setItem("password", password);
+                         localStorage.setItem("username", username);
+                         localStorage.setItem("password", password);
                         usernameInput.value = "";
                         passwordInput.value = "";
                         // Show the buttons and enable them
@@ -229,8 +231,8 @@
                         console.log("Login successful");
 
                         // Store the username and password locally
-                        // localStorage.setItem("username", username);
-                        // localStorage.setItem("password", password);
+                         localStorage.setItem("username", username);
+                         localStorage.setItem("password", password);
                         usernameInput.value = "";
                         passwordInput.value = "";
                         // Show the buttons and enable them
@@ -247,8 +249,8 @@
                         console.log("Login successful");
 
                         // Store the username and password locally
-                        // localStorage.setItem("username", username);
-                        // localStorage.setItem("password", password);
+                        localStorage.setItem("username", username);
+                        localStorage.setItem("password", password);
                         usernameInput.value = "";
                         passwordInput.value = "";
                         // Show the buttons and enable them
