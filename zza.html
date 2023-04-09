@@ -1,0 +1,121 @@
+<html>
+
+<head>
+    <title>Motor Performance Data</title>
+</head>
+
+<body>
+    <h1>Motor Performance Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Measurement</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody id="motor-data">
+        </tbody>
+    </table>
+
+    <script>
+        // Retrieve the JSON object from the PHP website
+        fetch('https://yoroco.ml/get_data.php')
+            .then(response => response.json())
+            .then(data => {
+                // Display the data on the page
+                document.getElementById('motor-data').innerHTML = `
+					<tr>
+						<td>Voltage Phase 1</td>
+						<td>${data.voltage_phase_1}</td>
+					</tr>
+					<tr>
+						<td>Voltage Phase 2</td>
+						<td>${data.voltage_phase_2}</td>
+					</tr>
+					<tr>
+						<td>Voltage Phase 3</td>
+						<td>${data.voltage_phase_3}</td>
+					</tr>
+					<tr>
+						<td>Voltage Line 1</td>
+						<td>${data.voltage_line_1}</td>
+					</tr>
+					<tr>
+						<td>Voltage Line 2</td>
+						<td>${data.voltage_line_2}</td>
+					</tr>
+					<tr>
+						<td>Voltage Line 3</td>
+						<td>${data.voltage_line_3}</td>
+					</tr>
+					<tr>
+						<td>Current Phase 1</td>
+						<td>${data.current_phase_1}</td>
+					</tr>
+					<tr>
+						<td>Current Phase 2</td>
+						<td>${data.current_phase_2}</td>
+					</tr>
+					<tr>
+						<td>Current Phase 3</td>
+						<td>${data.current_phase_3}</td>
+					</tr>
+					<tr>
+						<td>Power Factor Phase 1</td>
+						<td>${data.power_factor_phase_1}</td>
+					</tr>
+					<tr>
+						<td>Power Factor Phase 2</td>
+						<td>${data.power_factor_phase_2}</td>
+					</tr>
+					<tr>
+						<td>Power Factor Phase 3</td>
+						<td>${data.power_factor_phase_3}</td>
+					</tr>
+					<tr>
+						<td>Power kW 1</td>
+						<td>${data.power_kw_1}</td>
+					</tr>
+					<tr>
+						<td>Power kW 2</td>
+						<td>${data.power_kw_2}</td>
+					</tr>
+					<tr>
+						<td>Power kW 3</td>
+						<td>${data.power_kw_3}</td>
+					</tr>
+					<tr>
+						<td>Power kVA 1</td>
+						<td>${data.power_kva_1}</td>
+					</tr>
+					<tr>
+						<td>Power kVA 2</td>
+						<td>${data.power_kva_2}</td>
+					</tr>
+					<tr>
+						<td>Power kVA 3</td>
+						<td>${data.power_kva_3}</td>
+					</tr>
+					<tr>
+						<td>Power kVAR 1</td>
+						<td>${data.power_kvar_1}</td>
+					</tr>
+					<tr>
+						<td>Power kVAR 2</td>
+						<td>${data.power_kvar_2}</td>
+					</tr>
+					<tr>
+						<td>Power kVAR 3</td>
+						<td>${data.power_kvar_3}</td>
+					</tr>
+					<tr>
+						<td>Frequency</td>
+						<td>${data.freq}</td>
+					</tr>
+				`;
+            })
+            .catch(error => console.error(error));
+    </script>
+</body>
+
+</html>
