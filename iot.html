@@ -384,6 +384,7 @@
             console.log(`Published message: ${JSON.stringify(message)}`);
         });
     });
+function fetchData() {
     // Retrieve the JSON object from the PHP website
     fetch('https://yoroco.ml/get_data.php')
         .then(response => response.json())
@@ -481,15 +482,13 @@
                     `;
         })
         .catch(error => console.log(error));
-    const intervalTime = 15000;
-
-    // Set the interval function to refresh the page
-    const refreshPage = () => {
-        location.reload();
     }
 
-    // Set the interval to run the refresh function
-    setInterval(refreshPage, intervalTime);
+// Call the function initially
+fetchData();
+
+// Refresh the data every 15 seconds
+setInterval(fetchData, 15000);
 </script>
 
 </html>
