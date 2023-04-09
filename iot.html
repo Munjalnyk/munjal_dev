@@ -113,148 +113,20 @@
             font-weight: bold;
         }
 
-        #power_factor_phase_1 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
+        .graph-container {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			width: 510px;
+			height: 300px;
+		}
 
-        #power_factor_phase_2 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #power_factor_phase_3 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #voltage_line_1 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #voltage_line_2 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #voltage_line_3 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #current_phase_1 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #current_phase_2 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #current_phase_3 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #power_kw_1 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #power_kw_2 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #power_kw_3 {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
-
-        #freq {
-            width: 500px;
-            /* Set the width of the canvas element */
-            height: 300px;
-            /* Set the height of the canvas element */
-            margin: 0 auto;
-            /* Center the canvas element horizontally */
-            margin-top: 50px;
-            /* Add a top margin */
-        }
+		.graph {
+			width: 100px;
+			height: 50px;
+			margin-top: 50px;
+		}
     </style>
 </head>
 
@@ -300,19 +172,31 @@
             </tbody>
         </table>
         <br><br>
-        <canvas id="power_factor_phase_1"></canvas>
-        <canvas id="power_factor_phase_2"></canvas>
-        <canvas id="power_factor_phase_3"></canvas>
-        <canvas id="voltage_line_1"></canvas>
-        <canvas id="voltage_line_2"></canvas>
-        <canvas id="voltage_line_3"></canvas>
-        <canvas id="current_phase_1"></canvas>
-        <canvas id="current_phase_2"></canvas>
-        <canvas id="current_phase_3"></canvas>
-        <canvas id="power_kw_1"></canvas>
-        <canvas id="power_kw_2"></canvas>
-        <canvas id="power_kw_3"></canvas>
-        <canvas id="freq"></canvas>
+        <div class="graph-container">
+            <canvas id="power_factor_phase_1" class="graph"></canvas>
+            <canvas id="power_factor_phase_2" class="graph"></canvas>
+            <canvas id="power_factor_phase_3" class="graph"></canvas>
+        </div>
+        <div class="graph-container">
+            <canvas id="voltage_line_1" class="graph"></canvas>
+            <canvas id="voltage_line_2" class="graph"></canvas>
+            <canvas id="voltage_line_3" class="graph"></canvas>
+        </div>
+        <div class="graph-container">
+            <canvas id="current_phase_1" class="graph"></canvas>
+            <canvas id="current_phase_2" class="graph"></canvas>
+            <canvas id="current_phase_3" class="graph"></canvas>
+        </div>
+        <div class="graph-container">
+            <canvas id="power_kw_1" class="graph"></canvas>
+            <canvas id="power_kw_2" class="graph"></canvas>
+            <canvas id="power_kw_3" class="graph"></canvas>
+        </div>
+        <div class="graph-container" >
+            <canvas id="freq" class="graph"></canvas>
+            <canvas id="freq1" class="graph"></canvas>
+            <canvas id="freq2" class="graph"></canvas>
+        </div>
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -1010,6 +894,73 @@
                             }
                         }
                     });
+                    var ctx52 = document.getElementById('freq1').getContext('2d');
+					var powerFactorChart = new Chart(ctx52, {
+						type: 'line',
+						data: {
+							labels: labels,
+							datasets: [{
+								label: 'freq_2',
+								data: freq,
+								backgroundColor: 'rgba(54, 162, 235, 0.2)',
+								borderColor: 'rgba(54, 162, 235, 1)',
+								borderWidth: 1
+							}]
+						},
+						options: {
+							scales: {
+								xAxes: [{
+									scaleLabel: {
+										display: true,
+										labelString: 'ID'
+									}
+								}],
+								yAxes: [{
+									scaleLabel: {
+										display: true,
+										labelString: 'Frequency'
+									},
+									ticks: {
+										beginAtZero: true
+									}
+								}]
+							}
+						}
+					});
+
+					var ctx53 = document.getElementById('freq2').getContext('2d');
+					var powerFactorChart = new Chart(ctx53, {
+						type: 'line',
+						data: {
+							labels: labels,
+							datasets: [{
+								label: 'freq_3',
+								data: freq,
+								backgroundColor: 'rgba(54, 162, 235, 0.2)',
+								borderColor: 'rgba(54, 162, 235, 1)',
+								borderWidth: 1
+							}]
+						},
+						options: {
+							scales: {
+								xAxes: [{
+									scaleLabel: {
+										display: true,
+										labelString: 'ID'
+									}
+								}],
+								yAxes: [{
+									scaleLabel: {
+										display: true,
+										labelString: 'Frequency'
+									},
+									ticks: {
+										beginAtZero: true
+									}
+								}]
+							}
+						}
+					});
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
