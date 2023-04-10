@@ -574,7 +574,7 @@
                     }
 
                     var ctx11 = document.getElementById('power_factor_phase_1').getContext('2d');
-                    var powerFactorChart = new Chart(ctx11, {
+                    var powerFactorChart1 = new Chart(ctx11, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -598,7 +598,7 @@
                     });
 
                     var ctx12 = document.getElementById('power_factor_phase_2').getContext('2d');
-                    var powerFactorChart = new Chart(ctx12, {
+                    var powerFactorChart2 = new Chart(ctx12, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -622,7 +622,7 @@
                     });
 
                     var ctx13 = document.getElementById('power_factor_phase_3').getContext('2d');
-                    var powerFactorChart = new Chart(ctx13, {
+                    var powerFactorChart3 = new Chart(ctx13, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -646,7 +646,7 @@
                     });
 
                     var ctx21 = document.getElementById('voltage_line_1').getContext('2d');
-                    var powerFactorChart = new Chart(ctx21, {
+                    var powerFactorChart4 = new Chart(ctx21, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -670,7 +670,7 @@
                     });
 
                     var ctx22 = document.getElementById('voltage_line_2').getContext('2d');
-                    var powerFactorChart = new Chart(ctx22, {
+                    var powerFactorChart5 = new Chart(ctx22, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -693,7 +693,7 @@
                         }
                     });
                     var ctx23 = document.getElementById('voltage_line_3').getContext('2d');
-                    var powerFactorChart = new Chart(ctx23, {
+                    var powerFactorChart6 = new Chart(ctx23, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -718,7 +718,7 @@
 
 
                     var ctx31 = document.getElementById('current_phase_1').getContext('2d');
-                    var powerFactorChart = new Chart(ctx31, {
+                    var powerFactorChart7 = new Chart(ctx31, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -742,7 +742,7 @@
                     });
 
                     var ctx32 = document.getElementById('current_phase_2').getContext('2d');
-                    var powerFactorChart = new Chart(ctx32, {
+                    var powerFactorChart8 = new Chart(ctx32, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -765,7 +765,7 @@
                         }
                     });
                     var ctx33 = document.getElementById('current_phase_3').getContext('2d');
-                    var powerFactorChart = new Chart(ctx33, {
+                    var powerFactorChart9 = new Chart(ctx33, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -790,7 +790,7 @@
 
 
                     var ctx41 = document.getElementById('power_kw_1').getContext('2d');
-                    var powerFactorChart = new Chart(ctx41, {
+                    var powerFactorChart10 = new Chart(ctx41, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -814,7 +814,7 @@
                     });
 
                     var ctx42 = document.getElementById('power_kw_2').getContext('2d');
-                    var powerFactorChart = new Chart(ctx42, {
+                    var powerFactorChart11 = new Chart(ctx42, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -838,7 +838,7 @@
                     });
 
                     var ctx43 = document.getElementById('power_kw_3').getContext('2d');
-                    var powerFactorChart = new Chart(ctx43, {
+                    var powerFactorChart12 = new Chart(ctx43, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -861,7 +861,7 @@
                         }
                     });
                     var ctx51 = document.getElementById('freq').getContext('2d');
-                    var powerFactorChart = new Chart(ctx51, {
+                    var powerFactorChart13 = new Chart(ctx51, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -873,10 +873,28 @@
                                 borderWidth: 1
                             }]
                         },
-                        
+                        options: {
+                            scales: {
+                                xAxes: [{
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'ID'
+                                    }
+                                }],
+                                yAxes: [{
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Frequency'
+                                    },
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
                     });
                     var ctx52 = document.getElementById('freq1').getContext('2d');
-                    var powerFactorChart = new Chart(ctx52, {
+                    var powerFactorChart14 = new Chart(ctx52, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -888,11 +906,29 @@
                                 borderWidth: 1
                             }]
                         },
-                       
+                        options: {
+                            scales: {
+                                xAxes: [{
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'ID'
+                                    }
+                                }],
+                                yAxes: [{
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Frequency'
+                                    },
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
                     });
 
                     var ctx53 = document.getElementById('freq2').getContext('2d');
-                    var powerFactorChart = new Chart(ctx53, {
+                    var powerFactorChart15 = new Chart(ctx53, {
                         type: 'line',
                         data: {
                             labels: labels,
@@ -904,6 +940,25 @@
                                 borderWidth: 1
                             }]
                         },
+                        options: {
+                            scales: {
+                                xAxes: [{
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'ID'
+                                    }
+                                }],
+                                yAxes: [{
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Frequency'
+                                    },
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
                     });
                 }
                 )
