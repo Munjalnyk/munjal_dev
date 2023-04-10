@@ -530,16 +530,8 @@
                     `;
             })
             .catch(error => console.log(error));
-    }
 
-    // Call the function initially
-    fetchData();
-
-    // Refresh the data every 15 seconds
-    setInterval(fetchData, 15000);
-
-    function fetchDataGraph() {
-
+            
         $(document).ready(function () {
             $.ajax({
                 url: "https://yoroco.ml/get_data_graph.php",
@@ -975,10 +967,12 @@
 
     }
 
-    fetchDataGraph();
+    // Call the function initially
+    fetchData();
 
     // Refresh the data every 15 seconds
-    setInterval(fetchDataGraph, 15000);
+    setInterval(fetchData, 15000);
+
 
 </script>
 
