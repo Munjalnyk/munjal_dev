@@ -434,11 +434,14 @@
     });
     function fetchData() {
         // Retrieve the JSON object from the PHP website
-        fetch('https://yoroco.ml/get_data.php')
-            .then(response => response.json())
-            .then(data => {
-                // Display the data on the page
-                document.getElementById('motor-data').innerHTML = `
+        try {
+
+
+            fetch('https://yoroco.ml/get_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Display the data on the page
+                    document.getElementById('motor-data').innerHTML = `
 					<tr>
 						<td>Voltage Phase 1</td>
 						<td>${data.voltage_phase_1}</td>
@@ -528,448 +531,452 @@
 						<td>${data.freq}</td>
                     </tr>
                     `;
-            })
-            .catch(error => console.log(error));
+                })
+                
 
 
-        $(document).ready(function () {
-            fetch("https://yoroco.ml/get_data_graph.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    // Parse the JSON data and extract the values for the graphs
-                    var labels = [];
-                    var power_factor_phase_1 = [];
-                    var power_factor_phase_2 = [];
-                    var power_factor_phase_3 = [];
-                    var voltage_line_1 = [];
-                    var voltage_line_2 = [];
-                    var voltage_line_3 = [];
-                    var current_phase_1 = [];
-                    var current_phase_2 = [];
-                    var current_phase_3 = [];
-                    var power_kw_1 = [];
-                    var power_kw_2 = [];
-                    var power_kw_3 = [];
-                    var freq = [];
-                    for (var i = 0; i < data.length; i++) {
-                        labels.push(data[i].id);
-                        power_factor_phase_1.push(data[i].power_factor_phase_1);
-                        power_factor_phase_2.push(data[i].power_factor_phase_2);
-                        power_factor_phase_3.push(data[i].power_factor_phase_3);
-                        voltage_line_1.push(data[i].voltage_line_1);
-                        voltage_line_2.push(data[i].voltage_line_2);
-                        voltage_line_3.push(data[i].voltage_line_3);
-                        current_phase_1.push(data[i].current_phase_1);
-                        current_phase_2.push(data[i].current_phase_2);
-                        current_phase_3.push(data[i].current_phase_3);
-                        power_kw_1.push(data[i].power_kw_1);
-                        power_kw_2.push(data[i].power_kw_2);
-                        power_kw_3.push(data[i].power_kw_3);
-                        freq.push(data[i].freq);
+            $(document).ready(function () {
+                fetch("https://yoroco.ml/get_data_graph.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
                     }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Parse the JSON data and extract the values for the graphs
+                        var labels = [];
+                        var power_factor_phase_1 = [];
+                        var power_factor_phase_2 = [];
+                        var power_factor_phase_3 = [];
+                        var voltage_line_1 = [];
+                        var voltage_line_2 = [];
+                        var voltage_line_3 = [];
+                        var current_phase_1 = [];
+                        var current_phase_2 = [];
+                        var current_phase_3 = [];
+                        var power_kw_1 = [];
+                        var power_kw_2 = [];
+                        var power_kw_3 = [];
+                        var freq = [];
+                        for (var i = 0; i < data.length; i++) {
+                            labels.push(data[i].id);
+                            power_factor_phase_1.push(data[i].power_factor_phase_1);
+                            power_factor_phase_2.push(data[i].power_factor_phase_2);
+                            power_factor_phase_3.push(data[i].power_factor_phase_3);
+                            voltage_line_1.push(data[i].voltage_line_1);
+                            voltage_line_2.push(data[i].voltage_line_2);
+                            voltage_line_3.push(data[i].voltage_line_3);
+                            current_phase_1.push(data[i].current_phase_1);
+                            current_phase_2.push(data[i].current_phase_2);
+                            current_phase_3.push(data[i].current_phase_3);
+                            power_kw_1.push(data[i].power_kw_1);
+                            power_kw_2.push(data[i].power_kw_2);
+                            power_kw_3.push(data[i].power_kw_3);
+                            freq.push(data[i].freq);
+                        }
 
-                    var ctx11 = document.getElementById('power_factor_phase_1').getContext('2d');
-                    var powerFactorChart1 = new Chart(ctx11, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Power Factor Phase 1',
-                                data: power_factor_phase_1,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        var ctx11 = document.getElementById('power_factor_phase_1').getContext('2d');
+                        var powerFactorChart1 = new Chart(ctx11, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Power Factor Phase 1',
+                                    data: power_factor_phase_1,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    var ctx12 = document.getElementById('power_factor_phase_2').getContext('2d');
-                    var powerFactorChart2 = new Chart(ctx12, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Power Factor Phase 1',
-                                data: power_factor_phase_2,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        var ctx12 = document.getElementById('power_factor_phase_2').getContext('2d');
+                        var powerFactorChart2 = new Chart(ctx12, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Power Factor Phase 1',
+                                    data: power_factor_phase_2,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    var ctx13 = document.getElementById('power_factor_phase_3').getContext('2d');
-                    var powerFactorChart3 = new Chart(ctx13, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Power Factor Phase 3',
-                                data: power_factor_phase_1,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        var ctx13 = document.getElementById('power_factor_phase_3').getContext('2d');
+                        var powerFactorChart3 = new Chart(ctx13, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Power Factor Phase 3',
+                                    data: power_factor_phase_1,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    var ctx21 = document.getElementById('voltage_line_1').getContext('2d');
-                    var powerFactorChart4 = new Chart(ctx21, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'voltage_line_1',
-                                data: voltage_line_1,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        var ctx21 = document.getElementById('voltage_line_1').getContext('2d');
+                        var powerFactorChart4 = new Chart(ctx21, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'voltage_line_1',
+                                    data: voltage_line_1,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    var ctx22 = document.getElementById('voltage_line_2').getContext('2d');
-                    var powerFactorChart5 = new Chart(ctx22, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'voltage_line_2',
-                                data: voltage_line_2,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        var ctx22 = document.getElementById('voltage_line_2').getContext('2d');
+                        var powerFactorChart5 = new Chart(ctx22, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'voltage_line_2',
+                                    data: voltage_line_2,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
-                    var ctx23 = document.getElementById('voltage_line_3').getContext('2d');
-                    var powerFactorChart6 = new Chart(ctx23, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'voltage_line_3',
-                                data: voltage_line_3,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        });
+                        var ctx23 = document.getElementById('voltage_line_3').getContext('2d');
+                        var powerFactorChart6 = new Chart(ctx23, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'voltage_line_3',
+                                    data: voltage_line_3,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
-
-
-                    var ctx31 = document.getElementById('current_phase_1').getContext('2d');
-                    var powerFactorChart7 = new Chart(ctx31, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'current_phase_1',
-                                data: current_phase_1,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-
-                    var ctx32 = document.getElementById('current_phase_2').getContext('2d');
-                    var powerFactorChart8 = new Chart(ctx32, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'current_phase_2',
-                                data: current_phase_2,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                    var ctx33 = document.getElementById('current_phase_3').getContext('2d');
-                    var powerFactorChart9 = new Chart(ctx33, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'current_phase_3',
-                                data: current_phase_3,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
+                        });
 
 
-                    var ctx41 = document.getElementById('power_kw_1').getContext('2d');
-                    var powerFactorChart10 = new Chart(ctx41, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'power_kw_1',
-                                data: power_kw_1,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        var ctx31 = document.getElementById('current_phase_1').getContext('2d');
+                        var powerFactorChart7 = new Chart(ctx31, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'current_phase_1',
+                                    data: current_phase_1,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    var ctx42 = document.getElementById('power_kw_2').getContext('2d');
-                    var powerFactorChart11 = new Chart(ctx42, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'power_kw_2',
-                                data: power_kw_2,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        var ctx32 = document.getElementById('current_phase_2').getContext('2d');
+                        var powerFactorChart8 = new Chart(ctx32, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'current_phase_2',
+                                    data: current_phase_2,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
+                        });
+                        var ctx33 = document.getElementById('current_phase_3').getContext('2d');
+                        var powerFactorChart9 = new Chart(ctx33, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'current_phase_3',
+                                    data: current_phase_3,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
 
-                    var ctx43 = document.getElementById('power_kw_3').getContext('2d');
-                    var powerFactorChart12 = new Chart(ctx43, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'power_kw_3',
-                                data: power_kw_3,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                    var ctx51 = document.getElementById('freq').getContext('2d');
-                    var powerFactorChart13 = new Chart(ctx51, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'freq',
-                                data: freq,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                xAxes: [{
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'ID'
-                                    }
-                                }],
-                                yAxes: [{
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'Frequency'
-                                    },
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                    var ctx52 = document.getElementById('freq1').getContext('2d');
-                    var powerFactorChart14 = new Chart(ctx52, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'freq_2',
-                                data: freq,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                xAxes: [{
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'ID'
-                                    }
-                                }],
-                                yAxes: [{
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'Frequency'
-                                    },
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
 
-                    var ctx53 = document.getElementById('freq2').getContext('2d');
-                    var powerFactorChart15 = new Chart(ctx53, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'freq_3',
-                                data: freq,
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                xAxes: [{
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'ID'
-                                    }
-                                }],
-                                yAxes: [{
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'Frequency'
-                                    },
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                        var ctx41 = document.getElementById('power_kw_1').getContext('2d');
+                        var powerFactorChart10 = new Chart(ctx41, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'power_kw_1',
+                                    data: power_kw_1,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
-                }
-                )
+                        });
+
+                        var ctx42 = document.getElementById('power_kw_2').getContext('2d');
+                        var powerFactorChart11 = new Chart(ctx42, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'power_kw_2',
+                                    data: power_kw_2,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+
+                        var ctx43 = document.getElementById('power_kw_3').getContext('2d');
+                        var powerFactorChart12 = new Chart(ctx43, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'power_kw_3',
+                                    data: power_kw_3,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        var ctx51 = document.getElementById('freq').getContext('2d');
+                        var powerFactorChart13 = new Chart(ctx51, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'freq',
+                                    data: freq,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    xAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'ID'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Frequency'
+                                        },
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        var ctx52 = document.getElementById('freq1').getContext('2d');
+                        var powerFactorChart14 = new Chart(ctx52, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'freq_2',
+                                    data: freq,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    xAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'ID'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Frequency'
+                                        },
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+
+                        var ctx53 = document.getElementById('freq2').getContext('2d');
+                        var powerFactorChart15 = new Chart(ctx53, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'freq_3',
+                                    data: freq,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    xAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'ID'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Frequency'
+                                        },
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    }
+                    )
             })
-            .catch(error => console.log(error));
-        }
-        // Call the function initially
-        fetchData();
 
-        // Refresh the data every 15 seconds
-        setInterval(fetchData, 15000);
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    // Call the function initially
+    fetchData();
+
+    // Refresh the data every 15 seconds
+    setInterval(fetchData, 15000);
 
 
 </script>
