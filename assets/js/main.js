@@ -427,8 +427,10 @@ function initContactForm() {
         btn.disabled = true;
         
         // Send to Formspree
-        // Replace YOUR_FORM_ID with your Formspree form ID (get it from formspree.io)
         const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqarnero';
+        
+        // Add subject line to form data
+        formData.append('_subject', 'Portfolio Contact: ' + (data.subject || 'New Message'));
         
         try {
             const response = await fetch(FORMSPREE_ENDPOINT, {
