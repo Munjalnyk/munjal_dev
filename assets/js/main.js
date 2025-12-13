@@ -426,28 +426,41 @@ function initContactForm() {
         btnIcon.className = 'fas fa-spinner fa-spin';
         btn.disabled = true;
         
-        // Simulate sending (replace with actual API call)
+        // Send to Formspree
+        // Replace YOUR_FORM_ID with your Formspree form ID (get it from formspree.io)
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqarnero';
+        
         try {
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
             
-            // Success
-            btnText.textContent = 'Sent!';
-            btnIcon.className = 'fas fa-check';
-            showNotification('Message sent successfully!', 'success');
-            form.reset();
-            
-            // Reset button after delay
-            setTimeout(() => {
-                btnText.textContent = 'Send Message';
-                btnIcon.className = 'fas fa-paper-plane';
-                btn.disabled = false;
-            }, 3000);
+            if (response.ok) {
+                // Success
+                btnText.textContent = 'Sent!';
+                btnIcon.className = 'fas fa-check';
+                showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                form.reset();
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    btnText.textContent = 'Send Message';
+                    btnIcon.className = 'fas fa-paper-plane';
+                    btn.disabled = false;
+                }, 3000);
+            } else {
+                throw new Error('Form submission failed');
+            }
             
         } catch (error) {
             btnText.textContent = 'Send Message';
             btnIcon.className = 'fas fa-paper-plane';
             btn.disabled = false;
-            showNotification('Failed to send message. Please try again.', 'error');
+            showNotification('Failed to send message. Please email me directly at munjal@outlook.in', 'error');
         }
     });
 }
