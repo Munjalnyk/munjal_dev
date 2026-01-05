@@ -2396,6 +2396,11 @@ a.contact-value:hover {
     .hero {
         padding: calc(var(--header-height) + 1rem) 1rem 3rem;
     }
+
+    /* Lighten effects for mobile */
+    #particles-js { display: none; }
+    .cursor-glow { display: none; }
+    .dynamic-bg { opacity: 0.4; }
     
     .hero-stats {
         flex-direction: column;
@@ -2462,6 +2467,18 @@ a.contact-value:hover {
 }
 
 @media (max-width: 480px) {
+    html {
+        font-size: 15px;
+    }
+
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .hero {
+        padding: calc(var(--header-height) + 0.5rem) 0.75rem 2.5rem;
+    }
+
     .hero-name {
         font-size: 2rem;
     }

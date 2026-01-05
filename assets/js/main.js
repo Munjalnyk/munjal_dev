@@ -40,32 +40,28 @@ function initLoader() {
     
     if (!loader) return;
     
-    // Hide loader after page loads or after max 3 seconds
+    // Hide loader as soon as possible
     const hideLoader = () => {
-        setTimeout(() => {
-            loader.classList.add('hidden');
-            document.body.style.overflow = 'visible';
-        }, 1500);
-    };
-    
-    // If page already loaded, hide immediately
-    if (document.readyState === 'complete') {
-        hideLoader();
-    } else {
-        window.addEventListener('load', hideLoader);
-    }
-    
-    // Fallback: force hide after 4 seconds regardless
-    setTimeout(() => {
         loader.classList.add('hidden');
         document.body.style.overflow = 'visible';
-    }, 4000);
+    };
+    
+    // If page already loaded, hide almost immediately
+    if (document.readyState === 'complete') {
+        setTimeout(hideLoader, 100);
+    } else {
+        window.addEventListener('load', () => setTimeout(hideLoader, 100), { once: true });
+    }
+    
+    // Fallback: force hide quickly if load events are blocked
+    setTimeout(hideLoader, 2500);
 }
 
 /* ============================================
    PARTICLES BACKGROUND
    ============================================ */
 function initParticles() {
+    if (window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (typeof particlesJS !== 'undefined') {
         particlesJS('particles-js', {
             particles: {
@@ -689,6 +685,13 @@ animateSkillBars();
    ============================================ */
 (function initSectionReveal() {
     const sections = document.querySelectorAll('section');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // Helper to detect if section is already in view
+    const isInView = (section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0;
+    };
     
     const revealSection = (entries, observer) => {
         entries.forEach(entry => {
@@ -704,7 +707,18 @@ animateSkillBars();
         threshold: 0.15
     });
     
+    // If user prefers reduced motion, reveal everything immediately
+    if (prefersReducedMotion) {
+        sections.forEach(section => section.classList.add('revealed'));
+        return;
+    }
+    
     sections.forEach(section => {
+        // Reveal hero or anything already in view immediately to avoid blank screens
+        if (section.id === 'home' || isInView(section)) {
+            section.classList.add('revealed');
+            return;
+        }
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
         section.style.transition = 'all 0.8s ease';
@@ -1125,7 +1139,9 @@ function initRunningDogs() {
    INTERACTIVE 3D BACKGROUND
    ============================================ */
 function initInteractiveBackground() {
+    if (window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const dynamicBg = document.querySelector('.dynamic-bg');
+    if (!dynamicBg) return;
     const orbs = document.querySelectorAll('.bg-orb');
     const layers = document.querySelectorAll('.bg-layer');
     

@@ -92,6 +92,23 @@
         }
     }
     </script>
+
+        <!-- Google Analytics (replace G-XXXXXXXXXX with your ID) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5HRXFVH4XY"></script>
+        <script>
+            // Respect Do Not Track
+            const dnt = navigator.doNotTrack === '1' || window.doNotTrack === '1';
+            if (!dnt) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-XXXXXXXXXX', {
+                    anonymize_ip: true,
+                    allow_ad_personalization_signals: false,
+                    transport_type: 'beacon'
+                });
+            }
+        </script>
     
     <title>Munjal Nayak | Hardware & Embedded Systems Engineer</title>
 </head>
