@@ -29,6 +29,8 @@ function AnimatedCounter({ value, inView }: { value: string; inView: boolean }) 
   return <>{inView ? `${count}${suffix}` : `0${suffix}`}</>
 }
 
+const techKeywords = ['C', 'ESP32', 'STM32', 'SPI', 'MQTT', 'PCB', 'RTOS', 'SIL4', 'I2C', 'UART']
+
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
@@ -65,31 +67,61 @@ export default function About() {
 
         {/* Content grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Image */}
+          {/* Image column */}
           <motion.div
             ref={imageRef}
-            className="lg:col-span-4"
+            className="lg:col-span-5"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden rounded-lg group">
-              <motion.img
-                src={personalInfo.profileImg}
-                alt={personalInfo.name}
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-700 scale-110"
-                style={{ y: imgY }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
-              <div className="absolute inset-0 border border-accent/10 rounded-lg" />
-              <div className="absolute top-3 left-3 w-6 h-6 border-t border-l border-accent/40" />
-              <div className="absolute bottom-3 right-3 w-6 h-6 border-b border-r border-accent/40" />
-              <div className="absolute inset-0 bg-accent/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative max-w-md mx-auto lg:mx-0">
+              {/* Main image */}
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl group">
+                <motion.img
+                  src={personalInfo.profileImg}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-700 scale-110"
+                  style={{ y: imgY }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 border border-accent/10 rounded-2xl" />
+
+                {/* Corner accents */}
+                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-accent/30 rounded-tl-lg" />
+                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-accent/30 rounded-br-lg" />
+              </div>
+
+              {/* Floating tech keywords */}
+              {techKeywords.slice(0, 6).map((word, i) => {
+                const positions = [
+                  { top: '8%', right: '-12%' },
+                  { top: '25%', right: '-18%' },
+                  { top: '50%', right: '-15%' },
+                  { bottom: '30%', right: '-10%' },
+                  { bottom: '10%', left: '-10%' },
+                  { top: '15%', left: '-12%' },
+                ]
+                return (
+                  <motion.span
+                    key={word}
+                    className="absolute hidden lg:block px-2.5 py-1 bg-bg-card/80 backdrop-blur-sm border border-border/50 rounded-md font-mono text-[10px] text-text-muted/60 tracking-wider"
+                    style={positions[i]}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: 0.8 + i * 0.1, duration: 0.4 }}
+                    whileHover={{ scale: 1.1, color: '#c8a96e', borderColor: 'rgba(200,169,110,0.3)' }}
+                  >
+                    {word}
+                  </motion.span>
+                )
+              })}
             </div>
           </motion.div>
 
-          {/* Text */}
-          <div className="lg:col-span-8">
+          {/* Text column */}
+          <div className="lg:col-span-7">
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-8 leading-tight">
               <TextReveal text="Crafting Precision" delay={0.3} />
               <br />
@@ -133,7 +165,7 @@ export default function About() {
                   href={link.href}
                   target={link.href.startsWith('mailto') ? undefined : '_blank'}
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-4 py-2 border border-border bg-bg-card hover:border-accent/30 hover:bg-accent/[0.04] rounded-full transition-all duration-300"
+                  className="group inline-flex items-center gap-2 px-5 py-2.5 border border-border bg-bg-card hover:border-accent/30 hover:bg-accent/[0.04] rounded-full transition-all duration-300"
                 >
                   <span className="font-grotesk text-sm text-text-secondary group-hover:text-accent transition-colors">
                     {link.label}
@@ -143,7 +175,7 @@ export default function About() {
                     height="10"
                     viewBox="0 0 10 10"
                     fill="none"
-                    className="text-text-muted group-hover:text-accent transition-colors"
+                    className="text-text-muted group-hover:text-accent transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300"
                   >
                     <path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" strokeWidth="1" />
                   </svg>
@@ -156,20 +188,19 @@ export default function About() {
               {personalInfo.stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
-                  className="relative"
+                  className="relative group"
                   initial={{ opacity: 0, y: 30 }}
                   animate={statsInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
                 >
-                  <span className="block font-display text-4xl md:text-5xl font-bold text-gradient-gold">
-                    <AnimatedCounter value={stat.value} inView={statsInView} />
-                  </span>
-                  <span className="block mt-1 font-grotesk text-xs md:text-sm tracking-wide text-text-muted uppercase">
-                    {stat.label}
-                  </span>
-                  {i < personalInfo.stats.length - 1 && (
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-12 bg-border hidden md:block" />
-                  )}
+                  <div className="relative p-4 md:p-5 border border-border/50 rounded-xl bg-bg-card/50 hover:border-accent/20 transition-all duration-500 hover:glow-gold">
+                    <span className="block font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-gold">
+                      <AnimatedCounter value={stat.value} inView={statsInView} />
+                    </span>
+                    <span className="block mt-1.5 font-grotesk text-[11px] md:text-xs tracking-wider text-text-muted uppercase">
+                      {stat.label}
+                    </span>
+                  </div>
                 </motion.div>
               ))}
             </div>

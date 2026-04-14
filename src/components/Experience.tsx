@@ -40,7 +40,17 @@ export default function Experience() {
 
         {/* Timeline */}
         <div className="relative">
-          <div className="absolute left-0 md:left-8 top-0 bottom-0 w-[1px] bg-border" />
+          {/* Glowing timeline line */}
+          <div className="absolute left-[7px] md:left-[31px] top-0 bottom-0 w-[1px]">
+            <div className="absolute inset-0 bg-border" />
+            <motion.div
+              className="absolute top-0 left-0 right-0 bg-gradient-to-b from-accent via-accent/50 to-transparent"
+              initial={{ height: 0 }}
+              animate={isInView ? { height: '100%' } : {}}
+              transition={{ duration: 2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </div>
+
           {experiences.map((exp, i) => (
             <ExperienceCard key={i} experience={exp} index={i} />
           ))}
@@ -66,7 +76,7 @@ function ExperienceCard({
   return (
     <motion.div
       ref={ref}
-      className="relative pl-8 md:pl-20 pb-14 last:pb-0 group"
+      className="relative pl-10 md:pl-20 pb-14 last:pb-0 group"
       initial={{ opacity: 0, x: -30 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{
@@ -75,38 +85,65 @@ function ExperienceCard({
         ease: [0.215, 0.61, 0.355, 1],
       }}
     >
-      {/* Timeline dot */}
-      <div className="absolute left-0 md:left-8 top-2 -translate-x-1/2 z-10">
-        <div
-          className={`w-3 h-3 rounded-full border-2 transition-colors duration-300 ${
-            isWork
-              ? 'border-accent bg-accent/20 group-hover:bg-accent/40'
-              : 'border-text-muted bg-bg group-hover:border-accent/50'
-          }`}
-        />
+      {/* Timeline dot with glow */}
+      <div className="absolute left-0 md:left-[24px] top-3 z-10">
+        <motion.div
+          className="relative"
+          initial={{ scale: 0 }}
+          animate={isInView ? { scale: 1 } : {}}
+          transition={{ duration: 0.4, delay: 0.2 + index * 0.1, type: 'spring', stiffness: 300 }}
+        >
+          <div
+            className={`w-[14px] h-[14px] rounded-full border-2 transition-all duration-300 ${
+              isWork
+                ? 'border-accent bg-accent/30'
+                : 'border-text-muted/50 bg-bg'
+            }`}
+          />
+          {isWork && (
+            <div className="absolute inset-0 rounded-full bg-accent/20 animate-ping" style={{ animationDuration: '3s' }} />
+          )}
+        </motion.div>
       </div>
 
       {/* Card */}
-      <SpotlightCard className="p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 hover:bg-bg-hover rounded-lg transition-all duration-500 group-hover:glow-gold">
+      <SpotlightCard className="relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 hover:bg-bg-hover rounded-xl transition-all duration-500 group-hover:glow-gold overflow-hidden">
+        {/* Top gradient */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
         <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
           <div>
             <span
-              className={`inline-block px-3 py-1 text-[10px] font-mono tracking-[0.15em] uppercase rounded-full mb-3 ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-mono tracking-[0.15em] uppercase rounded-full mb-3 ${
                 isWork
                   ? 'bg-accent/10 text-accent border border-accent/20'
                   : 'bg-white/[0.03] text-text-secondary border border-border'
               }`}
             >
+              {isWork ? (
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1" y="3" width="8" height="6" rx="1" stroke="currentColor" strokeWidth="0.8"/><path d="M3 3V2C3 1.5 3.5 1 4 1H6C6.5 1 7 1.5 7 2V3" stroke="currentColor" strokeWidth="0.8"/></svg>
+              ) : (
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1L9 3.5V7.5L5 10L1 7.5V3.5L5 1Z" stroke="currentColor" strokeWidth="0.8"/></svg>
+              )}
               {isWork ? 'Work' : 'Education'}
             </span>
-            <h3 className="font-display text-xl md:text-2xl font-bold text-text-primary">
+            <h3 className="font-display text-xl md:text-2xl font-bold text-text-primary group-hover:text-accent transition-colors duration-300">
               {experience.role}
             </h3>
-            <p className="mt-1 font-grotesk text-base text-accent">{experience.company}</p>
+            <p className="mt-1 font-grotesk text-base text-accent/80">{experience.company}</p>
           </div>
           <div className="text-right shrink-0">
-            <span className="font-mono text-sm text-text-muted">{experience.duration}</span>
-            <p className="font-grotesk text-xs text-text-muted mt-1">{experience.location}</p>
+            <span className="inline-block px-3 py-1 bg-white/[0.02] border border-border/50 rounded-lg font-mono text-sm text-text-muted">
+              {experience.duration}
+            </span>
+            <p className="font-grotesk text-xs text-text-muted mt-1.5 flex items-center gap-1 justify-end">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-text-muted/50">
+                <circle cx="5" cy="4" r="2.5" stroke="currentColor" strokeWidth="0.8" />
+                <path d="M5 6.5V9" stroke="currentColor" strokeWidth="0.8" />
+                <path d="M3.5 9H6.5" stroke="currentColor" strokeWidth="0.8" />
+              </svg>
+              {experience.location}
+            </p>
           </div>
         </div>
 
@@ -115,10 +152,16 @@ function ExperienceCard({
         {experience.bullets.length > 0 && (
           <ul className="space-y-2.5 mb-5">
             {experience.bullets.map((bullet, j) => (
-              <li key={j} className="flex items-start gap-3 text-sm text-text-secondary leading-relaxed">
-                <span className="mt-2 w-1 h-1 rounded-full bg-accent/60 shrink-0" />
+              <motion.li
+                key={j}
+                className="flex items-start gap-3 text-sm text-text-secondary leading-relaxed"
+                initial={{ opacity: 0, x: -10 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.3 + j * 0.08 }}
+              >
+                <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent/40 shrink-0" />
                 {bullet}
-              </li>
+              </motion.li>
             ))}
           </ul>
         )}
@@ -127,7 +170,7 @@ function ExperienceCard({
           {experience.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-[10px] font-mono tracking-wider text-text-muted bg-white/[0.02] border border-border rounded-full"
+              className="px-3 py-1 text-[10px] font-mono tracking-wider text-text-muted bg-white/[0.02] border border-border hover:border-accent/20 hover:text-accent/60 rounded-full transition-all duration-300"
             >
               {tag}
             </span>
