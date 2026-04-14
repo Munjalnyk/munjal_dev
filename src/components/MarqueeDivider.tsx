@@ -1,0 +1,56 @@
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
+
+const words = [
+  'HARDWARE',
+  'EMBEDDED',
+  'IoT',
+  'PCB DESIGN',
+  'FIRMWARE',
+  'SYSTEMS',
+  'SIL4',
+  'ENGINEERING',
+]
+
+export default function MarqueeDivider() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
+
+  return (
+    <motion.div
+      ref={ref}
+      className="relative py-10 md:py-14 overflow-hidden border-y border-border"
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Fade edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-bg to-transparent z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-bg to-transparent z-10" />
+
+      {/* Row 1 - normal direction */}
+      <div className="animate-marquee whitespace-nowrap flex items-center mb-4">
+        {[...words, ...words, ...words].map((word, i) => (
+          <span key={`a-${i}`} className="inline-flex items-center">
+            <span className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white/[0.03] mx-4 md:mx-6 select-none">
+              {word}
+            </span>
+            <span className="text-accent/10 text-lg mx-2">&#9670;</span>
+          </span>
+        ))}
+      </div>
+
+      {/* Row 2 - reverse direction */}
+      <div className="animate-marquee-reverse whitespace-nowrap flex items-center">
+        {[...words, ...words, ...words].map((word, i) => (
+          <span key={`b-${i}`} className="inline-flex items-center">
+            <span className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-gold opacity-[0.04] mx-4 md:mx-6 select-none">
+              {word}
+            </span>
+            <span className="text-accent/8 text-sm mx-2">&#9670;</span>
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  )
+}

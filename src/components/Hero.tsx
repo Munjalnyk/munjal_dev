@@ -32,6 +32,38 @@ export default function Hero() {
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent/[0.015] rounded-full blur-[80px] -translate-x-1/2 translate-y-1/2" />
       </div>
 
+      {/* Decorative rotating ring - desktop only */}
+      <div className="absolute top-1/2 right-[8%] -translate-y-1/2 hidden lg:block pointer-events-none">
+        <motion.div
+          className="w-[340px] h-[340px] rounded-full border border-accent/[0.06]"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          className="absolute inset-8 rounded-full border border-accent/[0.04]"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          className="absolute inset-16 rounded-full border border-dashed border-accent/[0.03]"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        />
+        {/* Orbiting dots */}
+        {[0, 90, 180, 270].map((deg) => (
+          <motion.div
+            key={deg}
+            className="absolute w-1.5 h-1.5 rounded-full bg-accent/30"
+            style={{
+              top: `calc(50% - ${170 * Math.cos((deg * Math.PI) / 180)}px)`,
+              left: `calc(50% + ${170 * Math.sin((deg * Math.PI) / 180)}px)`,
+            }}
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 3, repeat: Infinity, delay: deg / 180 }}
+          />
+        ))}
+      </div>
+
       <motion.div
         style={{ y, opacity }}
         className="relative section-padding pt-32 pb-20 md:pt-40 md:pb-32"

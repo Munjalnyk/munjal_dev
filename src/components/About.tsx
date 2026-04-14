@@ -1,7 +1,33 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { personalInfo } from '@/data'
 import TextReveal from './TextReveal'
+
+function AnimatedCounter({ value, inView }: { value: string; inView: boolean }) {
+  const numMatch = value.match(/(\d+)/)
+  const num = numMatch ? parseInt(numMatch[1]) : 0
+  const suffix = value.replace(/\d+/, '')
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!inView) return
+    let start = 0
+    const duration = 2000
+    const step = duration / num
+    const timer = setInterval(() => {
+      start++
+      if (start >= num) {
+        setCount(num)
+        clearInterval(timer)
+      } else {
+        setCount(start)
+      }
+    }, step)
+    return () => clearInterval(timer)
+  }, [inView, num])
+
+  return <>{inView ? `${count}${suffix}` : `0${suffix}`}</>
+}
 
 export default function About() {
   const ref = useRef(null)
@@ -128,7 +154,7 @@ export default function About() {
                   transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
                 >
                   <span className="block font-display text-4xl md:text-5xl font-bold text-gradient-gold">
-                    {stat.value}
+                    <AnimatedCounter value={stat.value} inView={statsInView} />
                   </span>
                   <span className="block mt-1 font-grotesk text-xs md:text-sm tracking-wide text-text-muted uppercase">
                     {stat.label}

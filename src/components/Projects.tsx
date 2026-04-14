@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { projects, publications } from '@/data'
 import TextReveal from './TextReveal'
+import SpotlightCard from './SpotlightCard'
 
 export default function Projects() {
   const ref = useRef(null)
@@ -83,55 +84,56 @@ function ProjectCard({
   return (
     <motion.div
       ref={ref}
-      className="group relative p-6 md:p-8 border border-border bg-bg-card rounded-lg overflow-hidden transition-all duration-500 hover:border-accent/20 hover:glow-gold"
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.12 }}
     >
-      <div
-        className="absolute top-0 right-0 w-48 h-48 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-        style={{ backgroundColor: `${project.accent}12` }}
-      />
+      <SpotlightCard className="group relative p-6 md:p-8 border border-border bg-bg-card rounded-lg transition-all duration-500 hover:border-accent/20 hover:glow-gold">
+        <div
+          className="absolute top-0 right-0 w-48 h-48 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+          style={{ backgroundColor: `${project.accent}12` }}
+        />
 
-      <span className="relative font-mono text-xs text-text-muted/50 mb-6 block">
-        0{index + 1}
-      </span>
+        <span className="relative font-mono text-xs text-text-muted/50 mb-6 block">
+          0{index + 1}
+        </span>
 
-      <span
-        className="relative font-mono text-[10px] tracking-[0.2em] uppercase mb-4 block"
-        style={{ color: project.accent }}
-      >
-        {project.category}
-      </span>
+        <span
+          className="relative font-mono text-[10px] tracking-[0.2em] uppercase mb-4 block"
+          style={{ color: project.accent }}
+        >
+          {project.category}
+        </span>
 
-      <h3 className="relative font-display text-xl md:text-2xl font-bold text-text-primary mb-4 group-hover:text-accent transition-colors duration-300">
-        {project.title}
-      </h3>
+        <h3 className="relative font-display text-xl md:text-2xl font-bold text-text-primary mb-4 group-hover:text-accent transition-colors duration-300">
+          {project.title}
+        </h3>
 
-      <p className="relative font-sans text-sm text-text-secondary leading-relaxed mb-6">
-        {project.description}
-      </p>
+        <p className="relative font-sans text-sm text-text-secondary leading-relaxed mb-6">
+          {project.description}
+        </p>
 
-      <div className="relative flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-3 py-1 text-[10px] font-mono tracking-wider border rounded-full transition-colors duration-300"
-            style={{
-              color: `${project.accent}cc`,
-              borderColor: `${project.accent}20`,
-              backgroundColor: `${project.accent}08`,
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+        <div className="relative flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 text-[10px] font-mono tracking-wider border rounded-full transition-colors duration-300"
+              style={{
+                color: `${project.accent}cc`,
+                borderColor: `${project.accent}20`,
+                backgroundColor: `${project.accent}08`,
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
 
-      <div
-        className="absolute bottom-0 left-0 right-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
-        style={{ backgroundColor: project.accent }}
-      />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+          style={{ backgroundColor: project.accent }}
+        />
+      </SpotlightCard>
     </motion.div>
   )
 }

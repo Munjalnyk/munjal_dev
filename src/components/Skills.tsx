@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { skillCategories } from '@/data'
 import { Cpu, Code2, Server, Shield } from 'lucide-react'
 import TextReveal from './TextReveal'
+import SpotlightCard from './SpotlightCard'
 
 const iconMap: Record<string, React.ElementType> = {
   Cpu,
@@ -53,11 +54,11 @@ export default function Skills() {
             return (
               <motion.div
                 key={cat.category}
-                className="group relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 rounded-lg transition-all duration-500 hover:glow-gold overflow-hidden"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
               >
+              <SpotlightCard className="group relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 rounded-lg transition-all duration-500 hover:glow-gold overflow-hidden">
                 <div
                   className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                   style={{ backgroundColor: `${cat.color}12` }}
@@ -100,6 +101,7 @@ export default function Skills() {
                     </motion.div>
                   ))}
                 </div>
+              </SpotlightCard>
               </motion.div>
             )
           })}

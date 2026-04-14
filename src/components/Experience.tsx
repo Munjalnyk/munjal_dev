@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { experiences } from '@/data'
 import TextReveal from './TextReveal'
+import SpotlightCard from './SpotlightCard'
 
 export default function Experience() {
   const ref = useRef(null)
@@ -86,7 +87,7 @@ function ExperienceCard({
       </div>
 
       {/* Card */}
-      <div className="p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 hover:bg-bg-hover rounded-lg transition-all duration-500 group-hover:glow-gold">
+      <SpotlightCard className="p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 hover:bg-bg-hover rounded-lg transition-all duration-500 group-hover:glow-gold">
         <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
           <div>
             <span
@@ -132,7 +133,7 @@ function ExperienceCard({
             </span>
           ))}
         </div>
-      </div>
+      </SpotlightCard>
     </motion.div>
   )
 }
