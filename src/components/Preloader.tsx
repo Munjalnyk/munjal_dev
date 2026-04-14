@@ -1,58 +1,130 @@
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 export default function Preloader() {
+  const count = useMotionValue(0)
+  const rounded = useTransform(count, (latest) => Math.round(latest))
+  const displayRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const unsub = rounded.on('change', (latest) => {
+      if (displayRef.current) {
+        displayRef.current.textContent = String(latest).padStart(3, '0')
+      }
+    })
+    const animation = animate(count, 100, {
+      duration: 2.2,
+      ease: [0.16, 1, 0.3, 1],
+    })
+    return () => {
+      animation.stop()
+      unsub()
+    }
+  }, [count, rounded])
+
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#050505]"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050505]"
       exit={{ y: '-100%' }}
       transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
     >
-      <motion.div className="relative flex flex-col items-center">
-        {/* Initials */}
-        <motion.span
-          className="font-display text-5xl md:text-7xl font-bold tracking-[0.15em] text-text-primary"
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
-        >
-          MN
-        </motion.span>
+      {/* Background grid pattern */}
+      <div className="absolute inset-0 bg-grid opacity-30" />
 
-        {/* Gold line */}
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/[0.03] rounded-full blur-[200px]" />
+
+      <div className="relative flex flex-col items-center">
+        {/* Logo monogram */}
         <motion.div
-          className="mt-5 h-[1px] bg-accent"
+          className="relative mb-8"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
+        >
+          <span className="font-display text-6xl md:text-8xl font-bold tracking-[0.2em] text-text-primary">
+            M
+          </span>
+          <span className="font-display text-6xl md:text-8xl font-bold tracking-[0.2em] text-gradient-gold">
+            N
+          </span>
+        </motion.div>
+
+        {/* Divider line */}
+        <motion.div
+          className="h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent"
           initial={{ width: 0 }}
-          animate={{ width: 80 }}
-          transition={{ duration: 0.8, delay: 0.9, ease: [0.215, 0.61, 0.355, 1] }}
+          animate={{ width: 120 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
         />
 
-        {/* Loading text */}
-        <motion.span
-          className="mt-5 font-mono text-[10px] tracking-[0.35em] uppercase text-text-muted"
+        {/* Counter */}
+        <motion.div
+          className="mt-8 flex items-baseline gap-1"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1.3 }}
+          transition={{ duration: 0.4, delay: 0.8 }}
         >
-          Loading
-        </motion.span>
+          <span
+            ref={displayRef}
+            className="font-mono text-4xl md:text-5xl font-light text-accent tabular-nums"
+          >
+            000
+          </span>
+          <span className="font-mono text-lg text-accent/40">%</span>
+        </motion.div>
 
-        {/* Progress dots */}
-        <div className="mt-4 flex gap-1.5">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="h-1 w-1 rounded-full bg-accent"
-              initial={{ opacity: 0.2 }}
-              animate={{ opacity: [0.2, 1, 0.2] }}
-              transition={{
-                duration: 1.2,
-                repeat: Infinity,
-                delay: 1.5 + i * 0.15,
-              }}
-            />
-          ))}
-        </div>
-      </motion.div>
+        {/* Progress bar */}
+        <motion.div
+          className="mt-6 w-48 h-[1px] bg-white/5 rounded-full overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.8 }}
+        >
+          <motion.div
+            className="h-full bg-gradient-to-r from-accent/60 to-accent rounded-full"
+            initial={{ width: '0%' }}
+            animate={{ width: '100%' }}
+            transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+          />
+        </motion.div>
+
+        {/* Subtitle */}
+        <motion.span
+          className="mt-5 font-mono text-[9px] tracking-[0.4em] uppercase text-text-muted/60"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.0 }}
+        >
+          Portfolio
+        </motion.span>
+      </div>
+
+      {/* Corner markers */}
+      <motion.div
+        className="absolute top-6 left-6 w-8 h-8 border-t border-l border-accent/20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+      />
+      <motion.div
+        className="absolute top-6 right-6 w-8 h-8 border-t border-r border-accent/20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      />
+      <motion.div
+        className="absolute bottom-6 left-6 w-8 h-8 border-b border-l border-accent/20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+      />
+      <motion.div
+        className="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-accent/20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.7 }}
+      />
     </motion.div>
   )
 }
