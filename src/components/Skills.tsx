@@ -124,8 +124,8 @@ export default function Skills() {
           <div className="animate-marquee whitespace-nowrap flex items-center">
             {[...allSkills, ...allSkills].map((skill, i) => (
               <span key={i} className="inline-flex items-center mx-5">
-                <span className="font-grotesk text-sm text-text-muted/20">{skill}</span>
-                <span className="mx-5 text-accent/10 text-xs">&#9670;</span>
+                <span className="font-grotesk text-sm text-text-secondary/50">{skill}</span>
+                <span className="mx-5 text-accent/30 text-xs">&#9670;</span>
               </span>
             ))}
           </div>
