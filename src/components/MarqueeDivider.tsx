@@ -32,10 +32,10 @@ export default function MarqueeDivider() {
       <div className="animate-marquee whitespace-nowrap flex items-center mb-4">
         {[...words, ...words, ...words].map((word, i) => (
           <span key={`a-${i}`} className="inline-flex items-center">
-            <span className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white/[0.03] mx-4 md:mx-6 select-none">
+            <span className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white/[0.08] mx-4 md:mx-6 select-none">
               {word}
             </span>
-            <span className="text-accent/10 text-lg mx-2">&#9670;</span>
+            <span className="text-accent/25 text-lg mx-2">&#9670;</span>
           </span>
         ))}
       </div>
@@ -44,10 +44,10 @@ export default function MarqueeDivider() {
       <div className="animate-marquee-reverse whitespace-nowrap flex items-center">
         {[...words, ...words, ...words].map((word, i) => (
           <span key={`b-${i}`} className="inline-flex items-center">
-            <span className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-gold opacity-[0.04] mx-4 md:mx-6 select-none">
+            <span className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-accent/[0.12] mx-4 md:mx-6 select-none">
               {word}
             </span>
-            <span className="text-accent/8 text-sm mx-2">&#9670;</span>
+            <span className="text-accent/20 text-sm mx-2">&#9670;</span>
           </span>
         ))}
       </div>

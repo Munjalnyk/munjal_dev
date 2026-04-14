@@ -11,7 +11,7 @@
 
   html {
     scroll-behavior: auto;
-    background-color: #050505;
+    background-color: #060606;
     color: #f0f0f0;
   }
 
@@ -20,7 +20,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    background-color: #050505;
+    background-color: #060606;
     cursor: none;
   }
 
@@ -30,17 +30,17 @@
   }
 
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
   ::-webkit-scrollbar-track {
     background: #050505;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1a1a1a;
-    border-radius: 3px;
+    background: rgba(200, 169, 110, 0.15);
+    border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #2a2a2a;
+    background: rgba(200, 169, 110, 0.3);
   }
 
   *:focus-visible {
@@ -53,20 +53,24 @@
       cursor: auto;
     }
   }
+
+  /* Smooth image rendering */
+  img {
+    image-rendering: auto;
+  }
 }
 
 @layer components {
+  /* Futuristic dot-matrix backdrop */
   .grain-overlay {
     position: fixed;
-    top: -200%;
-    left: -200%;
-    width: 500%;
-    height: 500%;
+    inset: 0;
     pointer-events: none;
     z-index: 9998;
-    opacity: 0.03;
-    animation: grain 8s steps(10) infinite;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-image: radial-gradient(circle, rgba(200, 169, 110, 0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
   }
 
   .section-padding {
@@ -84,14 +88,27 @@
     background-clip: text;
   }
 
+  .text-gradient-gold-animated {
+    background: linear-gradient(90deg, #a08548, #c8a96e, #e8d5a8, #c8a96e, #a08548);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-text 4s linear infinite;
+  }
+
   .glow-gold {
-    box-shadow: 0 0 40px rgba(200, 169, 110, 0.06);
+    box-shadow: 0 0 40px rgba(200, 169, 110, 0.06), 0 0 80px rgba(200, 169, 110, 0.02);
+  }
+
+  .glow-gold-strong {
+    box-shadow: 0 0 60px rgba(200, 169, 110, 0.1), 0 0 120px rgba(200, 169, 110, 0.04);
   }
 
   .glass {
-    background: rgba(5, 5, 5, 0.75);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
 
@@ -105,7 +122,7 @@
     left: 0;
     width: 0;
     height: 1px;
-    background-color: #c8a96e;
+    background: linear-gradient(90deg, #c8a96e, #e8d5a8);
     transition: width 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   .hover-line:hover::after {
@@ -124,15 +141,72 @@
   .bg-dots {
     background-image: radial-gradient(
       circle,
-      rgba(200, 169, 110, 0.05) 1px,
+      rgba(200, 169, 110, 0.04) 1px,
       transparent 1px
     );
     background-size: 24px 24px;
+  }
+
+  /* Gradient border effect */
+  .border-gradient {
+    position: relative;
+  }
+  .border-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(200, 169, 110, 0.2), transparent 50%, rgba(200, 169, 110, 0.1));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+  }
+
+  /* Shimmer effect for buttons */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+    animation: shimmer 3s ease-in-out infinite;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+@keyframes shimmer-text {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
   }
 }

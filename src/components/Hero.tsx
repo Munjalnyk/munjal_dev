@@ -29,9 +29,6 @@ export default function Hero() {
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-grid" />
-        <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-accent/[0.03] rounded-full blur-[150px]" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.02] rounded-full blur-[120px] translate-x-1/4 -translate-y-1/4" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/[0.015] rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3" />
       </div>
 
       <motion.div
@@ -159,76 +156,71 @@ export default function Hero() {
           {/* Right — Profile Visual */}
           <motion.div
             className="relative hidden lg:flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 3.3, ease: [0.215, 0.61, 0.355, 1] }}
           >
             {/* Rotating rings */}
             <motion.div
-              className="absolute w-[360px] h-[360px] rounded-full border border-accent/[0.07]"
+              className="absolute w-[380px] h-[380px] rounded-full border border-accent/[0.06]"
               animate={{ rotate: 360 }}
-              transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
-            />
+              transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+            >
+              {/* Tick marks on ring */}
+              {[0, 90, 180, 270].map((deg) => (
+                <div
+                  key={deg}
+                  className="absolute w-[1px] h-3 bg-accent/20"
+                  style={{
+                    top: '50%',
+                    left: '50%',
+                    transformOrigin: '0 0',
+                    transform: `rotate(${deg}deg) translateY(-190px) translateX(-0.5px)`,
+                  }}
+                />
+              ))}
+            </motion.div>
             <motion.div
-              className="absolute w-[300px] h-[300px] rounded-full border border-accent/[0.04]"
+              className="absolute w-[320px] h-[320px] rounded-full border border-dashed border-accent/[0.04]"
               animate={{ rotate: -360 }}
-              transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
             />
             <motion.div
-              className="absolute w-[240px] h-[240px] rounded-full border border-dashed border-accent/[0.03]"
+              className="absolute w-[260px] h-[260px] rounded-full border border-accent/[0.03]"
               animate={{ rotate: 360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
             />
-
-            {/* Orbiting dots */}
-            {[0, 72, 144, 216, 288].map((deg, i) => (
-              <motion.div
-                key={deg}
-                className="absolute w-1.5 h-1.5 rounded-full bg-accent"
-                style={{
-                  top: `calc(50% - ${180 * Math.cos((deg * Math.PI) / 180)}px)`,
-                  left: `calc(50% + ${180 * Math.sin((deg * Math.PI) / 180)}px)`,
-                  boxShadow: '0 0 8px rgba(200,169,110,0.6)',
-                }}
-                animate={{ scale: [1, 1.8, 1], opacity: [0.4, 1, 0.4] }}
-                transition={{ duration: 3, repeat: Infinity, delay: i * 0.6 }}
-              />
-            ))}
 
             {/* Profile photo */}
-            <motion.div
-              className="relative w-56 h-64 rounded-2xl overflow-hidden"
-              style={{ boxShadow: '0 0 0 1px rgba(200,169,110,0.12), 0 32px 80px rgba(0,0,0,0.5)' }}
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#050505]/70 via-transparent to-accent/[0.03]" />
+            <div className="relative w-56 h-64 rounded-2xl overflow-hidden border border-border/60">
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#060606]/60 via-transparent to-transparent" />
               <img
                 src={personalInfo.profileImg}
                 alt={personalInfo.name}
                 className="w-full h-full object-cover"
                 style={{ filter: 'contrast(1.05) saturate(0.85)' }}
               />
-            </motion.div>
+              <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-accent/25" />
+              <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-accent/25" />
+            </div>
 
-            {/* Floating stat chips */}
+            {/* Stat chips */}
             {personalInfo.stats.map((stat, i) => {
               const positions = [
-                { top: '5%', right: '-8%' },
-                { top: '50%', right: '-16%' },
-                { bottom: '8%', right: '-5%' },
+                { top: '2%', right: '-10%' },
+                { top: '45%', right: '-20%' },
+                { bottom: '5%', right: '-8%' },
               ]
               return (
                 <motion.div
                   key={stat.label}
-                  className="absolute px-3.5 py-2.5 rounded-xl bg-bg-card/80 backdrop-blur-sm border border-border flex flex-col items-center"
+                  className="absolute px-3.5 py-2 rounded-lg bg-bg-card/90 backdrop-blur-sm border border-border flex flex-col items-center"
                   style={positions[i]}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 3.6 + i * 0.15 }}
-                  whileHover={{ scale: 1.06, y: -2 }}
+                  transition={{ delay: 3.6 + i * 0.12 }}
                 >
-                  <span className="text-xl font-bold text-accent leading-none font-display">{stat.value}</span>
+                  <span className="text-lg font-bold text-accent leading-none font-display">{stat.value}</span>
                   <span className="text-[9px] text-text-muted font-medium mt-0.5 whitespace-nowrap">{stat.label}</span>
                 </motion.div>
               )

@@ -50,7 +50,6 @@ export default function App() {
           >
             <motion.div
               className="relative mx-4 max-w-md w-full p-8 md:p-10 bg-bg-card border border-accent/20 rounded-2xl text-center"
-              style={{ boxShadow: '0 0 80px rgba(200,169,110,0.08)' }}
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
