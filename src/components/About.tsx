@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { personalInfo } from '@/data'
 import TextReveal from './TextReveal'
@@ -34,6 +34,12 @@ export default function About() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const statsRef = useRef(null)
   const statsInView = useInView(statsRef, { once: true, margin: '-50px' })
+  const imageRef = useRef(null)
+  const { scrollYProgress: imgScroll } = useScroll({
+    target: imageRef,
+    offset: ['start end', 'end start'],
+  })
+  const imgY = useTransform(imgScroll, [0, 1], [30, -30])
 
   return (
     <section id="about" className="section-gap relative" ref={ref}>
@@ -61,16 +67,18 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Image */}
           <motion.div
+            ref={imageRef}
             className="lg:col-span-4"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden rounded-lg group">
-              <img
+              <motion.img
                 src={personalInfo.profileImg}
                 alt={personalInfo.name}
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-700 scale-110"
+                style={{ y: imgY }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
               <div className="absolute inset-0 border border-accent/10 rounded-lg" />

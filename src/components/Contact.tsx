@@ -185,6 +185,50 @@ export default function Contact() {
             </form>
           </motion.div>
         </div>
+
+        {/* Available for work banner */}
+        <motion.div
+          className="mt-20 p-8 md:p-10 border border-accent/15 bg-accent/[0.02] rounded-lg relative overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.7 }}
+        >
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-2.5 mb-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent/60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                </span>
+                <span className="font-mono text-[10px] tracking-[0.2em] text-accent uppercase">
+                  Available for Projects
+                </span>
+              </div>
+              <p className="font-grotesk text-lg text-text-primary font-semibold">
+                Currently pursuing Master's — open to part-time or contract work
+              </p>
+              <p className="mt-1 font-sans text-sm text-text-muted">
+                Based in Sydney, Australia · Remote-friendly
+              </p>
+            </div>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="group shrink-0 inline-flex items-center gap-3 bg-accent text-[#050505] px-7 py-3.5 font-grotesk text-sm font-semibold tracking-wide rounded-full hover:bg-accent-light transition-all duration-300"
+            >
+              Get in Touch
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              >
+                <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
