@@ -146,6 +146,7 @@ export const projects = [
     accent: '#00e5ff',
     image: '/img/portfolio1.png',
     featured: true,
+    link: 'https://ncrtc.in/details/',
   },
   {
     title: 'IoT Smart Panel — Motor Control',
