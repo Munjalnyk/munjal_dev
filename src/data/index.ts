@@ -144,7 +144,7 @@ export const projects = [
       'Led onboard EVC3 engineering for MRTS trains in the National Capital Region Transport Corporation project — configuration data preparation, validation, and cross-functional coordination.',
     tags: ['Onboard ETCS', 'Data Engineering', 'SIL4', 'EVC3'],
     accent: '#00e5ff',
-    image: '/img/portfolio1.png',
+    image: '/img/MRTS.jpeg',
     featured: true,
     link: 'https://ncrtc.in/details/',
   },
