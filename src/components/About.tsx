@@ -29,8 +29,6 @@ function AnimatedCounter({ value, inView }: { value: string; inView: boolean }) 
   return <>{inView ? `${count}${suffix}` : `0${suffix}`}</>
 }
 
-const techKeywords = ['C', 'ESP32', 'STM32', 'SPI', 'MQTT', 'PCB', 'RTOS', 'SIL4', 'I2C', 'UART']
-
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
@@ -84,7 +82,7 @@ export default function About() {
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-700 scale-110"
                   style={{ y: imgY }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#060606] via-transparent to-transparent opacity-70" />
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="absolute inset-0 border border-accent/10 rounded-2xl" />
 
@@ -93,30 +91,6 @@ export default function About() {
                 <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-accent/30 rounded-br-lg" />
               </div>
 
-              {/* Floating tech keywords */}
-              {techKeywords.slice(0, 6).map((word, i) => {
-                const positions = [
-                  { top: '8%', right: '-12%' },
-                  { top: '25%', right: '-18%' },
-                  { top: '50%', right: '-15%' },
-                  { bottom: '30%', right: '-10%' },
-                  { bottom: '10%', left: '-10%' },
-                  { top: '15%', left: '-12%' },
-                ]
-                return (
-                  <motion.span
-                    key={word}
-                    className="absolute hidden lg:block px-2.5 py-1 bg-bg-card/80 backdrop-blur-sm border border-border/50 rounded-md font-mono text-[10px] text-text-muted/60 tracking-wider"
-                    style={positions[i]}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.8 + i * 0.1, duration: 0.4 }}
-                    whileHover={{ scale: 1.1, color: '#c8a96e', borderColor: 'rgba(200,169,110,0.3)' }}
-                  >
-                    {word}
-                  </motion.span>
-                )
-              })}
             </div>
           </motion.div>
 
