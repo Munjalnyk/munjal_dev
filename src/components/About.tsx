@@ -1,157 +1,183 @@
-import { motion } from 'framer-motion'
-import { MapPin, ExternalLink, Zap } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
 import { personalInfo } from '@/data'
+import TextReveal from './TextReveal'
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
-}
+function AnimatedCounter({ value, inView }: { value: string; inView: boolean }) {
+  const numMatch = value.match(/(\d+)/)
+  const num = numMatch ? parseInt(numMatch[1]) : 0
+  const suffix = value.replace(/\d+/, '')
+  const [count, setCount] = useState(0)
 
-function BentoCard({ className, children, glowColor }: {
-  className?: string
-  children: React.ReactNode
-  glowColor?: string
-}) {
-  return (
-    <motion.div
-      variants={item}
-      className={cn(
-        'group relative rounded-2xl border border-white/[0.06] bg-[#0d0d16] overflow-hidden transition-all duration-300',
-        className
-      )}
-      whileHover={{ y: -3, borderColor: glowColor ? `${glowColor}25` : 'rgba(255,255,255,0.1)' }}
-    >
-      {glowColor && (
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-          style={{ background: `radial-gradient(circle at 50% 0%, ${glowColor}08 0%, transparent 60%)` }}
-        />
-      )}
-      {children}
-    </motion.div>
-  )
+  useEffect(() => {
+    if (!inView) return
+    let start = 0
+    const duration = 2000
+    const step = duration / num
+    const timer = setInterval(() => {
+      start++
+      if (start >= num) {
+        setCount(num)
+        clearInterval(timer)
+      } else {
+        setCount(start)
+      }
+    }, step)
+    return () => clearInterval(timer)
+  }, [inView, num])
+
+  return <>{inView ? `${count}${suffix}` : `0${suffix}`}</>
 }
 
 export default function About() {
-  return (
-    <section id="about" className="relative py-28">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const statsRef = useRef(null)
+  const statsInView = useInView(statsRef, { once: true, margin: '-50px' })
+  const imageRef = useRef(null)
+  const { scrollYProgress: imgScroll } = useScroll({
+    target: imageRef,
+    offset: ['start end', 'end start'],
+  })
+  const imgY = useTransform(imgScroll, [0, 1], [30, -30])
 
-      <div className="max-w-6xl mx-auto px-6">
+  return (
+    <section id="about" className="section-gap relative" ref={ref}>
+      <div className="section-padding">
+        {/* Section label */}
         <motion.div
-          className="flex items-center gap-3 mb-16"
-          initial={{ opacity: 0, x: -16 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          className="mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
         >
-          <span className="font-mono text-xs text-[#00e5ff] tracking-[0.15em] uppercase">01 — About</span>
-          <div className="w-16 h-px bg-white/[0.07]" />
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-accent">
+            01 / About
+          </span>
+          <motion.div
+            className="mt-3 h-[1px] bg-accent/30 origin-left"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ maxWidth: '80px' }}
+          />
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
-          variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-        >
-          {/* Bio — 2 cols */}
-          <BentoCard className="lg:col-span-2 p-8" glowColor="#00e5ff">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white leading-tight mb-4">
-              Building hardware that{' '}
-              <span style={{
-                background: 'linear-gradient(120deg, #ffffff 0%, #00e5ff 60%, #7c3aed 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                just works.
+        {/* Content grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Image */}
+          <motion.div
+            ref={imageRef}
+            className="lg:col-span-4"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <div className="relative aspect-[3/4] max-w-sm mx-auto lg:mx-0 overflow-hidden rounded-lg group">
+              <motion.img
+                src={personalInfo.profileImg}
+                alt={personalInfo.name}
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-700 scale-110"
+                style={{ y: imgY }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 border border-accent/10 rounded-lg" />
+              <div className="absolute top-3 left-3 w-6 h-6 border-t border-l border-accent/40" />
+              <div className="absolute bottom-3 right-3 w-6 h-6 border-b border-r border-accent/40" />
+              <div className="absolute inset-0 bg-accent/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+          </motion.div>
+
+          {/* Text */}
+          <div className="lg:col-span-8">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-8 leading-tight">
+              <TextReveal text="Crafting Precision" delay={0.3} />
+              <br />
+              <span className="text-gradient-gold">
+                <TextReveal text="in Every Circuit" delay={0.5} />
               </span>
             </h2>
-            <p className="text-white/40 leading-relaxed text-sm mb-6">{personalInfo.bio}</p>
-            <div className="flex flex-wrap gap-1.5">
-              {['ESP32', 'STM32', 'PCB Design', 'SIL4', 'ETCS', 'IoT', 'Python', 'Embedded C'].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 rounded-full text-[10px] font-medium text-white/40 bg-white/[0.04] border border-white/[0.06] hover:text-[#00e5ff] hover:border-[#00e5ff]/20 hover:bg-[#00e5ff]/[0.05] transition-all duration-200 cursor-default"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </BentoCard>
 
-          {/* Photo */}
-          <BentoCard className="overflow-hidden min-h-[280px] row-span-2">
-            <img
-              src={personalInfo.profileImg}
-              alt={personalInfo.name}
-              className="w-full h-full object-cover object-top"
-              style={{ filter: 'grayscale(20%) contrast(1.05)' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d16] via-[#0d0d16]/20 to-transparent" />
-            <div className="absolute bottom-4 left-4">
-              <p className="text-sm font-semibold text-white">{personalInfo.name}</p>
-              <p className="text-xs text-white/40 mt-0.5">Hardware · Embedded · IoT</p>
-            </div>
-          </BentoCard>
+            <motion.p
+              className="font-sans text-lg md:text-xl text-text-secondary leading-relaxed mb-6 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              {personalInfo.bio}
+            </motion.p>
 
-          {/* Location */}
-          <BentoCard className="p-6" glowColor="#00e5ff">
-            <div className="w-9 h-9 rounded-xl bg-[#00e5ff]/[0.08] border border-[#00e5ff]/15 flex items-center justify-center mb-4">
-              <MapPin size={16} className="text-[#00e5ff]" />
-            </div>
-            <p className="text-[10px] text-white/25 font-medium uppercase tracking-wider mb-1">Location</p>
-            <p className="text-sm font-semibold text-white/80">{personalInfo.location}</p>
-          </BentoCard>
+            <motion.p
+              className="font-grotesk text-base text-text-muted leading-relaxed mb-10 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              {personalInfo.bioShort}
+            </motion.p>
 
-          {/* Status */}
-          <BentoCard className="p-6 border-[#00e5ff]/12 bg-[#00e5ff]/[0.02]">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#00e5ff] animate-pulse" />
-              <span className="text-[10px] text-[#00e5ff] font-semibold uppercase tracking-wider">{personalInfo.status}</span>
-            </div>
-            <p className="text-sm font-semibold text-white/80 leading-snug">Master's @ UNSW Sydney</p>
-            <p className="text-xs text-white/30 mt-1">Electrical Engineering · 2025–2027</p>
-          </BentoCard>
-
-          {/* Stats */}
-          {personalInfo.stats.map((stat) => (
-            <BentoCard key={stat.label} className="p-6 flex flex-col justify-between" glowColor="#00e5ff">
-              <span className="text-4xl font-black text-[#00e5ff]">{stat.value}</span>
-              <span className="text-xs text-white/35 font-medium mt-2">{stat.label}</span>
-            </BentoCard>
-          ))}
-
-          {/* Connect */}
-          <BentoCard className="p-6 md:col-span-2 lg:col-span-1">
-            <p className="text-[10px] text-white/25 font-medium uppercase tracking-wider mb-4">Connect</p>
-            <div className="space-y-1">
+            {/* Connect links */}
+            <motion.div
+              className="flex flex-wrap gap-3 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            >
               {[
-                { label: 'LinkedIn', href: personalInfo.linkedin, sub: '/in/munjalnyk' },
-                { label: 'GitHub', href: personalInfo.github, sub: '/yorocoboy1' },
-                { label: 'Email', href: `mailto:${personalInfo.email}`, sub: personalInfo.email },
-              ].map(({ label, href, sub }) => (
+                { label: 'LinkedIn', href: personalInfo.linkedin },
+                { label: 'GitHub', href: personalInfo.github },
+                { label: 'Email', href: `mailto:${personalInfo.email}` },
+              ].map((link) => (
                 <a
-                  key={label}
-                  href={href}
-                  target="_blank"
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith('mailto') ? undefined : '_blank'}
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white/[0.04] transition-all"
+                  className="group inline-flex items-center gap-2 px-4 py-2 border border-border bg-bg-card hover:border-accent/30 hover:bg-accent/[0.04] rounded-full transition-all duration-300"
                 >
-                  <div>
-                    <span className="text-sm font-medium text-white/60 group-hover:text-[#00e5ff] transition-colors">{label}</span>
-                    <p className="text-[10px] text-white/20">{sub}</p>
-                  </div>
-                  <ExternalLink size={11} className="text-white/20 group-hover:text-[#00e5ff] transition-colors" />
+                  <span className="font-grotesk text-sm text-text-secondary group-hover:text-accent transition-colors">
+                    {link.label}
+                  </span>
+                  <svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
+                    fill="none"
+                    className="text-text-muted group-hover:text-accent transition-colors"
+                  >
+                    <path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" strokeWidth="1" />
+                  </svg>
                 </a>
               ))}
+            </motion.div>
+
+            {/* Stats */}
+            <div ref={statsRef} className="grid grid-cols-3 gap-6 md:gap-10">
+              {personalInfo.stats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  className="relative"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={statsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
+                >
+                  <span className="block font-display text-4xl md:text-5xl font-bold text-gradient-gold">
+                    <AnimatedCounter value={stat.value} inView={statsInView} />
+                  </span>
+                  <span className="block mt-1 font-grotesk text-xs md:text-sm tracking-wide text-text-muted uppercase">
+                    {stat.label}
+                  </span>
+                  {i < personalInfo.stats.length - 1 && (
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-12 bg-border hidden md:block" />
+                  )}
+                </motion.div>
+              ))}
             </div>
-          </BentoCard>
-        </motion.div>
+          </div>
+        </div>
       </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
     </section>
   )
 }

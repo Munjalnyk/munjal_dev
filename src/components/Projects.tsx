@@ -1,156 +1,172 @@
-import { motion } from 'framer-motion'
-import { BookOpen, Tag, ArrowUpRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 import { projects, publications } from '@/data'
+import TextReveal from './TextReveal'
+import SpotlightCard from './SpotlightCard'
 
 export default function Projects() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
   return (
-    <section id="projects" className="relative py-28">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
-
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="projects" className="section-gap relative bg-grid" ref={ref}>
+      <div className="section-padding">
+        {/* Section label */}
         <motion.div
-          className="flex items-center gap-3 mb-4"
-          initial={{ opacity: 0, x: -16 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          className="mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
         >
-          <span className="font-mono text-xs text-[#00e5ff] tracking-[0.15em] uppercase">04 — Projects</span>
-          <div className="w-16 h-px bg-white/[0.07]" />
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-accent">
+            04 / Work
+          </span>
+          <motion.div
+            className="mt-3 h-[1px] bg-accent/30 origin-left"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ maxWidth: '80px' }}
+          />
         </motion.div>
 
-        <motion.div
-          className="mb-14"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold text-white">
-            Things I've{' '}
-            <span style={{
-              background: 'linear-gradient(120deg, #ffffff 0%, #00e5ff 70%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              built & shipped
-            </span>
-          </h2>
-        </motion.div>
+        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-16 leading-tight">
+          <TextReveal text="Selected" delay={0.1} />
+          <br />
+          <span className="text-gradient-gold">
+            <TextReveal text="Projects" delay={0.3} />
+          </span>
+        </h2>
 
-        {/* Project grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-16">
+        {/* Projects grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
           {projects.map((project, i) => (
-            <motion.div
-              key={project.title}
-              className="group relative rounded-2xl border border-white/[0.06] bg-[#0d0d16] p-7 overflow-hidden cursor-default transition-all duration-300"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
-              whileHover={{ y: -4, borderColor: `${project.accent}25` }}
-            >
-              {/* Top line */}
-              <motion.div
-                className="absolute top-0 left-0 right-0 h-px"
-                style={{ background: `linear-gradient(90deg, transparent, ${project.accent}60, transparent)` }}
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 + 0.3, duration: 0.7 }}
-              />
-
-              {/* Hover glow */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                style={{ background: `radial-gradient(circle at 50% 0%, ${project.accent}06 0%, transparent 65%)` }}
-              />
-
-              <div className="relative">
-                {/* Category + arrow */}
-                <div className="flex items-center justify-between mb-5">
-                  <span
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-wider border"
-                    style={{
-                      background: `${project.accent}10`,
-                      color: project.accent,
-                      borderColor: `${project.accent}20`,
-                    }}
-                  >
-                    <Tag size={8} />
-                    {project.category}
-                  </span>
-                  <div
-                    className="w-7 h-7 rounded-lg border border-white/[0.06] flex items-center justify-center text-white/20 opacity-0 group-hover:opacity-100 group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/20 transition-all duration-200"
-                  >
-                    <ArrowUpRight size={12} />
-                  </div>
-                </div>
-
-                <h3 className="font-bold text-white text-[1.05rem] leading-snug mb-3 group-hover:text-white transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-white/35 text-sm leading-relaxed mb-5">{project.description}</p>
-
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-0.5 rounded-full text-[10px] font-medium border border-white/[0.06] text-white/30"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+            <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </div>
 
         {/* Publications */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center border border-purple-500/20 bg-purple-500/[0.08]">
-              <BookOpen size={14} className="text-purple-400" />
-            </div>
-            <h3 className="font-semibold text-white/70 text-sm">Research Publications</h3>
+          <div className="flex items-center gap-4 mb-10">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-text-primary">
+              Publications
+            </h3>
+            <div className="flex-1 h-[1px] bg-border" />
           </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-4">
             {publications.map((pub, i) => (
-              <motion.div
-                key={i}
-                className="group rounded-2xl border border-white/[0.06] bg-[#0d0d16] p-5 transition-all duration-300"
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -2, borderColor: 'rgba(167,139,250,0.18)' }}
-              >
-                <div className="flex items-start gap-4">
-                  <span
-                    className="flex-shrink-0 mt-0.5 px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/20 text-purple-400"
-                    style={{ background: 'rgba(167,139,250,0.08)' }}
-                  >
-                    {pub.year}
-                  </span>
-                  <div>
-                    <p className="text-[10px] text-white/25 font-medium uppercase tracking-wider mb-1.5">{pub.journal}</p>
-                    <p className="text-sm text-white/40 leading-relaxed group-hover:text-white/60 transition-colors">
-                      {pub.title}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+              <PublicationCard key={i} publication={pub} index={i} />
             ))}
           </div>
         </motion.div>
       </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
     </section>
+  )
+}
+
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: (typeof projects)[0]
+  index: number
+}) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: index * 0.12 }}
+    >
+      <SpotlightCard className="group relative p-6 md:p-8 border border-border bg-bg-card rounded-lg transition-all duration-500 hover:border-accent/20 hover:glow-gold">
+        <div
+          className="absolute top-0 right-0 w-48 h-48 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+          style={{ backgroundColor: `${project.accent}12` }}
+        />
+
+        <span className="relative font-mono text-xs text-text-muted/50 mb-6 block">
+          0{index + 1}
+        </span>
+
+        <span
+          className="relative font-mono text-[10px] tracking-[0.2em] uppercase mb-4 block"
+          style={{ color: project.accent }}
+        >
+          {project.category}
+        </span>
+
+        <h3 className="relative font-display text-xl md:text-2xl font-bold text-text-primary mb-4 group-hover:text-accent transition-colors duration-300">
+          {project.title}
+        </h3>
+
+        <p className="relative font-sans text-sm text-text-secondary leading-relaxed mb-6">
+          {project.description}
+        </p>
+
+        <div className="relative flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 text-[10px] font-mono tracking-wider border rounded-full transition-colors duration-300"
+              style={{
+                color: `${project.accent}cc`,
+                borderColor: `${project.accent}20`,
+                backgroundColor: `${project.accent}08`,
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+          style={{ backgroundColor: project.accent }}
+        />
+      </SpotlightCard>
+    </motion.div>
+  )
+}
+
+function PublicationCard({
+  publication,
+  index,
+}: {
+  publication: (typeof publications)[0]
+  index: number
+}) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
+
+  return (
+    <motion.div
+      ref={ref}
+      className="group p-6 border border-border bg-bg-card hover:border-accent/20 rounded-lg transition-all duration-500 hover:glow-gold"
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <span className="font-mono text-xs text-accent tracking-wider">
+            {publication.journal}
+          </span>
+          <p className="mt-2 font-sans text-sm text-text-secondary leading-relaxed">
+            {publication.title}
+          </p>
+        </div>
+        <span className="font-mono text-sm text-text-muted shrink-0">{publication.year}</span>
+      </div>
+    </motion.div>
   )
 }

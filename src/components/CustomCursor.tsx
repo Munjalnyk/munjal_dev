@@ -1,78 +1,88 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export default function CustomCursor() {
-  const cursorDotRef = useRef<HTMLDivElement>(null)
-  const [hovered, setHovered] = useState(false)
-  const [visible, setVisible] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [isTouchDevice, setIsTouchDevice] = useState(false)
 
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+  const cursorX = useMotionValue(-100)
+  const cursorY = useMotionValue(-100)
+  const springX = useSpring(cursorX, { stiffness: 300, damping: 28 })
+  const springY = useSpring(cursorY, { stiffness: 300, damping: 28 })
 
-  // Smooth spring for the ring
-  const springX = useSpring(mouseX, { stiffness: 200, damping: 25, mass: 0.5 })
-  const springY = useSpring(mouseY, { stiffness: 200, damping: 25, mass: 0.5 })
+  const handleEnter = useCallback(() => setIsHovering(true), [])
+  const handleLeave = useCallback(() => setIsHovering(false), [])
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX)
-      mouseY.set(e.clientY)
-      if (!visible) setVisible(true)
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    setIsTouchDevice(isTouch)
+    if (isTouch) return
+
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX)
+      cursorY.set(e.clientY)
+      if (!isVisible) setIsVisible(true)
     }
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      const isInteractive = target.closest('a, button, [role="button"], input, textarea, select')
-      setHovered(!!isInteractive)
+    window.addEventListener('mousemove', moveCursor)
+    return () => window.removeEventListener('mousemove', moveCursor)
+  }, [isVisible, cursorX, cursorY])
+
+  useEffect(() => {
+    if (isTouchDevice) return
+
+    const attach = () => {
+      const els = document.querySelectorAll(
+        'a, button, [role="button"], input, textarea, [data-cursor-hover]'
+      )
+      els.forEach((el) => {
+        el.addEventListener('mouseenter', handleEnter)
+        el.addEventListener('mouseleave', handleLeave)
+      })
     }
 
-    const handleMouseLeave = () => setVisible(false)
-    const handleMouseEnter = () => setVisible(true)
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    window.addEventListener('mouseover', handleMouseOver, { passive: true })
-    document.addEventListener('mouseleave', handleMouseLeave)
-    document.addEventListener('mouseenter', handleMouseEnter)
+    attach()
+    const observer = new MutationObserver(attach)
+    observer.observe(document.body, { childList: true, subtree: true })
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mouseover', handleMouseOver)
-      document.removeEventListener('mouseleave', handleMouseLeave)
-      document.removeEventListener('mouseenter', handleMouseEnter)
+      observer.disconnect()
+      const els = document.querySelectorAll(
+        'a, button, [role="button"], input, textarea, [data-cursor-hover]'
+      )
+      els.forEach((el) => {
+        el.removeEventListener('mouseenter', handleEnter)
+        el.removeEventListener('mouseleave', handleLeave)
+      })
     }
-  }, [mouseX, mouseY, visible])
+  }, [isTouchDevice, handleEnter, handleLeave])
 
-  // Don't render on touch devices
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
-    return null
-  }
+  if (isTouchDevice) return null
 
   return (
     <>
-      {/* Dot (instant follow) */}
       <motion.div
-        className="cursor-dot"
-        style={{
-          left: mouseX,
-          top: mouseY,
-          opacity: visible ? 1 : 0,
-        }}
-        animate={{ scale: hovered ? 0 : 1 }}
-        transition={{ duration: 0.15 }}
-      />
-
-      {/* Ring (spring follow) */}
-      <motion.div
-        className={`cursor-ring ${hovered ? 'hovered' : ''}`}
-        style={{
-          left: springX,
-          top: springY,
-          opacity: visible ? 1 : 0,
-        }}
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-accent pointer-events-none z-[9999]"
+        style={{ x: springX, y: springY, translateX: '-50%', translateY: '-50%' }}
         animate={{
-          scale: hovered ? 1 : 1,
+          scale: isHovering ? 0 : 1,
+          opacity: isVisible ? 1 : 0,
         }}
-        transition={{ duration: 0.2 }}
+        transition={{ scale: { duration: 0.2 }, opacity: { duration: 0.3 } }}
+      />
+      <motion.div
+        className="fixed top-0 left-0 rounded-full border pointer-events-none z-[9999]"
+        style={{ x: springX, y: springY, translateX: '-50%', translateY: '-50%' }}
+        animate={{
+          width: isHovering ? 48 : 32,
+          height: isHovering ? 48 : 32,
+          opacity: isVisible ? 0.5 : 0,
+          borderColor: isHovering
+            ? 'rgba(200, 169, 110, 0.5)'
+            : 'rgba(200, 169, 110, 0.2)',
+        }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
       />
     </>
   )
