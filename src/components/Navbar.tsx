@@ -1,168 +1,163 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Download } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { personalInfo } from '@/data'
+import MagneticButton from './MagneticButton'
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40)
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll, { passive: true })
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id) })
-      },
-      { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' }
-    )
-    document.querySelectorAll('section[id]').forEach((s) => observer.observe(s))
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      observer.disconnect()
-    }
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollTo = (href: string) => {
-    setMobileOpen(false)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' }
+    )
+    const sections = document.querySelectorAll('section[id]')
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
+  }, [])
+
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false)
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <>
       <motion.header
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled ? 'glass py-3' : 'py-5 bg-transparent'
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, delay: 2.8, ease: [0.215, 0.61, 0.355, 1] }}
       >
-        <motion.nav
-          className={cn(
-            'relative flex items-center justify-between gap-6 px-4 py-2.5 transition-all duration-300',
-            scrolled
-              ? 'bg-[#080810]/90 backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-xl shadow-black/20 w-full max-w-3xl'
-              : 'bg-transparent w-full max-w-5xl'
-          )}
-        >
+        <nav className="section-padding flex items-center justify-between">
           {/* Logo */}
-          <motion.a
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-            className="flex items-center gap-2 shrink-0"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <div className="relative w-8 h-8 rounded-lg bg-[#00e5ff] flex items-center justify-center overflow-hidden">
-              <span className="text-[#080810] text-xs font-black tracking-tighter">MN</span>
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-            </div>
-            <span className="font-semibold text-sm text-white/90 hidden sm:block">
-              munjal<span className="text-[#00e5ff]">.dev</span>
-            </span>
-          </motion.a>
-
-          {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-0.5 flex-1 justify-center">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <button
-                  onClick={() => scrollTo(link.href)}
-                  className={cn(
-                    'relative px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
-                    activeSection === link.href.slice(1)
-                      ? 'text-[#00e5ff]'
-                      : 'text-white/50 hover:text-white/90'
-                  )}
-                >
-                  {activeSection === link.href.slice(1) && (
-                    <motion.div
-                      layoutId="nav-active"
-                      className="absolute inset-0 rounded-lg bg-[#00e5ff]/10 border border-[#00e5ff]/20"
-                      transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-                    />
-                  )}
-                  <span className="relative z-10">{link.label}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          {/* Resume CTA */}
-          <div className="flex items-center gap-2 shrink-0">
-            <motion.a
-              href="/assets/pdf/CV_Munjal_Nayak.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-[#00e5ff] text-[#080810] hover:bg-white transition-colors duration-200"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-            >
-              <Download size={11} />
-              Resume
-            </motion.a>
+          <MagneticButton>
             <button
-              className="md:hidden p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/[0.06] transition-all"
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="font-display text-xl font-bold tracking-wider text-text-primary hover:text-accent transition-colors duration-300"
             >
-              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+              MN<span className="text-accent">.</span>
+            </button>
+          </MagneticButton>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <MagneticButton key={link.name} strength={0.15}>
+                <button
+                  onClick={() => handleNavClick(link.href)}
+                  className={`hover-line font-grotesk text-sm tracking-wide transition-colors duration-300 ${
+                    activeSection === link.href.slice(1)
+                      ? 'text-accent'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  {link.name}
+                </button>
+              </MagneticButton>
+            ))}
+          </div>
+
+          {/* Resume + Mobile Toggle */}
+          <div className="flex items-center gap-4">
+            <MagneticButton>
+              <a
+                href={personalInfo.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:inline-flex items-center gap-2 border border-accent/30 px-5 py-2 font-grotesk text-sm text-accent hover:bg-accent/10 transition-all duration-300 rounded-full"
+              >
+                Resume
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-60">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.2" />
+                </svg>
+              </a>
+            </MagneticButton>
+
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
+              aria-label="Toggle menu"
+            >
+              <motion.span
+                className="block w-6 h-[1.5px] bg-text-primary origin-center"
+                animate={isMobileMenuOpen ? { rotate: 45, y: 4.5 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.span
+                className="block w-4 h-[1.5px] bg-text-primary"
+                animate={isMobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="block w-6 h-[1.5px] bg-text-primary origin-center"
+                animate={isMobileMenuOpen ? { rotate: -45, y: -4.5 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+              />
             </button>
           </div>
-        </motion.nav>
+        </nav>
       </motion.header>
 
-      {/* Mobile overlay */}
+      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileOpen && (
+        {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40"
+            className="fixed inset-0 z-40 bg-[#050505]/95 backdrop-blur-xl flex flex-col items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
           >
-            <div className="absolute inset-0 bg-[#080810]/96 backdrop-blur-2xl" onClick={() => setMobileOpen(false)} />
-            <motion.div
-              className="relative pt-24 px-6 flex flex-col gap-1"
-              initial={{ y: -20 }}
-              animate={{ y: 0 }}
-              exit={{ y: -20 }}
-              transition={{ duration: 0.2 }}
-            >
+            <nav className="flex flex-col items-center gap-8">
               {navLinks.map((link, i) => (
                 <motion.button
-                  key={link.label}
-                  onClick={() => scrollTo(link.href)}
-                  className="text-left px-4 py-3.5 rounded-xl text-xl font-medium text-white/80 hover:text-[#00e5ff] hover:bg-white/[0.04] transition-all"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
+                  key={link.name}
+                  onClick={() => handleNavClick(link.href)}
+                  className="font-display text-3xl font-semibold text-text-primary hover:text-accent transition-colors"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
                 >
-                  {link.label}
+                  {link.name}
                 </motion.button>
               ))}
               <motion.a
-                href="/assets/pdf/CV_Munjal_Nayak.pdf"
+                href={personalInfo.cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 px-4 py-3.5 rounded-xl text-center font-semibold text-[#080810] bg-[#00e5ff]"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                onClick={() => setMobileOpen(false)}
+                className="mt-4 border border-accent/30 px-8 py-3 font-grotesk text-accent hover:bg-accent/10 transition-all rounded-full"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, delay: navLinks.length * 0.08 }}
               >
-                Download Resume
+                Resume
               </motion.a>
-            </motion.div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

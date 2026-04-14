@@ -3,82 +3,136 @@
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after { box-sizing: border-box; }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
   html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: auto;
+    background-color: #050505;
+    color: #f0f0f0;
   }
 
   body {
-    background-color: #080810;
-    color: #e8e8f5;
     font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    background-color: #050505;
     cursor: none;
   }
 
   ::selection {
-    background: rgba(0, 229, 255, 0.18);
-    color: #00e5ff;
+    background-color: rgba(200, 169, 110, 0.3);
+    color: #f0f0f0;
   }
 
-  ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-track { background: #080810; }
-  ::-webkit-scrollbar-thumb { background: #1a1a28; border-radius: 2px; }
-  ::-webkit-scrollbar-thumb:hover { background: #252538; }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a2a2a;
+  }
 
-  :focus-visible {
-    outline: 2px solid rgba(0, 229, 255, 0.4);
+  *:focus-visible {
+    outline: 1px solid #c8a96e;
     outline-offset: 2px;
-    border-radius: 4px;
+  }
+
+  @media (pointer: coarse) {
+    body {
+      cursor: auto;
+    }
   }
 }
 
-/* Cursor */
-.cursor-dot, .cursor-ring {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-}
-.cursor-dot {
-  width: 5px;
-  height: 5px;
-  background: #00e5ff;
-}
-.cursor-ring {
-  width: 34px;
-  height: 34px;
-  border: 1.5px solid rgba(0, 229, 255, 0.4);
-  transition: width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
-}
-.cursor-ring.hovered {
-  width: 52px;
-  height: 52px;
-  border-color: rgba(0, 229, 255, 0.7);
-  background: rgba(0, 229, 255, 0.04);
+@layer components {
+  .grain-overlay {
+    position: fixed;
+    top: -200%;
+    left: -200%;
+    width: 500%;
+    height: 500%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.03;
+    animation: grain 8s steps(10) infinite;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  }
+
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-24 xl:px-32;
+  }
+
+  .section-gap {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #c8a96e 0%, #e8d5a8 50%, #c8a96e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 40px rgba(200, 169, 110, 0.06);
+  }
+
+  .glass {
+    background: rgba(5, 5, 5, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .hover-line {
+    position: relative;
+  }
+  .hover-line::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #c8a96e;
+    transition: width 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .hover-line:hover::after {
+    width: 100%;
+  }
+
+  .bg-grid {
+    background-image: linear-gradient(
+        rgba(200, 169, 110, 0.025) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(200, 169, 110, 0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(
+      circle,
+      rgba(200, 169, 110, 0.05) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+  }
 }
 
-@media (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none; }
-  body { cursor: auto; }
-}
-
-/* Marquee */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* Scroll progress */
-.scroll-progress {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #00e5ff, #7c3aed);
-  transform-origin: left;
-  z-index: 9999;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
