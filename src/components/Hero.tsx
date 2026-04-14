@@ -156,49 +156,75 @@ export default function Hero() {
           {/* Right — Profile Visual */}
           <motion.div
             className="relative hidden lg:flex items-center justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 3.3, ease: [0.215, 0.61, 0.355, 1] }}
           >
-            <div className="relative">
-              {/* Profile photo */}
-              <div
-                className="relative w-60 h-72 rounded-2xl overflow-hidden border border-border"
-              >
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#060606]/60 via-transparent to-transparent" />
-                <img
-                  src={personalInfo.profileImg}
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover"
-                  style={{ filter: 'contrast(1.05) saturate(0.85)' }}
+            {/* Rotating rings */}
+            <motion.div
+              className="absolute w-[380px] h-[380px] rounded-full border border-accent/[0.06]"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+            >
+              {/* Tick marks on ring */}
+              {[0, 90, 180, 270].map((deg) => (
+                <div
+                  key={deg}
+                  className="absolute w-[1px] h-3 bg-accent/20"
+                  style={{
+                    top: '50%',
+                    left: '50%',
+                    transformOrigin: '0 0',
+                    transform: `rotate(${deg}deg) translateY(-190px) translateX(-0.5px)`,
+                  }}
                 />
-                {/* Corner accents */}
-                <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-accent/30" />
-                <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-accent/30" />
-              </div>
+              ))}
+            </motion.div>
+            <motion.div
+              className="absolute w-[320px] h-[320px] rounded-full border border-dashed border-accent/[0.04]"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
+            />
+            <motion.div
+              className="absolute w-[260px] h-[260px] rounded-full border border-accent/[0.03]"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            />
 
-              {/* Stat chips */}
-              {personalInfo.stats.map((stat, i) => {
-                const positions = [
-                  { top: '8%', right: '-45%' },
-                  { top: '42%', right: '-55%' },
-                  { bottom: '10%', right: '-40%' },
-                ]
-                return (
-                  <motion.div
-                    key={stat.label}
-                    className="absolute px-3.5 py-2 rounded-lg bg-bg-card border border-border flex flex-col items-center"
-                    style={positions[i]}
-                    initial={{ opacity: 0, x: 15 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 3.6 + i * 0.12 }}
-                  >
-                    <span className="text-lg font-bold text-accent leading-none font-display">{stat.value}</span>
-                    <span className="text-[9px] text-text-muted font-medium mt-0.5 whitespace-nowrap">{stat.label}</span>
-                  </motion.div>
-                )
-              })}
+            {/* Profile photo */}
+            <div className="relative w-56 h-64 rounded-2xl overflow-hidden border border-border/60">
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#060606]/60 via-transparent to-transparent" />
+              <img
+                src={personalInfo.profileImg}
+                alt={personalInfo.name}
+                className="w-full h-full object-cover"
+                style={{ filter: 'contrast(1.05) saturate(0.85)' }}
+              />
+              <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-accent/25" />
+              <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-accent/25" />
             </div>
+
+            {/* Stat chips */}
+            {personalInfo.stats.map((stat, i) => {
+              const positions = [
+                { top: '2%', right: '-10%' },
+                { top: '45%', right: '-20%' },
+                { bottom: '5%', right: '-8%' },
+              ]
+              return (
+                <motion.div
+                  key={stat.label}
+                  className="absolute px-3.5 py-2 rounded-lg bg-bg-card/90 backdrop-blur-sm border border-border flex flex-col items-center"
+                  style={positions[i]}
+                  initial={{ opacity: 0, x: 15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 3.6 + i * 0.12 }}
+                >
+                  <span className="text-lg font-bold text-accent leading-none font-display">{stat.value}</span>
+                  <span className="text-[9px] text-text-muted font-medium mt-0.5 whitespace-nowrap">{stat.label}</span>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
 
