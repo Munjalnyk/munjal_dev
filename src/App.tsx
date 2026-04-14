@@ -79,11 +79,36 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      {/* Persistent ambient backdrop */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#070709] to-[#050505]" />
+
+        {/* Subtle radial vignette */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,169,110,0.015) 0%, transparent 70%)' }} />
+
+        {/* Floating ambient orbs */}
+        <div className="absolute top-[15%] left-[8%] w-[500px] h-[500px] rounded-full bg-accent/[0.012] blur-[200px] animate-float" />
+        <div className="absolute top-[55%] right-[5%] w-[400px] h-[400px] rounded-full bg-[#7c3aed]/[0.012] blur-[180px]" style={{ animation: 'float 8s ease-in-out infinite reverse' }} />
+        <div className="absolute bottom-[10%] left-[20%] w-[350px] h-[350px] rounded-full bg-[#00e5ff]/[0.008] blur-[160px]" style={{ animation: 'float 10s ease-in-out infinite 2s' }} />
+
+        {/* Global fine grid */}
+        <div className="absolute inset-0 opacity-[0.012]" style={{
+          backgroundImage: `linear-gradient(rgba(200,169,110,1) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,110,1) 1px, transparent 1px)`,
+          backgroundSize: '100px 100px',
+        }} />
+
+        {/* Diagonal accent lines */}
+        <div className="absolute inset-0 opacity-[0.006]" style={{
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 200px, rgba(200,169,110,1) 200px, rgba(200,169,110,1) 201px)`,
+        }} />
+      </div>
+
       {!isLoading && (
         <SmoothScroll>
           <ScrollProgress />
           <Navbar />
-          <main>
+          <main className="relative z-10">
             <Hero />
             <MarqueeDivider />
             <About />
