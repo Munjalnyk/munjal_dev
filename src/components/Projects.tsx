@@ -96,10 +96,12 @@ function FeaturedProject({ project }: { project: (typeof projects)[0] }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
   const imageRef = useRef(null)
+
   const { scrollYProgress } = useScroll({
     target: imageRef,
     offset: ['start end', 'end start'],
   })
+
   const imgScale = useTransform(scrollYProgress, [0, 1], [1.1, 1])
 
   return (
@@ -111,36 +113,50 @@ function FeaturedProject({ project }: { project: (typeof projects)[0] }) {
       transition={{ duration: 0.8 }}
     >
       <div className="group relative rounded-xl overflow-hidden border border-border hover:border-accent/20 transition-all duration-700 hover:glow-gold">
-        {/* Gradient border top */}
+        
+        {/* Top gradient border */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent/50 to-transparent z-10" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          {/* Image side */}
-          <div ref={imageRef} className="relative aspect-[16/10] lg:aspect-auto overflow-hidden bg-bg-subtle">
+          
+          {/* Image */}
+          <div
+            ref={imageRef}
+            className="relative aspect-[16/10] lg:aspect-auto overflow-hidden bg-bg-subtle"
+          >
             <motion.img
               src={project.image}
               alt={project.title}
               className="w-full h-full object-cover"
               style={{ scale: imgScale, filter: 'saturate(0.8) contrast(1.05)' }}
             />
+
+            {/* Overlays */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-bg-card/90 hidden lg:block" />
             <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent lg:hidden" />
+
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-              style={{ background: `linear-gradient(135deg, ${project.accent}08 0%, transparent 60%)` }}
+              style={{
+                background: `linear-gradient(135deg, ${project.accent}08 0%, transparent 60%)`,
+              }}
             />
 
             {/* Featured badge */}
             <div className="absolute top-5 left-5 z-10">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-bg/70 backdrop-blur-md border border-accent/20 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-accent">Featured</span>
+                <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-accent">
+                  Featured
+                </span>
               </span>
             </div>
           </div>
 
-          {/* Content side */}
+          {/* Content */}
           <div className="relative p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-bg-card">
+            
+            {/* Category */}
             <span
               className="font-mono text-[10px] tracking-[0.25em] uppercase mb-4 block"
               style={{ color: project.accent }}
@@ -148,15 +164,18 @@ function FeaturedProject({ project }: { project: (typeof projects)[0] }) {
               {project.category}
             </span>
 
+            {/* Title */}
             <h3 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary mb-5 leading-tight group-hover:text-accent transition-colors duration-500">
               {project.title}
             </h3>
 
+            {/* Description */}
             <p className="font-sans text-base text-text-secondary leading-relaxed mb-8 max-w-lg">
               {project.description}
             </p>
 
-            <div className="flex flex-wrap gap-2 mb-8">
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-6">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
@@ -172,19 +191,42 @@ function FeaturedProject({ project }: { project: (typeof projects)[0] }) {
               ))}
             </div>
 
-            {/* Decorative elements */}
-            <div className="flex items-center gap-4">
-              <div className="h-[1px] w-12" style={{ backgroundColor: `${project.accent}40` }} />
-              <span className="font-mono text-[10px] text-text-muted tracking-wider">01 / 0{projects.length}</span>
+            {/* CTA + Index Row */}
+            <div className="flex items-center justify-between mt-4">
+              
+              {/* CTA */}
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/cta inline-flex items-center gap-3 px-5 py-2.5 rounded-full border font-mono text-xs tracking-wider transition-all duration-300 hover:shadow-lg"
+                  style={{
+                    color: project.accent,
+                    borderColor: `${project.accent}40`,
+                    background: `${project.accent}08`,
+                  }}
+                >
+                  <span className="uppercase">View Project</span>
+                  <span className="transition-transform duration-300 group-hover/cta:translate-x-1">
+                    →
+                  </span>
+                </a>
+              )}
+
+              {/* Index */}
+              <div className="flex items-center gap-4">
+                <div
+                  className="h-[1px] w-12"
+                  style={{ backgroundColor: `${project.accent}40` }}
+                />
+                <span className="font-mono text-[10px] text-text-muted tracking-wider">
+                  01 / 0{projects.length}
+                </span>
+              </div>
             </div>
           </div>
         </div>
-        {project.link && (
-  <a href={project.link} target="_blank" rel="noopener noreferrer"
-     className="inline-flex items-center gap-2 font-mono text-xs text-accent hover:underline">
-    View Project →
-  </a>
-)}
 
         {/* Bottom accent line */}
         <div
