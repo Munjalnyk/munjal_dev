@@ -179,6 +179,12 @@ function FeaturedProject({ project }: { project: (typeof projects)[0] }) {
             </div>
           </div>
         </div>
+        {project.link && (
+  <a href={project.link} target="_blank" rel="noopener noreferrer"
+     className="inline-flex items-center gap-2 font-mono text-xs text-accent hover:underline">
+    View Project →
+  </a>
+)}
 
         {/* Bottom accent line */}
         <div
