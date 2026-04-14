@@ -16,8 +16,8 @@ export const personalInfo = {
   phone: '+61 420 932 011',
   linkedin: 'https://linkedin.com/in/munjalnyk',
   github: 'https://github.com/yorocoboy1',
-  cvUrl: '/assets/pdf/CV_Munjal_Nayak.pdf',
-  profileImg: '/assets/img/perfil.png',
+  cvUrl: '/pdf/CV_Munjal_Nayak.pdf',
+  profileImg: '/img/perfil.png',
   stats: [
     { value: '3+', label: 'Years Experience' },
     { value: '10+', label: 'Projects' },
@@ -144,6 +144,8 @@ export const projects = [
       'Led onboard EVC3 engineering for MRTS trains in the National Capital Region Transport Corporation project — configuration data preparation, validation, and cross-functional coordination.',
     tags: ['Onboard ETCS', 'Data Engineering', 'SIL4', 'EVC3'],
     accent: '#00e5ff',
+    image: '/img/portfolio1.png',
+    featured: true,
   },
   {
     title: 'IoT Smart Panel — Motor Control',
@@ -152,6 +154,8 @@ export const projects = [
       'ESP32-based IoT controller to manage a three-phase induction motor via VFD with cloud connectivity for data logging and predictive analysis.',
     tags: ['ESP32', 'VFD', 'Industrial IoT', 'MQTT', 'Cloud'],
     accent: '#7c3aed',
+    image: '/img/portfolio2.jpg',
+    featured: false,
   },
   {
     title: 'IoT Smart Irrigation System',
@@ -160,6 +164,8 @@ export const projects = [
       'ESP32 + Home Assistant based smart irrigation system for soil moisture and temperature monitoring with automated per-plant watering schedules.',
     tags: ['ESP32', 'Home Assistant', 'Sensors', 'Automation'],
     accent: '#10b981',
+    image: '/img/portfolio3.jpg',
+    featured: false,
   },
   {
     title: '5-Level Multilevel Inverter',
@@ -168,6 +174,8 @@ export const projects = [
       'Implemented a 5-level H-bridge multilevel inverter using 5 MOSFETs with STM32 control, focused on switching strategy optimisation and efficiency.',
     tags: ['STM32', 'Power Electronics', 'MOSFETs', 'PWM'],
     accent: '#f59e0b',
+    image: '/img/portfolio4.jpg',
+    featured: false,
   },
 ]
 
