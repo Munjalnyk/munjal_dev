@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import TextReveal from './TextReveal'
 
@@ -13,15 +13,12 @@ const galleryImages = [
   { src: '/img/about.jpg', alt: 'At the workspace' },
 ]
 
+// Duplicate for seamless loop
+const images = [...galleryImages, ...galleryImages]
+
 export default function Gallery() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const scrollRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ['start end', 'end start'],
-  })
-  const x = useTransform(scrollYProgress, [0, 1], ['5%', '-25%'])
 
   return (
     <section className="py-24 md:py-32 relative overflow-hidden" ref={ref}>
@@ -52,19 +49,17 @@ export default function Gallery() {
         </h2>
       </div>
 
-      {/* Scrolling carousel */}
-      <div ref={scrollRef} className="relative">
-        <motion.div
-          className="flex gap-4 md:gap-5 pl-6 md:pl-12 lg:pl-24 xl:pl-32"
-          style={{ x }}
-        >
-          {galleryImages.map((img, i) => (
-            <motion.div
+      {/* Auto-scrolling carousel */}
+      <div className="relative">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-bg to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-bg to-transparent z-10" />
+
+        <div className="animate-gallery-scroll flex gap-4 md:gap-5 w-max hover:[animation-play-state:paused]">
+          {images.map((img, i) => (
+            <div
               key={i}
               className="shrink-0 w-[280px] md:w-[340px] lg:w-[400px] aspect-[4/3] rounded-xl overflow-hidden border border-border group relative"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.08 }}
             >
               <img
                 src={img.src}
@@ -80,12 +75,12 @@ export default function Gallery() {
               </div>
               <div className="absolute top-3 right-3">
                 <span className="font-mono text-[9px] text-text-muted/40 bg-bg/50 backdrop-blur-sm px-2 py-0.5 rounded-md border border-white/5">
-                  0{i + 1}
+                  0{(i % galleryImages.length) + 1}
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />

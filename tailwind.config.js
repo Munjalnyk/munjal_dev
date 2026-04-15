@@ -42,6 +42,7 @@ export default {
         grain: 'grain 8s steps(10) infinite',
         marquee: 'marquee 40s linear infinite',
         'marquee-reverse': 'marquee-reverse 40s linear infinite',
+        'gallery-scroll': 'gallery-scroll 50s linear infinite',
       },
       keyframes: {
         float: {
@@ -67,6 +68,10 @@ export default {
         'marquee-reverse': {
           '0%': { transform: 'translateX(-50%)' },
           '100%': { transform: 'translateX(0%)' },
+        },
+        'gallery-scroll': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
     },
