@@ -20,7 +20,7 @@ const galleryImages = [
   { src: '/img/15.jpg', alt: '' },
   { src: '/img/16.jpg', alt: '' },
   { src: '/img/17.jpg', alt: '' },
-  { src: '/img/18.jpg', alt: '' },  
+  { src: '/img/18.jpg', alt: '' },
   { src: '/img/19.jpg', alt: '' },
   { src: '/img/20.jpg', alt: '' },
   { src: '/img/21.jpg', alt: '' },
@@ -78,12 +78,12 @@ export default function Gallery() {
           {images.map((img, i) => (
             <div
               key={i}
-              className="shrink-0 w-[280px] md:w-[340px] lg:w-[400px] aspect-[4/3] rounded-xl overflow-hidden border border-border group relative"
+              className="shrink-0 w-[280px] md:w-[340px] lg:w-[400px] aspect-[4/3] rounded-xl overflow-hidden border border-border group relative bg-bg-subtle"
             >
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                 style={{ filter: 'saturate(0.85) contrast(1.05)' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#060606]/70 via-transparent to-transparent" />
