@@ -54,7 +54,7 @@ export default function Projects() {
         {featured && <FeaturedProject project={featured} />}
 
         {/* Remaining projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-24">
           {rest.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
@@ -261,6 +261,7 @@ function ProjectCard({
           <img
             src={project.image}
             alt={project.title}
+            loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             style={{ filter: 'saturate(0.7) contrast(1.05)' }}
           />

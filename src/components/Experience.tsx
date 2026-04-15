@@ -76,7 +76,7 @@ function ExperienceCard({
   return (
     <motion.div
       ref={ref}
-      className="relative pl-10 md:pl-20 pb-14 last:pb-0 group"
+      className="relative pl-8 md:pl-20 pb-14 last:pb-0 group"
       initial={{ opacity: 0, x: -30 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{

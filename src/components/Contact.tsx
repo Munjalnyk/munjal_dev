@@ -100,7 +100,7 @@ export default function Contact() {
           </span>
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24">
           {/* Contact info */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -258,7 +258,7 @@ export default function Contact() {
                     Available for Projects
                   </span>
                 </div>
-                <p className="font-grotesk text-xl text-text-primary font-semibold">
+                <p className="font-grotesk text-base sm:text-xl text-text-primary font-semibold">
                   Currently pursuing Master's — open to part-time or contract work
                 </p>
                 <p className="mt-1.5 font-sans text-sm text-text-muted flex items-center gap-2">
