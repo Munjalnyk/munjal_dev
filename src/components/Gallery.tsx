@@ -3,16 +3,35 @@ import { useRef } from 'react'
 import TextReveal from './TextReveal'
 
 const galleryImages = [
-  { src: '/img/portfolio1.png', alt: 'NCRTC MRTS project work' },
-  { src: '/img/portfolio2.jpg', alt: 'IoT smart panel development' },
-  { src: '/img/portfolio3.jpg', alt: 'Smart irrigation system' },
-  { src: '/img/portfolio4.jpg', alt: 'Power electronics work' },
-  { src: '/img/portfolio11.jpg', alt: 'Engineering work' },
-  { src: '/img/portfolio12.png', alt: 'Hardware design' },
-  { src: '/img/portfolio13.jpg', alt: 'Project development' },
-  { src: '/img/about.jpg', alt: 'At the workspace' },
-]
+  { src: '/img/1.jpg', alt: '' },
+  { src: '/img/2.jpg', alt: '' },
+  { src: '/img/3.jpg', alt: '' },
+  { src: '/img/4.jpg', alt: '' },
+  { src: '/img/5.jpg', alt: '' },
+  { src: '/img/6.jpg', alt: '' },
+  { src: '/img/7.jpg', alt: '' },
+  { src: '/img/8.jpg', alt: '' },
+  { src: '/img/9.jpg', alt: '' },
+  { src: '/img/10.jpg', alt: '' },
+  { src: '/img/11.jpg', alt: '' },
+  { src: '/img/12.jpg', alt: '' },
+  { src: '/img/13.jpg', alt: '' },
+  { src: '/img/14.jpg', alt: '' },
+  { src: '/img/15.jpg', alt: '' },
+  { src: '/img/16.jpg', alt: '' },
+  { src: '/img/17.jpg', alt: '' },
+  { src: '/img/18.jpg', alt: '' },  
+  { src: '/img/19.jpg', alt: '' },
+  { src: '/img/20.jpg', alt: '' },
+  { src: '/img/21.jpg', alt: '' },
+  { src: '/img/22.jpg', alt: '' },
+  { src: '/img/23.jpg', alt: '' },
+  { src: '/img/24.jpg', alt: '' },
+  { src: '/img/25.jpg', alt: '' },
+  { src: '/img/26.jpg', alt: '' },
+  { src: '/img/27.jpg', alt: '' },
 
+]
 // Duplicate for seamless loop
 const images = [...galleryImages, ...galleryImages]
 
