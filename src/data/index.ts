@@ -17,6 +17,7 @@ export const personalInfo = {
   linkedin: 'https://linkedin.com/in/munjalnyk',
   github: 'https://github.com/yorocoboy1',
   cvUrl: '/pdf/CV_Munjal_Nayak.pdf',
+  heroimg: '/img/perfil.png',
   profileImg: '/img/hero.jpg',
   stats: [
     { value: '3+', label: 'Years Experience' },

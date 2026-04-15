@@ -195,7 +195,7 @@ export default function Hero() {
             <div className="relative w-56 h-64 rounded-2xl overflow-hidden border border-border/60">
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#060606]/60 via-transparent to-transparent" />
               <img
-                src={personalInfo.profileImg}
+                src={personalInfo.heroimg}
                 alt={personalInfo.name}
                 className="w-full h-full object-cover"
                 style={{ filter: 'contrast(1.05) saturate(0.85)' }}
