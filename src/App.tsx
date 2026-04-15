@@ -9,6 +9,7 @@ import Experience from '@/components/Experience'
 import Skills from '@/components/Skills'
 import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
+import Gallery from '@/components/Gallery'
 import MarqueeDivider from '@/components/MarqueeDivider'
 import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
@@ -92,6 +93,7 @@ export default function App() {
             <Projects />
             <MarqueeDivider />
             <Contact />
+            <Gallery />
           </main>
           <Footer />
         </SmoothScroll>

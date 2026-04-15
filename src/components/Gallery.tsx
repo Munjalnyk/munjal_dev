@@ -1,0 +1,94 @@
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+import TextReveal from './TextReveal'
+
+const galleryImages = [
+  { src: '/img/portfolio1.png', alt: 'NCRTC MRTS project work' },
+  { src: '/img/portfolio2.jpg', alt: 'IoT smart panel development' },
+  { src: '/img/portfolio3.jpg', alt: 'Smart irrigation system' },
+  { src: '/img/portfolio4.jpg', alt: 'Power electronics work' },
+  { src: '/img/portfolio11.jpg', alt: 'Engineering work' },
+  { src: '/img/portfolio12.png', alt: 'Hardware design' },
+  { src: '/img/portfolio13.jpg', alt: 'Project development' },
+  { src: '/img/about.jpg', alt: 'At the workspace' },
+]
+
+export default function Gallery() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const scrollRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: scrollRef,
+    offset: ['start end', 'end start'],
+  })
+  const x = useTransform(scrollYProgress, [0, 1], ['5%', '-25%'])
+
+  return (
+    <section className="py-24 md:py-32 relative overflow-hidden" ref={ref}>
+      <div className="section-padding mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-accent">
+            06 / Gallery
+          </span>
+          <motion.div
+            className="mt-3 h-[1px] bg-accent/30 origin-left"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ maxWidth: '80px' }}
+          />
+        </motion.div>
+
+        <h2 className="mt-10 font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
+          <TextReveal text="Behind the" delay={0.1} />
+          <br />
+          <span className="text-gradient-gold">
+            <TextReveal text="Scenes" delay={0.3} />
+          </span>
+        </h2>
+      </div>
+
+      {/* Scrolling carousel */}
+      <div ref={scrollRef} className="relative">
+        <motion.div
+          className="flex gap-4 md:gap-5 pl-6 md:pl-12 lg:pl-24 xl:pl-32"
+          style={{ x }}
+        >
+          {galleryImages.map((img, i) => (
+            <motion.div
+              key={i}
+              className="shrink-0 w-[280px] md:w-[340px] lg:w-[400px] aspect-[4/3] rounded-xl overflow-hidden border border-border group relative"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.08 }}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                style={{ filter: 'saturate(0.85) contrast(1.05)' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#060606]/70 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <span className="font-grotesk text-xs text-text-secondary/70">
+                  {img.alt}
+                </span>
+              </div>
+              <div className="absolute top-3 right-3">
+                <span className="font-mono text-[9px] text-text-muted/40 bg-bg/50 backdrop-blur-sm px-2 py-0.5 rounded-md border border-white/5">
+                  0{i + 1}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
+    </section>
+  )
+}
