@@ -79,6 +79,7 @@ export default function About() {
                 <motion.img
                   src={personalInfo.profileImg}
                   alt={personalInfo.name}
+                  loading="lazy"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-700 scale-110"
                   style={{ y: imgY }}
                 />
@@ -158,7 +159,7 @@ export default function About() {
             </motion.div>
 
             {/* Stats */}
-            <div ref={statsRef} className="grid grid-cols-3 gap-6 md:gap-10">
+            <div ref={statsRef} className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-10">
               {personalInfo.stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -167,11 +168,11 @@ export default function About() {
                   animate={statsInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
                 >
-                  <div className="relative p-4 md:p-5 border border-border/50 rounded-xl bg-bg-card/50 hover:border-accent/20 transition-all duration-500 hover:glow-gold">
-                    <span className="block font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-gold">
+                  <div className="relative p-3 md:p-5 border border-border/50 rounded-xl bg-bg-card/50 hover:border-accent/20 transition-all duration-500 hover:glow-gold">
+                    <span className="block font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-gold">
                       <AnimatedCounter value={stat.value} inView={statsInView} />
                     </span>
-                    <span className="block mt-1.5 font-grotesk text-[11px] md:text-xs tracking-wider text-text-muted uppercase">
+                    <span className="block mt-1.5 font-grotesk text-[10px] sm:text-[11px] md:text-xs tracking-wider text-text-muted uppercase">
                       {stat.label}
                     </span>
                   </div>

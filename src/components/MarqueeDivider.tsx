@@ -25,17 +25,17 @@ export default function MarqueeDivider() {
       transition={{ duration: 0.8 }}
     >
       {/* Fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-bg to-transparent z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-bg to-transparent z-10" />
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-bg to-transparent z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-bg to-transparent z-10" />
 
       {/* Row 1 - normal direction */}
       <div className="animate-marquee whitespace-nowrap flex items-center mb-4">
         {[...words, ...words, ...words].map((word, i) => (
           <span key={`a-${i}`} className="inline-flex items-center">
-            <span className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white/[0.08] mx-4 md:mx-6 select-none">
+            <span className="font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white/[0.08] mx-3 md:mx-6 select-none">
               {word}
             </span>
-            <span className="text-accent/25 text-lg mx-2">&#9670;</span>
+            <span className="text-accent/25 text-sm md:text-lg mx-1.5 md:mx-2">&#9670;</span>
           </span>
         ))}
       </div>
@@ -44,10 +44,10 @@ export default function MarqueeDivider() {
       <div className="animate-marquee-reverse whitespace-nowrap flex items-center">
         {[...words, ...words, ...words].map((word, i) => (
           <span key={`b-${i}`} className="inline-flex items-center">
-            <span className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-accent/[0.12] mx-4 md:mx-6 select-none">
+            <span className="font-display text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-accent/[0.12] mx-3 md:mx-6 select-none">
               {word}
             </span>
-            <span className="text-accent/20 text-sm mx-2">&#9670;</span>
+            <span className="text-accent/20 text-xs md:text-sm mx-1.5 md:mx-2">&#9670;</span>
           </span>
         ))}
       </div>

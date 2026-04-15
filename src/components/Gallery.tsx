@@ -52,19 +52,20 @@ export default function Gallery() {
       {/* Auto-scrolling carousel */}
       <div className="relative">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-bg to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-bg to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-40 bg-gradient-to-r from-bg to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-40 bg-gradient-to-l from-bg to-transparent z-10" />
 
-        <div className="animate-gallery-scroll flex gap-4 md:gap-5 w-max hover:[animation-play-state:paused]">
+        <div className="animate-gallery-scroll flex gap-3 md:gap-5 w-max hover:[animation-play-state:paused]">
           {images.map((img, i) => (
             <div
               key={i}
-              className="shrink-0 w-[280px] md:w-[340px] lg:w-[400px] aspect-[4/3] rounded-xl overflow-hidden border border-border group relative"
+              className="shrink-0 w-[240px] sm:w-[280px] md:w-[340px] lg:w-[400px] aspect-[4/3] rounded-xl overflow-hidden border border-border group relative bg-bg-subtle"
             >
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                 style={{ filter: 'saturate(0.85) contrast(1.05)' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#060606]/70 via-transparent to-transparent" />
