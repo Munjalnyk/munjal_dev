@@ -187,27 +187,35 @@ export const projects = [
 export const testimonials = [
   {
     name: 'Amit Gohel',
-    role: 'Senior Engineer',
-    company: 'Alstom',
+    role: 'CEO',
+    company: 'eleics design',
     image: '/img/amit_gohel.jpg',
     quote:
-      'Munjal consistently delivered high-quality configuration data for our SIL4 systems. His attention to detail and ability to navigate complex safety-critical requirements made him an invaluable team member on the NCRTC project.',
+      'As CEO of eleics, I had the pleasure of working with Munjal during his time as an intern at Eleics Design Private Limited, and I must say that he has exceeded my expectations. Munjal is a brilliant out-of-the-box thinker and a quick problem solver. He is a true all-rounder, who was able to contribute effectively to multiple projects during his time with us. I was particularly impressed with his ability to take the initiative and work independently when necessary. he was able to complete his assigned tasks in a timely and efficient manner, and his contributions to the team were always of high quality. Overall, I would highly recommend Munjal for any future role. His skills, work ethic, and attitude make them a valuable asset to any team or organization.',
   },
   {
     name: 'Pavan Venkata',
-    role: 'Project Lead',
-    company: 'Alstom',
+    role: 'Assistant Professor',
+    company: 'PDEU',
     image: '/img/pavan-venkata.jpeg',
     quote:
-      'Working with Munjal on the EVC3 onboard systems was a great experience. He quickly mastered the domain and took full ownership of data validation workflows, significantly reducing turnaround time.',
+      'Hey.. This is Dr. Pavan Venkata and I am working as an Assistant Professor in the Electrical Engineering Department of Pandit Deendayal Energy University. Munjal Nayak is pursuing his B.Tech in our department of PDEU and I am his faculty advisor for the last four years. I have taught him Analog and Digital Electronics (Theory and Lab), Power system Protection Laboratory courses in his under graduation. I found him very obedient with lots of respect towards elders and faculties. He is very enthusiastic about learning new things and always asks very important questions during lectures and laboratory sessions. I have seen him so many times in the laboratory doing some sort of experiments during his free time. He is a good human being with a positive attitude. I wish him all the best in his all endeavours.',
   },
   {
     name: 'Meera Karamta',
-    role: 'Engineering Manager',
-    company: 'Eleics Design',
+    role: 'Assistant Professor',
+    company: 'PDEU',
     image: '/img/meera.karamta_photo.jpg',
     quote:
-      'During his internship, Munjal demonstrated exceptional skill in embedded firmware and PCB design. His work on the WiDrive product went well beyond what we expected from an intern.',
+      'When it comes to academics, Munjal is extremely dedicated. I see the urge in him to succeed in his work by challenging himself and through hard-work. He was always an active participant in classroom discussions and comes along with new ideas. He possesses remarkable skill to think out of the box. He was keen to apply the theoretical classroom learning into projects and prototypes. He performed well in all the courses taught by me which reflects his disciplined attitude towards learning. Munjal is a person of perseverance. He is one of the students who leaves a remarkable impression through his dedication. He possesses qualities that makes him thrive in challenging environment.',
+  },
+  {
+    name: 'Dr. Manju bhashini',
+    role: 'Assistant Professor',
+    company: 'PDEU',
+    image: '',
+    quote:
+      'Munjal is an exceptionally talented and dedicated engineer. He has a firm root in the essential subjects and stands above in understanding and responding to questions. He also strongly desires to know about recent technology and aspires to contribute to that field. I have observed him grow into an individual who excels in all academic pursuits. It is evident he has a passion for electrical engineering, and his attention to detail is unmatched. Additionally, he is a voracious learner seeking learning opportunities in every session. I noticed from his submission works he solves problems independently and consistently delivers high-quality work. He is always looking for ways to improve and innovate. It was a pleasant experience to teach, and he has my support.',
   },
 ]
 
