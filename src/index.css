@@ -25,7 +25,7 @@
   }
 
   ::selection {
-    background-color: rgba(200, 169, 110, 0.3);
+    background-color: rgba(200, 169, 110, 0.45);
     color: #f0f0f0;
   }
 
@@ -54,9 +54,17 @@
     }
   }
 
-  /* Smooth image rendering */
   img {
     image-rendering: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -68,7 +76,7 @@
     pointer-events: none;
     z-index: 9998;
     background-image: radial-gradient(circle, rgba(200, 169, 110, 0.07) 1px, transparent 1px);
-    background-size: 32px 32px;
+    background-size: 48px 48px;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
   }

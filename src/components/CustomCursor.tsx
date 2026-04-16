@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export default function CustomCursor() {
@@ -11,9 +11,6 @@ export default function CustomCursor() {
   const springX = useSpring(cursorX, { stiffness: 300, damping: 28 })
   const springY = useSpring(cursorY, { stiffness: 300, damping: 28 })
 
-  const handleEnter = useCallback(() => setIsHovering(true), [])
-  const handleLeave = useCallback(() => setIsHovering(false), [])
-
   useEffect(() => {
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
     setIsTouchDevice(isTouch)
@@ -25,38 +22,30 @@ export default function CustomCursor() {
       if (!isVisible) setIsVisible(true)
     }
 
-    window.addEventListener('mousemove', moveCursor)
-    return () => window.removeEventListener('mousemove', moveCursor)
-  }, [isVisible, cursorX, cursorY])
-
-  useEffect(() => {
-    if (isTouchDevice) return
-
-    const attach = () => {
-      const els = document.querySelectorAll(
-        'a, button, [role="button"], input, textarea, [data-cursor-hover]'
-      )
-      els.forEach((el) => {
-        el.addEventListener('mouseenter', handleEnter)
-        el.addEventListener('mouseleave', handleLeave)
-      })
+    const handleOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (target.closest('a, button, [role="button"], input, textarea, [data-cursor-hover]')) {
+        setIsHovering(true)
+      }
     }
 
-    attach()
-    const observer = new MutationObserver(attach)
-    observer.observe(document.body, { childList: true, subtree: true })
+    const handleOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (target.closest('a, button, [role="button"], input, textarea, [data-cursor-hover]')) {
+        setIsHovering(false)
+      }
+    }
+
+    window.addEventListener('mousemove', moveCursor, { passive: true })
+    document.addEventListener('mouseover', handleOver, { passive: true })
+    document.addEventListener('mouseout', handleOut, { passive: true })
 
     return () => {
-      observer.disconnect()
-      const els = document.querySelectorAll(
-        'a, button, [role="button"], input, textarea, [data-cursor-hover]'
-      )
-      els.forEach((el) => {
-        el.removeEventListener('mouseenter', handleEnter)
-        el.removeEventListener('mouseleave', handleLeave)
-      })
+      window.removeEventListener('mousemove', moveCursor)
+      document.removeEventListener('mouseover', handleOver)
+      document.removeEventListener('mouseout', handleOut)
     }
-  }, [isTouchDevice, handleEnter, handleLeave])
+  }, [isVisible, cursorX, cursorY])
 
   if (isTouchDevice) return null
 

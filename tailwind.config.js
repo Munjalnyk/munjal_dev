@@ -18,8 +18,8 @@ export default {
         },
         text: {
           primary: '#f0f0f0',
-          secondary: '#8a8a8a',
-          muted: '#555555',
+          secondary: '#999999',
+          muted: '#6a6a6a',
         },
         accent: {
           DEFAULT: '#c8a96e',

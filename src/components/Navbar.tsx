@@ -98,7 +98,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
+              className="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-1.5"
               aria-label="Toggle menu"
             >
               <motion.span
