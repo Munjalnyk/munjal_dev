@@ -15,7 +15,7 @@ export default function TextReveal({
   once = true,
 }: TextRevealProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once, margin: '-80px' })
+  const isInView = useInView(ref, { once, margin: '-10px' })
   const words = text.split(' ')
 
   return (

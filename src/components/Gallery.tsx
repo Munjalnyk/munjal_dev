@@ -81,7 +81,6 @@ export default function Gallery() {
               <img
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
                 className="h-full w-auto max-w-none object-cover transition-transform duration-700 group-hover:scale-105"
                 style={{ filter: 'saturate(0.85) contrast(1.05)' }}
               />
