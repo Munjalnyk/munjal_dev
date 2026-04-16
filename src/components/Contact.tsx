@@ -94,10 +94,8 @@ export default function Contact() {
           <TextReveal text="Let's Build" delay={0.2} inView={isInView} />
           <br />
           <TextReveal text="Something" delay={0.35} inView={isInView} />
-          <span className="text-gradient-gold">
-            {' '}
-            <TextReveal text="Great" delay={0.5} inView={isInView} />
-          </span>
+          {' '}
+          <TextReveal text="Great" delay={0.5} inView={isInView} gold />
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24">

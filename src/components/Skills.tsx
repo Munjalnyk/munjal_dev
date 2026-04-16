@@ -43,9 +43,7 @@ export default function Skills() {
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
             <TextReveal text="Technical" delay={0.1} inView={isInView} />
             <br />
-            <span className="text-gradient-gold">
-              <TextReveal text="Arsenal" delay={0.3} inView={isInView} />
-            </span>
+            <TextReveal text="Arsenal" delay={0.3} inView={isInView} gold />
           </h2>
           <motion.p
             className="max-w-xs font-sans text-sm text-text-muted leading-relaxed"

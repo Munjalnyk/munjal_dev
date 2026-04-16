@@ -5,6 +5,7 @@ interface TextRevealProps {
   className?: string
   delay?: number
   inView?: boolean
+  gold?: boolean
 }
 
 export default function TextReveal({
@@ -12,6 +13,7 @@ export default function TextReveal({
   className = '',
   delay = 0,
   inView = true,
+  gold = false,
 }: TextRevealProps) {
   const words = text.split(' ')
 
@@ -20,7 +22,7 @@ export default function TextReveal({
       {words.map((word, i) => (
         <span key={i} className="inline-block overflow-hidden mr-[0.25em] last:mr-0">
           <motion.span
-            className="inline-block"
+            className={`inline-block ${gold ? 'text-gradient-gold' : ''}`}
             initial={{ y: '110%', rotate: 2 }}
             animate={inView ? { y: 0, rotate: 0 } : { y: '110%', rotate: 2 }}
             transition={{

@@ -60,9 +60,7 @@ export default function Gallery() {
         <h2 className="mt-10 font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
           <TextReveal text="Behind the" delay={0.1} inView={isInView} />
           <br />
-          <span className="text-gradient-gold">
-            <TextReveal text="Scenes" delay={0.3} inView={isInView} />
-          </span>
+          <TextReveal text="Scenes" delay={0.3} inView={isInView} gold />
         </h2>
       </div>
 

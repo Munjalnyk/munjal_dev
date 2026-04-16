@@ -36,9 +36,7 @@ export default function Projects() {
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
             <TextReveal text="Selected" delay={0.1} inView={isInView} />
             <br />
-            <span className="text-gradient-gold">
-              <TextReveal text="Projects" delay={0.3} inView={isInView} />
-            </span>
+            <TextReveal text="Projects" delay={0.3} inView={isInView} gold />
           </h2>
           <motion.p
             className="max-w-sm font-sans text-sm text-text-muted leading-relaxed"

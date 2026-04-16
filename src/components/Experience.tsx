@@ -33,9 +33,7 @@ export default function Experience() {
         <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-8 md:mb-16 leading-tight">
           <TextReveal text="Where I've" delay={0.1} inView={isInView} />
           <br />
-          <span className="text-gradient-gold">
-            <TextReveal text="Worked & Learned" delay={0.3} inView={isInView} />
-          </span>
+          <TextReveal text="Worked & Learned" delay={0.3} inView={isInView} gold />
         </h2>
 
         {/* Timeline */}
