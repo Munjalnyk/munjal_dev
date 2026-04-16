@@ -91,12 +91,12 @@ export default function Contact() {
 
         {/* Large CTA text */}
         <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-text-primary mb-8 md:mb-16 leading-tight">
-          <TextReveal text="Let's Build" delay={0.2} />
+          <TextReveal text="Let's Build" delay={0.2} inView={isInView} />
           <br />
-          <TextReveal text="Something" delay={0.35} />
+          <TextReveal text="Something" delay={0.35} inView={isInView} />
           <span className="text-gradient-gold">
             {' '}
-            <TextReveal text="Great" delay={0.5} />
+            <TextReveal text="Great" delay={0.5} inView={isInView} />
           </span>
         </h2>
 

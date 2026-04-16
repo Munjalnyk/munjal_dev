@@ -98,10 +98,10 @@ export default function About() {
           {/* Text column */}
           <div className="lg:col-span-7">
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-8 leading-tight">
-              <TextReveal text="Crafting Precision" delay={0.3} />
+              <TextReveal text="Crafting Precision" delay={0.3} inView={isInView} />
               <br />
               <span className="text-gradient-gold">
-                <TextReveal text="in Every Circuit" delay={0.5} />
+                <TextReveal text="in Every Circuit" delay={0.5} inView={isInView} />
               </span>
             </h2>
 

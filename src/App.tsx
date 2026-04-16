@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Preloader from '@/components/Preloader'
 import Navbar from '@/components/Navbar'
@@ -22,11 +22,11 @@ export default function App() {
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-      document.body.style.overflow = 'auto'
-    }, 1200)
-    return () => clearTimeout(timer)
+  }, [])
+
+  const handleLoadComplete = useCallback(() => {
+    setIsLoading(false)
+    document.body.style.overflow = 'auto'
   }, [])
 
   return (
@@ -35,7 +35,7 @@ export default function App() {
       <div className="grain-overlay" />
 
       <AnimatePresence mode="wait">
-        {isLoading && <Preloader key="preloader" />}
+        {isLoading && <Preloader key="preloader" onComplete={handleLoadComplete} />}
       </AnimatePresence>
 
       {/* Under Development Popup */}

@@ -41,10 +41,10 @@ export default function Skills() {
 
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-8 md:mb-16">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
-            <TextReveal text="Technical" delay={0.1} />
+            <TextReveal text="Technical" delay={0.1} inView={isInView} />
             <br />
             <span className="text-gradient-gold">
-              <TextReveal text="Arsenal" delay={0.3} />
+              <TextReveal text="Arsenal" delay={0.3} inView={isInView} />
             </span>
           </h2>
           <motion.p
