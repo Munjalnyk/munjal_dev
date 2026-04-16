@@ -35,10 +35,10 @@ const images = [...galleryImages, ...galleryImages]
 
 export default function Gallery() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden" ref={ref}>
+    <section className="py-16 md:py-28 lg:py-32 relative overflow-hidden" ref={ref}>
       <div className="section-padding mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

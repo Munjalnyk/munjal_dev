@@ -51,7 +51,7 @@ const contactLinks = [
 
 export default function Contact() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
   const [formState, setFormState] = useState({ name: '', email: '', message: '' })
   const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -72,7 +72,7 @@ export default function Contact() {
       <div className="section-padding">
         {/* Section label */}
         <motion.div
-          className="mb-16 md:mb-20"
+          className="mb-8 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -90,7 +90,7 @@ export default function Contact() {
         </motion.div>
 
         {/* Large CTA text */}
-        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-text-primary mb-16 leading-tight">
+        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-text-primary mb-8 md:mb-16 leading-tight">
           <TextReveal text="Let's Build" delay={0.2} />
           <br />
           <TextReveal text="Something" delay={0.35} />
@@ -182,7 +182,7 @@ export default function Contact() {
                         setFormState((prev) => ({ ...prev, [field.name]: e.target.value }))
                       }
                       required
-                      className="w-full bg-transparent border-b border-border/70 py-3 font-sans text-text-primary placeholder:text-text-muted/25 focus:border-accent/50 focus:outline-none transition-colors duration-300"
+                      className="w-full bg-transparent border-b border-border/70 py-3.5 font-sans text-base text-text-primary placeholder:text-text-muted/25 focus:border-accent/50 focus:outline-none transition-colors duration-300"
                     />
                   </div>
                 ))}
@@ -197,7 +197,7 @@ export default function Contact() {
                     onChange={(e) => setFormState((prev) => ({ ...prev, message: e.target.value }))}
                     required
                     rows={4}
-                    className="w-full bg-transparent border-b border-border/70 py-3 font-sans text-text-primary placeholder:text-text-muted/25 focus:border-accent/50 focus:outline-none transition-colors duration-300 resize-none"
+                    className="w-full bg-transparent border-b border-border/70 py-3.5 font-sans text-base text-text-primary placeholder:text-text-muted/25 focus:border-accent/50 focus:outline-none transition-colors duration-300 resize-none"
                   />
                 </div>
 

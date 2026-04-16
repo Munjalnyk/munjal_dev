@@ -6,14 +6,14 @@ import SpotlightCard from './SpotlightCard'
 
 export default function Experience() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
 
   return (
     <section id="experience" className="section-gap relative bg-dots" ref={ref}>
       <div className="section-padding">
         {/* Section label */}
         <motion.div
-          className="mb-16 md:mb-20"
+          className="mb-8 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -30,7 +30,7 @@ export default function Experience() {
           />
         </motion.div>
 
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-16 leading-tight">
+        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-8 md:mb-16 leading-tight">
           <TextReveal text="Where I've" delay={0.1} />
           <br />
           <span className="text-gradient-gold">
@@ -111,7 +111,7 @@ function ExperienceCard({
         {/* Top gradient */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-4">
           <div>
             <span
               className={`inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-mono tracking-[0.15em] uppercase rounded-full mb-3 ${
@@ -132,11 +132,11 @@ function ExperienceCard({
             </h3>
             <p className="mt-1 font-grotesk text-base text-accent/80">{experience.company}</p>
           </div>
-          <div className="text-right shrink-0">
+          <div className="sm:text-right shrink-0 flex sm:flex-col items-center sm:items-end gap-2 sm:gap-0">
             <span className="inline-block px-3 py-1 bg-white/[0.02] border border-border/50 rounded-lg font-mono text-sm text-text-muted">
               {experience.duration}
             </span>
-            <p className="font-grotesk text-xs text-text-muted mt-1.5 flex items-center gap-1 justify-end">
+            <p className="font-grotesk text-xs text-text-muted sm:mt-1.5 flex items-center gap-1">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="text-text-muted/50">
                 <circle cx="5" cy="4" r="2.5" stroke="currentColor" strokeWidth="0.8" />
                 <path d="M5 6.5V9" stroke="currentColor" strokeWidth="0.8" />

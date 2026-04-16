@@ -49,7 +49,7 @@ export default function Navbar() {
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, delay: 1.8, ease: [0.215, 0.61, 0.355, 1] }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
       >
         <nav className="section-padding flex items-center justify-between">
           {/* Logo */}

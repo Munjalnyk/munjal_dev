@@ -43,7 +43,7 @@ export default function Hero() {
               className="mb-10 md:mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.2 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="inline-flex items-center gap-2.5 border border-accent/20 bg-accent/[0.04] px-4 py-2 rounded-full">
                 <span className="relative flex h-2 w-2">
@@ -63,7 +63,7 @@ export default function Hero() {
                   className="font-display text-[clamp(3rem,11vw,9rem)] font-extrabold leading-[0.88] tracking-[-0.02em] text-text-primary"
                   initial={{ y: '110%' }}
                   animate={{ y: 0 }}
-                  transition={{ duration: 1, delay: 2.0, ease: [0.215, 0.61, 0.355, 1] }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
                 >
                   MUNJAL
                 </motion.h1>
@@ -74,7 +74,7 @@ export default function Hero() {
                   style={{ color: 'transparent', WebkitTextStroke: '1.5px #c8a96e' }}
                   initial={{ y: '110%' }}
                   animate={{ y: 0 }}
-                  transition={{ duration: 1, delay: 2.15, ease: [0.215, 0.61, 0.355, 1] }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
                 >
                   NAYAK
                 </motion.h1>
@@ -86,7 +86,7 @@ export default function Hero() {
               className="max-w-xl mb-8 md:mb-10"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2.5 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
               <p className="font-grotesk text-lg md:text-xl text-text-secondary leading-relaxed">
                 {personalInfo.title}
@@ -120,7 +120,7 @@ export default function Hero() {
               className="flex flex-wrap items-center gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.7 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
             >
               <MagneticButton>
                 <a
@@ -158,7 +158,7 @@ export default function Hero() {
             className="relative hidden lg:flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 2.3, ease: [0.215, 0.61, 0.355, 1] }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
           >
             {/* Rotating rings */}
             <motion.div
@@ -218,7 +218,7 @@ export default function Hero() {
                   style={positions[i]}
                   initial={{ opacity: 0, x: 15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 2.6 + i * 0.12 }}
+                  transition={{ delay: 0.6 + i * 0.12 }}
                 >
                   <span className="text-lg font-bold text-accent leading-none font-display">{stat.value}</span>
                   <span className="text-[9px] text-text-muted font-medium mt-0.5 whitespace-nowrap">{stat.label}</span>
@@ -233,7 +233,7 @@ export default function Hero() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 3.2 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
         >
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-text-muted">Scroll</span>
           <motion.div

@@ -6,7 +6,7 @@ import SpotlightCard from './SpotlightCard'
 
 export default function Projects() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
   const featured = projects.find((p) => p.featured)
   const rest = projects.filter((p) => !p.featured)
 
@@ -15,7 +15,7 @@ export default function Projects() {
       <div className="section-padding">
         {/* Section label */}
         <motion.div
-          className="mb-16 md:mb-20"
+          className="mb-8 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -32,7 +32,7 @@ export default function Projects() {
           />
         </motion.div>
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-8 md:mb-16">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
             <TextReveal text="Selected" delay={0.1} />
             <br />
@@ -54,7 +54,7 @@ export default function Projects() {
         {featured && <FeaturedProject project={featured} />}
 
         {/* Remaining projects grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-12 md:mb-24">
           {rest.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
@@ -154,7 +154,7 @@ function FeaturedProject({ project }: { project: (typeof projects)[0] }) {
           </div>
 
           {/* Content */}
-          <div className="relative p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-bg-card">
+          <div className="relative p-6 md:p-10 lg:p-12 flex flex-col justify-center bg-bg-card">
             
             {/* Category */}
             <span
@@ -264,6 +264,7 @@ function ProjectCard({
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             style={{ filter: 'saturate(0.7) contrast(1.05)' }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-bg-card/20 to-transparent" />
           <div

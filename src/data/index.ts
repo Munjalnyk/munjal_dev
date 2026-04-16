@@ -156,7 +156,7 @@ export const projects = [
       'ESP32-based IoT controller to manage a three-phase induction motor via VFD with cloud connectivity for data logging and predictive analysis.',
     tags: ['ESP32', 'VFD', 'Industrial IoT', 'MQTT', 'Cloud'],
     accent: '#7c3aed',
-    image: '/img/portfolio2.jpg',
+    image: '/img/portfolio1.png',
     featured: false,
   },
   {
@@ -166,7 +166,7 @@ export const projects = [
       'ESP32 + Home Assistant based smart irrigation system for soil moisture and temperature monitoring with automated per-plant watering schedules.',
     tags: ['ESP32', 'Home Assistant', 'Sensors', 'Automation'],
     accent: '#10b981',
-    image: '/img/portfolio3.jpg',
+    image: '/img/portfolio12.png',
     featured: false,
   },
   {

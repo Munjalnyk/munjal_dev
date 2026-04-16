@@ -14,7 +14,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function Skills() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
   const allSkills = skillCategories.flatMap((cat) => cat.skills)
 
   return (
@@ -22,7 +22,7 @@ export default function Skills() {
       <div className="section-padding">
         {/* Section label */}
         <motion.div
-          className="mb-16 md:mb-20"
+          className="mb-8 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -39,7 +39,7 @@ export default function Skills() {
           />
         </motion.div>
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-8 md:mb-16">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
             <TextReveal text="Technical" delay={0.1} />
             <br />

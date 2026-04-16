@@ -31,7 +31,7 @@ function AnimatedCounter({ value, inView }: { value: string; inView: boolean }) 
 
 export default function About() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
   const statsRef = useRef(null)
   const statsInView = useInView(statsRef, { once: true, margin: '-50px' })
   const imageRef = useRef(null)
@@ -46,7 +46,7 @@ export default function About() {
       <div className="section-padding">
         {/* Section label */}
         <motion.div
-          className="mb-16 md:mb-20"
+          className="mb-8 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -115,7 +115,7 @@ export default function About() {
             </motion.p>
 
             <motion.p
-              className="font-grotesk text-base text-text-muted leading-relaxed mb-10 max-w-2xl"
+              className="font-grotesk text-base text-text-muted leading-relaxed mb-6 md:mb-10 max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -125,7 +125,7 @@ export default function About() {
 
             {/* Connect links */}
             <motion.div
-              className="flex flex-wrap gap-3 mb-12"
+              className="flex flex-wrap gap-3 mb-8 md:mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}

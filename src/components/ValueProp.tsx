@@ -39,14 +39,14 @@ const values = [
 
 export default function ValueProp() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
 
   return (
     <section className="section-gap relative" ref={ref}>
       <div className="section-padding">
         {/* Large statement */}
         <motion.div
-          className="mb-20 max-w-4xl"
+          className="mb-10 md:mb-20 max-w-4xl"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1 }}

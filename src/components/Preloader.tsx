@@ -13,7 +13,7 @@ export default function Preloader() {
       }
     })
     const animation = animate(count, 100, {
-      duration: 1.4,
+      duration: 0.9,
       ease: [0.16, 1, 0.3, 1],
     })
     return () => {
@@ -85,7 +85,7 @@ export default function Preloader() {
             className="h-full bg-gradient-to-r from-accent/60 to-accent rounded-full"
             initial={{ width: '0%' }}
             animate={{ width: '100%' }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           />
         </motion.div>
 
