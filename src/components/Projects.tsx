@@ -278,7 +278,7 @@ function ProjectCard({
           />
           {/* Number badge */}
           <div className="absolute top-4 right-4">
-            <span className="font-mono text-xs text-text-muted/70 bg-bg/60 backdrop-blur-sm px-2 py-1 rounded-md border border-white/5">
+            <span className="font-mono text-xs text-text-muted/70 bg-bg/60 backdrop-blur-sm px-2 py-1 rounded-md border border-border/30">
               0{index + 2} / 0{total}
             </span>
           </div>

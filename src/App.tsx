@@ -82,7 +82,7 @@ export default function App() {
               </p>
               <button
                 onClick={() => setShowBanner(false)}
-                className="inline-flex items-center gap-2 bg-accent text-[#050505] px-6 py-2.5 font-grotesk text-sm font-semibold rounded-full hover:bg-accent-light transition-colors duration-300"
+                className="inline-flex items-center gap-2 bg-accent text-[var(--text-on-accent)] px-6 py-2.5 font-grotesk text-sm font-semibold rounded-full hover:bg-accent-light transition-colors duration-300"
               >
                 Got it, explore anyway
               </button>

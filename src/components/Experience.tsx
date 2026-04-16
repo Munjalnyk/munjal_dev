@@ -115,7 +115,7 @@ function ExperienceCard({
               className={`inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-mono tracking-[0.15em] uppercase rounded-full mb-3 ${
                 isWork
                   ? 'bg-accent/10 text-accent border border-accent/20'
-                  : 'bg-white/[0.03] text-text-secondary border border-border'
+                  : 'bg-bg-subtle text-text-secondary border border-border'
               }`}
             >
               {isWork ? (
@@ -131,7 +131,7 @@ function ExperienceCard({
             <p className="mt-1 font-grotesk text-base text-accent/80">{experience.company}</p>
           </div>
           <div className="sm:text-right shrink-0 flex sm:flex-col items-center sm:items-end gap-2 sm:gap-0">
-            <span className="inline-block px-3 py-1 bg-white/[0.02] border border-border/50 rounded-lg font-mono text-sm text-text-muted">
+            <span className="inline-block px-3 py-1 bg-bg-subtle/50 border border-border/50 rounded-lg font-mono text-sm text-text-muted">
               {experience.duration}
             </span>
             <p className="font-grotesk text-xs text-text-muted sm:mt-1.5 flex items-center gap-1">
@@ -168,7 +168,7 @@ function ExperienceCard({
           {experience.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-[10px] font-mono tracking-wider text-text-muted bg-white/[0.02] border border-border hover:border-accent/20 hover:text-accent/60 rounded-full transition-all duration-300"
+              className="px-3 py-1 text-[10px] font-mono tracking-wider text-text-muted bg-bg-subtle/50 border border-border hover:border-accent/20 hover:text-accent/60 rounded-full transition-all duration-300"
             >
               {tag}
             </span>

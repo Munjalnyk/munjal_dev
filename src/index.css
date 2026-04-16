@@ -26,23 +26,23 @@
   }
 
   .light {
-    --c-bg: 245 242 236;
-    --c-bg-subtle: 235 231 223;
+    --c-bg: 255 255 255;
+    --c-bg-subtle: 245 245 247;
     --c-bg-card: 255 255 255;
-    --c-bg-hover: 240 236 228;
-    --c-bg-elevated: 230 225 217;
-    --c-border: 215 210 200;
-    --c-border-subtle: 225 220 212;
-    --c-border-strong: 195 190 182;
-    --c-text-primary: 26 26 26;
-    --c-text-secondary: 75 75 75;
-    --c-text-muted: 128 128 128;
-    --c-accent: 154 123 63;
-    --c-accent-light: 184 146 76;
-    --c-accent-dark: 122 97 48;
+    --c-bg-hover: 245 245 247;
+    --c-bg-elevated: 238 238 240;
+    --c-border: 210 210 215;
+    --c-border-subtle: 230 230 235;
+    --c-border-strong: 190 190 195;
+    --c-text-primary: 29 29 31;
+    --c-text-secondary: 110 110 115;
+    --c-text-muted: 142 142 147;
+    --c-accent: 140 110 50;
+    --c-accent-light: 170 138 72;
+    --c-accent-dark: 110 85 35;
 
-    --bg-hex: #f5f2ec;
-    --accent-hex: #9a7b3f;
+    --bg-hex: #ffffff;
+    --accent-hex: #8c6e32;
     --text-on-accent: #ffffff;
     --overlay: 0 0 0;
   }
@@ -92,6 +92,16 @@
     outline-offset: 2px;
   }
 
+  .light ::-webkit-scrollbar-track {
+    background: #f5f5f7;
+  }
+  .light ::-webkit-scrollbar-thumb {
+    background: rgb(0 0 0 / 0.12);
+  }
+  .light ::-webkit-scrollbar-thumb:hover {
+    background: rgb(0 0 0 / 0.2);
+  }
+
   @media (pointer: coarse) {
     body {
       cursor: auto;
@@ -100,6 +110,9 @@
 
   img {
     image-rendering: auto;
+  }
+  .light img {
+    filter: none !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -122,6 +135,9 @@
     background-size: 48px 48px;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
+  }
+  .light .grain-overlay {
+    opacity: 0;
   }
 
   .section-padding {
@@ -151,9 +167,15 @@
   .glow-gold {
     box-shadow: 0 0 40px rgb(var(--c-accent) / 0.06), 0 0 80px rgb(var(--c-accent) / 0.02);
   }
+  .light .glow-gold {
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.06), 0 1px 3px rgb(0 0 0 / 0.04);
+  }
 
   .glow-gold-strong {
     box-shadow: 0 0 60px rgb(var(--c-accent) / 0.1), 0 0 120px rgb(var(--c-accent) / 0.04);
+  }
+  .light .glow-gold-strong {
+    box-shadow: 0 4px 24px rgb(0 0 0 / 0.08), 0 2px 8px rgb(0 0 0 / 0.04);
   }
 
   .glass {
@@ -161,6 +183,11 @@
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgb(var(--overlay) / 0.04);
+  }
+  .light .glass {
+    background: rgb(255 255 255 / 0.72);
+    border-bottom: 1px solid rgb(0 0 0 / 0.06);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.04);
   }
 
   .hover-line {
@@ -188,6 +215,13 @@
       linear-gradient(90deg, rgb(var(--c-accent) / 0.025) 1px, transparent 1px);
     background-size: 60px 60px;
   }
+  .light .bg-grid {
+    background-image: linear-gradient(
+        rgb(0 0 0 / 0.02) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgb(0 0 0 / 0.02) 1px, transparent 1px);
+  }
 
   .bg-dots {
     background-image: radial-gradient(
@@ -196,6 +230,13 @@
       transparent 1px
     );
     background-size: 24px 24px;
+  }
+  .light .bg-dots {
+    background-image: radial-gradient(
+      circle,
+      rgb(0 0 0 / 0.025) 1px,
+      transparent 1px
+    );
   }
 
   .border-gradient {
@@ -242,7 +283,7 @@
     opacity: 0.12;
     will-change: transform;
   }
-  .light .aurora-blob { opacity: 0.08; }
+  .light .aurora-blob { opacity: 0.04; filter: blur(120px); }
 
   .aurora-blob-1 {
     width: 500px;
@@ -274,11 +315,19 @@
     .aurora-blob-1 { width: 300px; height: 300px; }
     .aurora-blob-2 { width: 250px; height: 250px; }
     .aurora-blob-3 { width: 200px; height: 200px; }
-    .light .aurora-blob { opacity: 0.05; }
+    .light .aurora-blob { opacity: 0.03; }
   }
 
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Apple-style light mode sections */
+  .light .bg-dots {
+    background-color: #f5f5f7;
+  }
+  .light .bg-grid {
+    background-color: #ffffff;
+  }
 }
 
 @layer utilities {

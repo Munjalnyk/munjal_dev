@@ -89,7 +89,7 @@ export default function Gallery() {
                 </span>
               </div>
               <div className="absolute top-3 right-3">
-                <span className="font-mono text-[9px] text-text-muted/40 bg-bg/50 backdrop-blur-sm px-2 py-0.5 rounded-md border border-white/5">
+                <span className="font-mono text-[9px] text-text-muted/40 bg-bg/50 backdrop-blur-sm px-2 py-0.5 rounded-md border border-border/30">
                   0{(i % galleryImages.length) + 1}
                 </span>
               </div>

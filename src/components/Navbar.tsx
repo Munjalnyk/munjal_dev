@@ -25,7 +25,7 @@ export default function Navbar() {
     localStorage.setItem('theme', next)
     document.documentElement.classList.toggle('light', next === 'light')
     const meta = document.getElementById('meta-theme-color') as HTMLMetaElement | null
-    if (meta) meta.content = next === 'light' ? '#f5f2ec' : '#050505'
+    if (meta) meta.content = next === 'light' ? '#ffffff' : '#050505'
   }
 
   useEffect(() => {
