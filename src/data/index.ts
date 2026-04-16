@@ -158,6 +158,7 @@ export const projects = [
     accent: '#7c3aed',
     image: '/img/portfolio1.png',
     featured: false,
+    link: '',
   },
   {
     title: 'IoT Smart Irrigation System',
@@ -168,6 +169,7 @@ export const projects = [
     accent: '#10b981',
     image: '/img/portfolio12.png',
     featured: false,
+    link: '',
   },
   {
     title: '5-Level Multilevel Inverter',
@@ -178,6 +180,34 @@ export const projects = [
     accent: '#f59e0b',
     image: '/img/portfolio4.jpg',
     featured: false,
+    link: '',
+  },
+]
+
+export const testimonials = [
+  {
+    name: 'Amit Gohel',
+    role: 'Senior Engineer',
+    company: 'Alstom',
+    image: '/img/amit_gohel.jpg',
+    quote:
+      'Munjal consistently delivered high-quality configuration data for our SIL4 systems. His attention to detail and ability to navigate complex safety-critical requirements made him an invaluable team member on the NCRTC project.',
+  },
+  {
+    name: 'Pavan Venkata',
+    role: 'Project Lead',
+    company: 'Alstom',
+    image: '/img/pavan-venkata.jpeg',
+    quote:
+      'Working with Munjal on the EVC3 onboard systems was a great experience. He quickly mastered the domain and took full ownership of data validation workflows, significantly reducing turnaround time.',
+  },
+  {
+    name: 'Meera Karamta',
+    role: 'Engineering Manager',
+    company: 'Eleics Design',
+    image: '/img/meera.karamta_photo.jpg',
+    quote:
+      'During his internship, Munjal demonstrated exceptional skill in embedded firmware and PCB design. His work on the WiDrive product went well beyond what we expected from an intern.',
   },
 ]
 

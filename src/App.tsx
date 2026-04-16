@@ -11,6 +11,7 @@ const ValueProp = lazy(() => import('@/components/ValueProp'))
 const Experience = lazy(() => import('@/components/Experience'))
 const Skills = lazy(() => import('@/components/Skills'))
 const Projects = lazy(() => import('@/components/Projects'))
+const Testimonials = lazy(() => import('@/components/Testimonials'))
 const Contact = lazy(() => import('@/components/Contact'))
 const Gallery = lazy(() => import('@/components/Gallery'))
 const MarqueeDivider = lazy(() => import('@/components/MarqueeDivider'))
@@ -102,6 +103,7 @@ export default function App() {
             <Experience />
             <Skills />
             <Projects />
+            <Testimonials />
             <MarqueeDivider />
             <Contact />
             <Gallery />

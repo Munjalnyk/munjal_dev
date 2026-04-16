@@ -1,7 +1,46 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { personalInfo } from '@/data'
 import MagneticButton from './MagneticButton'
+
+function Typewriter({ words, interval = 3000 }: { words: string[]; interval?: number }) {
+  const [index, setIndex] = useState(0)
+  const [text, setText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const current = words[index]
+    const speed = isDeleting ? 40 : 70
+
+    if (!isDeleting && text === current) {
+      const pause = setTimeout(() => setIsDeleting(true), interval)
+      return () => clearTimeout(pause)
+    }
+
+    if (isDeleting && text === '') {
+      setIsDeleting(false)
+      setIndex((prev) => (prev + 1) % words.length)
+      return
+    }
+
+    const timer = setTimeout(() => {
+      setText(isDeleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1))
+    }, speed)
+
+    return () => clearTimeout(timer)
+  }, [text, isDeleting, index, words, interval])
+
+  return (
+    <span className="text-accent">
+      {text}
+      <motion.span
+        className="inline-block w-[2px] h-[1em] bg-accent ml-0.5 align-middle"
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.6, repeat: Infinity, repeatType: 'reverse' }}
+      />
+    </span>
+  )
+}
 
 export default function Hero() {
   const sectionRef = useRef(null)
@@ -12,23 +51,18 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
-  const [currentRole, setCurrentRole] = useState(0)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % personalInfo.roles.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
     <section
       id="hero"
       ref={sectionRef}
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Aurora background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-grid" />
+        <div className="aurora-blob aurora-blob-1" />
+        <div className="aurora-blob aurora-blob-2" />
+        <div className="aurora-blob aurora-blob-3" />
       </div>
 
       <motion.div
@@ -81,7 +115,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Subtitle */}
+            {/* Subtitle with typewriter */}
             <motion.div
               className="max-w-xl mb-8 md:mb-10"
               initial={{ opacity: 0, y: 30 }}
@@ -93,16 +127,10 @@ export default function Hero() {
               </p>
               <div className="mt-3 flex items-center gap-3">
                 <span className="font-mono text-xs text-text-muted tracking-wider">~/</span>
-                <div className="h-6 overflow-hidden">
-                  <motion.span
-                    key={currentRole}
-                    className="block font-grotesk text-sm text-accent"
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    {personalInfo.roles[currentRole]}
-                  </motion.span>
+                <div className="h-6 flex items-center">
+                  <span className="font-grotesk text-sm">
+                    <Typewriter words={personalInfo.roles} />
+                  </span>
                 </div>
               </div>
               <p className="mt-3 font-grotesk text-sm text-text-muted flex items-center gap-2">
@@ -153,7 +181,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — Profile Visual */}
+          {/* Right — Profile Visual (desktop) */}
           <motion.div
             className="relative hidden lg:flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -166,7 +194,6 @@ export default function Hero() {
               animate={{ rotate: 360 }}
               transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
             >
-              {/* Tick marks on ring */}
               {[0, 90, 180, 270].map((deg) => (
                 <div
                   key={deg}
@@ -227,6 +254,32 @@ export default function Hero() {
             })}
           </motion.div>
         </div>
+
+        {/* Mobile profile card */}
+        <motion.div
+          className="lg:hidden mt-10 flex items-center gap-5 p-4 border border-border/50 rounded-2xl bg-bg-card/50 backdrop-blur-sm"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-border/60 shrink-0">
+            <img
+              src={personalInfo.heroimg}
+              alt={personalInfo.name}
+              className="w-full h-full object-cover"
+              style={{ filter: 'contrast(1.05) saturate(0.85)' }}
+            />
+            <div className="absolute inset-0 border border-accent/10 rounded-xl" />
+          </div>
+          <div className="flex-1 flex items-center gap-4 overflow-x-auto no-scrollbar">
+            {personalInfo.stats.map((stat, i) => (
+              <div key={stat.label} className="flex flex-col items-center shrink-0">
+                <span className="text-lg font-bold text-accent leading-none font-display">{stat.value}</span>
+                <span className="text-[9px] text-text-muted font-medium mt-0.5 whitespace-nowrap">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Scroll indicator */}
         <motion.div

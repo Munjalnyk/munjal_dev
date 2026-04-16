@@ -54,7 +54,7 @@ export default function Projects() {
         {/* Remaining projects grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-12 md:mb-24">
           {rest.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
+            <ProjectCard key={project.title} project={project} index={i} total={projects.length} />
           ))}
         </div>
 
@@ -239,12 +239,19 @@ function FeaturedProject({ project }: { project: (typeof projects)[0] }) {
 function ProjectCard({
   project,
   index,
+  total,
 }: {
   project: (typeof projects)[0]
   index: number
+  total: number
 }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
+
+  const Wrapper = project.link ? 'a' : 'div'
+  const wrapperProps = project.link
+    ? { href: project.link, target: '_blank' as const, rel: 'noopener noreferrer' }
+    : {}
 
   return (
     <motion.div
@@ -272,9 +279,33 @@ function ProjectCard({
           {/* Number badge */}
           <div className="absolute top-4 right-4">
             <span className="font-mono text-xs text-text-muted/70 bg-bg/60 backdrop-blur-sm px-2 py-1 rounded-md border border-white/5">
-              0{index + 2}
+              0{index + 2} / 0{total}
             </span>
           </div>
+          {/* Hover CTA overlay */}
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-10 flex items-center justify-center bg-bg/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            >
+              <span
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border font-mono text-xs tracking-wider"
+                style={{
+                  color: project.accent,
+                  borderColor: `${project.accent}50`,
+                  background: `${project.accent}15`,
+                  backdropFilter: 'blur(8px)',
+                }}
+              >
+                VIEW PROJECT
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.2" />
+                </svg>
+              </span>
+            </a>
+          )}
         </div>
 
         {/* Content */}
@@ -294,24 +325,38 @@ function ProjectCard({
             {project.description}
           </p>
 
-          <div className="flex flex-wrap gap-1.5">
-            {project.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-1 text-[9px] font-mono tracking-wider border rounded-full"
-                style={{
-                  color: `${project.accent}bb`,
-                  borderColor: `${project.accent}18`,
-                  backgroundColor: `${project.accent}06`,
-                }}
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-wrap gap-1.5">
+              {project.tags.slice(0, 3).map((tag) => (
+                <span
+                  key={tag}
+                  className="px-2.5 py-1 text-[9px] font-mono tracking-wider border rounded-full"
+                  style={{
+                    color: `${project.accent}bb`,
+                    borderColor: `${project.accent}18`,
+                    backgroundColor: `${project.accent}06`,
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+              {project.tags.length > 3 && (
+                <span className="px-2.5 py-1 text-[9px] font-mono tracking-wider text-text-muted border border-border rounded-full">
+                  +{project.tags.length - 3}
+                </span>
+              )}
+            </div>
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 text-text-muted/40 group-hover:text-accent transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300"
               >
-                {tag}
-              </span>
-            ))}
-            {project.tags.length > 3 && (
-              <span className="px-2.5 py-1 text-[9px] font-mono tracking-wider text-text-muted border border-border rounded-full">
-                +{project.tags.length - 3}
-              </span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.2" />
+                </svg>
+              </a>
             )}
           </div>
         </div>

@@ -78,7 +78,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
         >
           <span className="font-mono text-xs tracking-[0.3em] uppercase text-accent">
-            05 / Contact
+            06 / Contact
           </span>
           <motion.div
             className="mt-3 h-[1px] bg-accent/30 origin-left"
