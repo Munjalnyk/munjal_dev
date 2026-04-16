@@ -1,46 +1,57 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Preloader from '@/components/Preloader'
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import ValueProp from '@/components/ValueProp'
-import Experience from '@/components/Experience'
-import Skills from '@/components/Skills'
-import Projects from '@/components/Projects'
-import Contact from '@/components/Contact'
-import Gallery from '@/components/Gallery'
-import MarqueeDivider from '@/components/MarqueeDivider'
-import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
 import ScrollProgress from '@/components/ScrollProgress'
 import SmoothScroll from '@/components/SmoothScroll'
 
+const Navbar = lazy(() => import('@/components/Navbar'))
+const Hero = lazy(() => import('@/components/Hero'))
+const About = lazy(() => import('@/components/About'))
+const ValueProp = lazy(() => import('@/components/ValueProp'))
+const Experience = lazy(() => import('@/components/Experience'))
+const Skills = lazy(() => import('@/components/Skills'))
+const Projects = lazy(() => import('@/components/Projects'))
+const Contact = lazy(() => import('@/components/Contact'))
+const Gallery = lazy(() => import('@/components/Gallery'))
+const MarqueeDivider = lazy(() => import('@/components/MarqueeDivider'))
+const Footer = lazy(() => import('@/components/Footer'))
+
+function dismissHtmlPreloader() {
+  const el = document.getElementById('html-preloader')
+  if (!el) return
+  el.classList.add('fade-out')
+  setTimeout(() => el.remove(), 700)
+}
+
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isReady, setIsReady] = useState(false)
   const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden'
+    // Signal to the HTML preloader that JS bundle loaded
+    if (typeof window.__onAppReady === 'function') {
+      window.__onAppReady()
+    }
+
+    // Small delay so the counter visually reaches 100% before dismissing
+    const timer = setTimeout(() => {
+      setIsReady(true)
+      document.body.style.overflow = 'auto'
+      dismissHtmlPreloader()
+    }, 600)
+
+    return () => clearTimeout(timer)
   }, [])
 
-  const handleLoadComplete = useCallback(() => {
-    setIsLoading(false)
-    document.body.style.overflow = 'auto'
-  }, [])
+  if (!isReady) return null
 
   return (
     <>
       <CustomCursor />
       <div className="grain-overlay" />
 
-      <AnimatePresence mode="wait">
-        {isLoading && <Preloader key="preloader" onComplete={handleLoadComplete} />}
-      </AnimatePresence>
-
-      {/* Under Development Popup */}
       <AnimatePresence>
-        {showBanner && !isLoading && (
+        {showBanner && (
           <motion.div
             className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 backdrop-blur-sm"
             initial={{ opacity: 0 }}
@@ -79,9 +90,9 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {!isLoading && (
-        <SmoothScroll>
-          <ScrollProgress />
+      <SmoothScroll>
+        <ScrollProgress />
+        <Suspense fallback={null}>
           <Navbar />
           <main>
             <Hero />
@@ -96,8 +107,8 @@ export default function App() {
             <Gallery />
           </main>
           <Footer />
-        </SmoothScroll>
-      )}
+        </Suspense>
+      </SmoothScroll>
     </>
   )
 }
