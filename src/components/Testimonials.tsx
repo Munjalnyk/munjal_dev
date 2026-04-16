@@ -7,14 +7,18 @@ export default function Testimonials() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-40px' })
   const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
 
   useEffect(() => {
-    if (!isInView) return
+    if (!isInView || paused) return
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % testimonials.length)
     }, 6000)
     return () => clearInterval(timer)
-  }, [isInView])
+  }, [isInView, paused])
+
+  const prev = () => setActive((a) => (a - 1 + testimonials.length) % testimonials.length)
+  const next = () => setActive((a) => (a + 1) % testimonials.length)
 
   const t = testimonials[active]
 
@@ -51,7 +55,11 @@ export default function Testimonials() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="relative p-6 md:p-10 lg:p-12 border border-border/50 bg-bg-card/30 rounded-2xl overflow-hidden">
+          <div
+            className="relative p-6 md:p-10 lg:p-12 border border-border/50 bg-bg-card/30 rounded-2xl overflow-hidden"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
             {/* Quote icon */}
@@ -114,20 +122,40 @@ export default function Testimonials() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Navigation dots */}
-              <div className="flex items-center gap-2">
-                {testimonials.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActive(i)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      i === active
-                        ? 'bg-accent w-6'
-                        : 'bg-text-muted/20 hover:bg-text-muted/40'
-                    }`}
-                    aria-label={`View testimonial ${i + 1}`}
-                  />
-                ))}
+              {/* Navigation arrows + dots */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={prev}
+                  className="w-9 h-9 rounded-full border border-border hover:border-accent/30 flex items-center justify-center text-text-muted hover:text-accent transition-all duration-300"
+                  aria-label="Previous testimonial"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M9 3L5 7L9 11" stroke="currentColor" strokeWidth="1.2" />
+                  </svg>
+                </button>
+                <div className="flex items-center gap-2">
+                  {testimonials.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActive(i)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        i === active
+                          ? 'bg-accent w-6'
+                          : 'bg-text-muted/20 hover:bg-text-muted/40 w-2'
+                      }`}
+                      aria-label={`View testimonial ${i + 1}`}
+                    />
+                  ))}
+                </div>
+                <button
+                  onClick={next}
+                  className="w-9 h-9 rounded-full border border-border hover:border-accent/30 flex items-center justify-center text-text-muted hover:text-accent transition-all duration-300"
+                  aria-label="Next testimonial"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M5 3L9 7L5 11" stroke="currentColor" strokeWidth="1.2" />
+                  </svg>
+                </button>
               </div>
             </div>
 
@@ -135,10 +163,11 @@ export default function Testimonials() {
             <div className="mt-6 h-[1px] bg-border/30 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-accent/40"
-                key={active}
-                initial={{ width: '0%' }}
-                animate={{ width: '100%' }}
-                transition={{ duration: 6, ease: 'linear' }}
+                key={`${active}-${paused}`}
+                initial={{ width: paused ? undefined : '0%' }}
+                animate={{ width: paused ? undefined : '100%' }}
+                transition={{ duration: paused ? 0 : 6, ease: 'linear' }}
+                style={paused ? { animationPlayState: 'paused' } : undefined}
               />
             </div>
           </div>
