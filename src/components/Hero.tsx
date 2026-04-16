@@ -105,7 +105,7 @@ export default function Hero() {
               <div className="overflow-hidden">
                 <motion.h1
                   className="font-display text-[clamp(3rem,11vw,9rem)] font-extrabold leading-[0.88] tracking-[-0.02em]"
-                  style={{ color: 'transparent', WebkitTextStroke: '1.5px #c8a96e' }}
+                  style={{ color: 'transparent', WebkitTextStroke: '1.5px var(--accent-hex)' }}
                   initial={{ y: '110%' }}
                   animate={{ y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
@@ -157,7 +157,7 @@ export default function Hero() {
                     e.preventDefault()
                     document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })
                   }}
-                  className="group inline-flex items-center gap-3 bg-accent text-[#050505] px-5 py-3 md:px-7 md:py-3.5 font-grotesk text-sm font-semibold tracking-wide rounded-full hover:bg-accent-light transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,169,110,0.25)]"
+                  className="group inline-flex items-center gap-3 bg-accent text-[var(--text-on-accent)] px-5 py-3 md:px-7 md:py-3.5 font-grotesk text-sm font-semibold tracking-wide rounded-full hover:bg-accent-light transition-all duration-300 hover:shadow-[0_0_30px_rgb(var(--c-accent)/0.25)]"
                 >
                   View Projects
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -220,7 +220,7 @@ export default function Hero() {
 
             {/* Profile photo */}
             <div className="relative w-56 h-64 rounded-2xl overflow-hidden border border-border/60">
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#060606]/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-bg/60 via-transparent to-transparent" />
               <img
                 src={personalInfo.heroimg}
                 alt={personalInfo.name}

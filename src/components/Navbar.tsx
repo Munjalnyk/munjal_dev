@@ -15,6 +15,18 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const [theme, setTheme] = useState<'light' | 'dark'>(() =>
+    document.documentElement.classList.contains('light') ? 'light' : 'dark'
+  )
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    localStorage.setItem('theme', next)
+    document.documentElement.classList.toggle('light', next === 'light')
+    const meta = document.getElementById('meta-theme-color') as HTMLMetaElement | null
+    if (meta) meta.content = next === 'light' ? '#f5f2ec' : '#050505'
+  }
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -80,8 +92,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Resume + Mobile Toggle */}
-          <div className="flex items-center gap-4">
+          {/* Resume + Theme Toggle + Mobile Toggle */}
+          <div className="flex items-center gap-3">
             <MagneticButton>
               <a
                 href={personalInfo.cvUrl}
@@ -94,6 +106,25 @@ export default function Navbar() {
                   <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.2" />
                 </svg>
               </a>
+            </MagneticButton>
+
+            <MagneticButton strength={0.15}>
+              <button
+                onClick={toggleTheme}
+                className="w-9 h-9 rounded-full border border-border hover:border-accent/30 flex items-center justify-center text-text-muted hover:text-accent transition-all duration-300"
+                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              >
+                {theme === 'dark' ? (
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2" />
+                    <path d="M8 2V3.5M8 12.5V14M2 8H3.5M12.5 8H14M3.76 3.76L4.82 4.82M11.18 11.18L12.24 12.24M12.24 3.76L11.18 4.82M4.82 11.18L3.76 12.24" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13 9.5A5.5 5.5 0 116.5 3 4 4 0 0013 9.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </button>
             </MagneticButton>
 
             <button
@@ -125,7 +156,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-[#050505]/95 backdrop-blur-xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-xl flex flex-col items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -157,6 +188,31 @@ export default function Navbar() {
               >
                 Resume
               </motion.a>
+              <motion.button
+                onClick={toggleTheme}
+                className="mt-3 flex items-center gap-2.5 font-grotesk text-sm text-text-secondary hover:text-accent transition-colors"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, delay: (navLinks.length + 1) * 0.08 }}
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2" />
+                      <path d="M8 2V3.5M8 12.5V14M2 8H3.5M12.5 8H14M3.76 3.76L4.82 4.82M11.18 11.18L12.24 12.24M12.24 3.76L11.18 4.82M4.82 11.18L3.76 12.24" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                    </svg>
+                    Light Mode
+                  </>
+                ) : (
+                  <>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M13 9.5A5.5 5.5 0 116.5 3 4 4 0 0013 9.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+                    </svg>
+                    Dark Mode
+                  </>
+                )}
+              </motion.button>
             </nav>
           </motion.div>
         )}
