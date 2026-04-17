@@ -115,7 +115,7 @@ export default function Footer() {
       {/* Large watermark */}
       <div className="overflow-hidden pointer-events-none select-none">
         <div className="section-padding pb-6">
-          <p className="font-display text-[clamp(3rem,12vw,10rem)] font-bold text-[rgb(var(--overlay)/0.02)] leading-none tracking-tight whitespace-nowrap">
+          <p className="font-display text-[clamp(3rem,12vw,10rem)] font-bold text-[rgb(var(--overlay)/0.02)] watermark-text leading-none tracking-tight whitespace-nowrap">
             MUNJAL NAYAK
           </p>
         </div>

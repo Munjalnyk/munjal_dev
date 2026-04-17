@@ -31,18 +31,18 @@
     --c-bg-card: 255 255 255;
     --c-bg-hover: 245 245 247;
     --c-bg-elevated: 238 238 240;
-    --c-border: 210 210 215;
-    --c-border-subtle: 230 230 235;
-    --c-border-strong: 190 190 195;
+    --c-border: 220 220 225;
+    --c-border-subtle: 235 235 240;
+    --c-border-strong: 200 200 205;
     --c-text-primary: 29 29 31;
-    --c-text-secondary: 110 110 115;
-    --c-text-muted: 142 142 147;
-    --c-accent: 140 110 50;
-    --c-accent-light: 170 138 72;
-    --c-accent-dark: 110 85 35;
+    --c-text-secondary: 100 100 105;
+    --c-text-muted: 134 134 139;
+    --c-accent: 130 100 42;
+    --c-accent-light: 160 128 62;
+    --c-accent-dark: 100 75 28;
 
     --bg-hex: #ffffff;
-    --accent-hex: #8c6e32;
+    --accent-hex: #82642a;
     --text-on-accent: #ffffff;
     --overlay: 0 0 0;
   }
@@ -115,6 +115,60 @@
     filter: none !important;
   }
 
+  .about-img {
+    filter: grayscale(1) saturate(0.85) contrast(1.05);
+  }
+  .about-img:hover {
+    filter: grayscale(0) saturate(0.85) contrast(1.05);
+  }
+  .light .about-img,
+  .light .about-img:hover {
+    filter: none !important;
+  }
+
+  .light .img-overlay-dark {
+    opacity: 0.25 !important;
+  }
+  .light .img-overlay-dark-strong {
+    opacity: 0.35 !important;
+  }
+  .light .img-overlay-gallery {
+    background: linear-gradient(to top, rgba(0,0,0,0.35), transparent, transparent) !important;
+  }
+  .light .img-overlay-featured-r {
+    opacity: 0.5 !important;
+  }
+  .light .img-overlay-featured-t {
+    opacity: 0.3 !important;
+  }
+  .light .cta-overlay-hover {
+    background: rgba(0,0,0,0.4) !important;
+  }
+  .light .gallery-label {
+    color: rgba(255,255,255,0.85) !important;
+  }
+  .light .gallery-number,
+  .light .project-number-badge {
+    background: rgba(0,0,0,0.5) !important;
+    color: rgba(255,255,255,0.8) !important;
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+  .light .watermark-text {
+    color: rgb(0 0 0 / 0.04) !important;
+  }
+  .light .light-card-shadow {
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.04), 0 1px 2px rgb(0 0 0 / 0.03);
+  }
+  .light .light-card-shadow:hover {
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.07), 0 1px 3px rgb(0 0 0 / 0.04);
+  }
+
+  .no-transitions *,
+  .no-transitions *::before,
+  .no-transitions *::after {
+    transition-duration: 0s !important;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -168,7 +222,7 @@
     box-shadow: 0 0 40px rgb(var(--c-accent) / 0.06), 0 0 80px rgb(var(--c-accent) / 0.02);
   }
   .light .glow-gold {
-    box-shadow: 0 2px 12px rgb(0 0 0 / 0.06), 0 1px 3px rgb(0 0 0 / 0.04);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.08), 0 1px 4px rgb(0 0 0 / 0.05);
   }
 
   .glow-gold-strong {
@@ -185,9 +239,9 @@
     border-bottom: 1px solid rgb(var(--overlay) / 0.04);
   }
   .light .glass {
-    background: rgb(255 255 255 / 0.72);
-    border-bottom: 1px solid rgb(0 0 0 / 0.06);
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.04);
+    background: rgb(255 255 255 / 0.82);
+    border-bottom: 1px solid rgb(0 0 0 / 0.08);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.04), 0 0 1px rgb(0 0 0 / 0.06);
   }
 
   .hover-line {
@@ -321,12 +375,27 @@
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-  /* Apple-style light mode sections */
+  /* Apple-style light mode */
   .light .bg-dots {
     background-color: #f5f5f7;
   }
   .light .bg-grid {
-    background-color: #ffffff;
+    background-color: #fbfbfd;
+  }
+  .light .section-gap {
+    border-bottom: 1px solid rgb(0 0 0 / 0.04);
+  }
+  .light .text-gradient-gold {
+    background: linear-gradient(135deg, rgb(var(--c-accent-dark)) 0%, rgb(var(--c-accent)) 50%, rgb(var(--c-accent-dark)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .light .border-gradient::before {
+    background: linear-gradient(135deg, rgb(0 0 0 / 0.06), transparent 50%, rgb(0 0 0 / 0.03));
+  }
+  .light .shimmer::after {
+    background: linear-gradient(90deg, transparent, rgb(0 0 0 / 0.03), transparent);
   }
 }
 

@@ -21,11 +21,17 @@ export default function Navbar() {
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark'
+    document.documentElement.classList.add('no-transitions')
     setTheme(next)
     localStorage.setItem('theme', next)
     document.documentElement.classList.toggle('light', next === 'light')
     const meta = document.getElementById('meta-theme-color') as HTMLMetaElement | null
     if (meta) meta.content = next === 'light' ? '#ffffff' : '#050505'
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.documentElement.classList.remove('no-transitions')
+      })
+    })
   }
 
   useEffect(() => {
@@ -111,7 +117,7 @@ export default function Navbar() {
             <MagneticButton strength={0.15}>
               <button
                 onClick={toggleTheme}
-                className="w-9 h-9 rounded-full border border-border hover:border-accent/30 flex items-center justify-center text-text-muted hover:text-accent transition-all duration-300"
+                className="w-10 h-10 md:w-9 md:h-9 rounded-full border border-border hover:border-accent/30 flex items-center justify-center text-text-muted hover:text-accent transition-all duration-300"
                 aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               >
                 {theme === 'dark' ? (

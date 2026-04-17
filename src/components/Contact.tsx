@@ -162,7 +162,7 @@ export default function Contact() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <div className="p-6 md:p-8 border border-border/50 bg-bg-card/30 rounded-2xl">
+            <div className="p-6 md:p-8 border border-border/50 bg-bg-card/30 rounded-2xl light-card-shadow">
               <form onSubmit={handleSubmit} className="space-y-7">
                 {[
                   { name: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },

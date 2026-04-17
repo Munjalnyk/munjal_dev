@@ -220,7 +220,7 @@ export default function Hero() {
 
             {/* Profile photo */}
             <div className="relative w-56 h-64 rounded-2xl overflow-hidden border border-border/60">
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-bg/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-bg/60 via-transparent to-transparent img-overlay-dark" />
               <img
                 src={personalInfo.heroimg}
                 alt={personalInfo.name}

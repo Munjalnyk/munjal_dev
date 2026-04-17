@@ -66,7 +66,7 @@ export default function Skills() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
               >
-                <SpotlightCard className="group relative p-7 md:p-8 border border-border bg-bg-card hover:border-accent/15 rounded-xl transition-all duration-500 overflow-hidden h-full">
+                <SpotlightCard className="group relative p-7 md:p-8 border border-border bg-bg-card hover:border-accent/15 rounded-xl transition-all duration-500 overflow-hidden h-full light-card-shadow">
                   {/* Header */}
                   <div className="relative flex items-center gap-4 mb-6">
                     <div

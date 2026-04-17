@@ -56,7 +56,7 @@ export default function Testimonials() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <div
-            className="relative p-6 md:p-10 lg:p-12 border border-border/50 bg-bg-card/30 rounded-2xl overflow-hidden"
+            className="relative p-6 md:p-10 lg:p-12 border border-border/50 bg-bg-card/30 rounded-2xl overflow-hidden light-card-shadow"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
@@ -93,7 +93,7 @@ export default function Testimonials() {
             </div>
 
             {/* Author */}
-            <div className="mt-8 flex items-center justify-between gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}

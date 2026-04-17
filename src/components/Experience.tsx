@@ -105,7 +105,7 @@ function ExperienceCard({
       </div>
 
       {/* Card */}
-      <SpotlightCard className="relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 hover:bg-bg-hover rounded-xl transition-all duration-500 group-hover:glow-gold overflow-hidden">
+      <SpotlightCard className="relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 hover:bg-bg-hover rounded-xl transition-all duration-500 group-hover:glow-gold overflow-hidden light-card-shadow">
         {/* Top gradient */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
