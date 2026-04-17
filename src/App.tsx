@@ -25,9 +25,16 @@ export default function App() {
     const timer = setTimeout(() => {
       setIsLoading(false)
       document.body.style.overflow = 'auto'
-    }, 1800)
+    }, 1500)
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    if (!isLoading && showBanner) {
+      const dismiss = setTimeout(() => setShowBanner(false), 3000)
+      return () => clearTimeout(dismiss)
+    }
+  }, [isLoading, showBanner])
 
   return (
     <>
@@ -70,7 +77,7 @@ export default function App() {
               </p>
               <button
                 onClick={() => setShowBanner(false)}
-                className="inline-flex items-center gap-2 bg-accent text-[#050505] px-6 py-2.5 font-grotesk text-sm font-semibold rounded-full hover:bg-accent-light transition-colors duration-300"
+                className="inline-flex items-center gap-2 bg-accent btn-on-accent px-6 py-2.5 font-grotesk text-sm font-semibold rounded-full hover:bg-accent-light transition-colors duration-300"
               >
                 Got it, explore anyway
               </button>

@@ -79,8 +79,8 @@ export default function CustomCursor() {
           height: isHovering ? 48 : 32,
           opacity: isVisible ? 0.5 : 0,
           borderColor: isHovering
-            ? 'rgba(200, 169, 110, 0.5)'
-            : 'rgba(200, 169, 110, 0.2)',
+            ? 'rgb(var(--c-accent) / 0.5)'
+            : 'rgb(var(--c-accent) / 0.2)',
         }}
         transition={{ duration: 0.25, ease: 'easeOut' }}
       />

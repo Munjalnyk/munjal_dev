@@ -204,7 +204,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitted}
-                  className="group w-full inline-flex items-center justify-center gap-3 bg-accent text-[#050505] px-8 py-4 font-grotesk text-sm font-semibold tracking-wide rounded-xl hover:bg-accent-light transition-all duration-300 disabled:opacity-60 hover:shadow-[0_0_40px_rgba(200,169,110,0.2)]"
+                  className="group w-full inline-flex items-center justify-center gap-3 bg-accent btn-on-accent px-8 py-4 font-grotesk text-sm font-semibold tracking-wide rounded-xl hover:bg-accent-light transition-all duration-300 disabled:opacity-60 hover:shadow-[0_0_40px_rgba(200,169,110,0.2)]"
                 >
                   {isSubmitted ? (
                     <>
@@ -273,7 +273,7 @@ export default function Contact() {
               <MagneticButton>
                 <a
                   href={`mailto:${personalInfo.email}`}
-                  className="group shrink-0 inline-flex items-center gap-3 bg-accent text-[#050505] px-7 py-3.5 font-grotesk text-sm font-semibold tracking-wide rounded-full hover:bg-accent-light transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,169,110,0.25)]"
+                  className="group shrink-0 inline-flex items-center gap-3 bg-accent btn-on-accent px-7 py-3.5 font-grotesk text-sm font-semibold tracking-wide rounded-full hover:bg-accent-light transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,169,110,0.25)]"
                 >
                   Get in Touch
                   <svg

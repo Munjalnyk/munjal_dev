@@ -80,10 +80,10 @@ export default function About() {
                   src={personalInfo.profileImg}
                   alt={personalInfo.name}
                   loading="lazy"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-700 scale-110"
+                  className="w-full h-full object-cover about-img scale-110"
                   style={{ y: imgY }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#060606] via-transparent to-transparent opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent opacity-70" />
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="absolute inset-0 border border-accent/10 rounded-2xl" />
 

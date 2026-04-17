@@ -32,7 +32,7 @@ export default function MarqueeDivider() {
       <div className="animate-marquee whitespace-nowrap flex items-center mb-4">
         {[...words, ...words, ...words].map((word, i) => (
           <span key={`a-${i}`} className="inline-flex items-center">
-            <span className="font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white/[0.08] mx-3 md:mx-6 select-none">
+            <span className="font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-overlay/[0.08] mx-3 md:mx-6 select-none">
               {word}
             </span>
             <span className="text-accent/25 text-sm md:text-lg mx-1.5 md:mx-2">&#9670;</span>

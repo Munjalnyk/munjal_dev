@@ -68,14 +68,14 @@ export default function Gallery() {
                 className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                 style={{ filter: 'saturate(0.85) contrast(1.05)' }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#060606]/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <span className="font-grotesk text-xs text-text-secondary/70">
                   {img.alt}
                 </span>
               </div>
               <div className="absolute top-3 right-3">
-                <span className="font-mono text-[9px] text-text-muted/40 bg-bg/50 backdrop-blur-sm px-2 py-0.5 rounded-md border border-white/5">
+                <span className="font-mono text-[9px] text-text-muted/40 bg-bg/50 backdrop-blur-sm px-2 py-0.5 rounded-md border border-overlay/5">
                   0{(i % galleryImages.length) + 1}
                 </span>
               </div>

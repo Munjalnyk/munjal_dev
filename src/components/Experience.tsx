@@ -107,7 +107,7 @@ function ExperienceCard({
       </div>
 
       {/* Card */}
-      <SpotlightCard className="relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 hover:bg-bg-hover rounded-xl transition-all duration-500 group-hover:glow-gold overflow-hidden">
+      <SpotlightCard className="relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 hover:bg-bg-hover rounded-xl transition-all duration-500 group-hover:glow-gold overflow-hidden light-card-shadow">
         {/* Top gradient */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -117,7 +117,7 @@ function ExperienceCard({
               className={`inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-mono tracking-[0.15em] uppercase rounded-full mb-3 ${
                 isWork
                   ? 'bg-accent/10 text-accent border border-accent/20'
-                  : 'bg-white/[0.03] text-text-secondary border border-border'
+                  : 'bg-overlay/[0.03] text-text-secondary border border-border'
               }`}
             >
               {isWork ? (
@@ -133,7 +133,7 @@ function ExperienceCard({
             <p className="mt-1 font-grotesk text-base text-accent/80">{experience.company}</p>
           </div>
           <div className="text-right shrink-0">
-            <span className="inline-block px-3 py-1 bg-white/[0.02] border border-border/50 rounded-lg font-mono text-sm text-text-muted">
+            <span className="inline-block px-3 py-1 bg-overlay/[0.02] border border-border/50 rounded-lg font-mono text-sm text-text-muted">
               {experience.duration}
             </span>
             <p className="font-grotesk text-xs text-text-muted mt-1.5 flex items-center gap-1 justify-end">
@@ -170,7 +170,7 @@ function ExperienceCard({
           {experience.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-[10px] font-mono tracking-wider text-text-muted bg-white/[0.02] border border-border hover:border-accent/20 hover:text-accent/60 rounded-full transition-all duration-300"
+              className="px-3 py-1 text-[10px] font-mono tracking-wider text-text-muted bg-overlay/[0.02] border border-border hover:border-accent/20 hover:text-accent/60 rounded-full transition-all duration-300"
             >
               {tag}
             </span>

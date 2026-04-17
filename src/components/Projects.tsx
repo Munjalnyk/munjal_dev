@@ -110,7 +110,7 @@ function FeaturedProject({ project }: { project: (typeof projects)[0] }) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8 }}
     >
-      <div className="group relative rounded-xl overflow-hidden border border-border hover:border-accent/20 transition-all duration-700 hover:glow-gold">
+      <div className="group relative rounded-xl overflow-hidden border border-border hover:border-accent/20 transition-all duration-700 hover:glow-gold light-card-shadow">
         {/* Gradient border top */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent/50 to-transparent z-10" />
 
@@ -207,7 +207,7 @@ function ProjectCard({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.12 }}
     >
-      <SpotlightCard className="group relative border border-border bg-bg-card rounded-xl overflow-hidden transition-all duration-500 hover:border-accent/20 hover:glow-gold h-full flex flex-col">
+      <SpotlightCard className="group relative border border-border bg-bg-card rounded-xl overflow-hidden transition-all duration-500 hover:border-accent/20 hover:glow-gold h-full flex flex-col light-card-shadow">
         {/* Project image */}
         <div className="relative aspect-[16/10] overflow-hidden">
           <img
@@ -224,7 +224,7 @@ function ProjectCard({
           />
           {/* Number badge */}
           <div className="absolute top-4 right-4">
-            <span className="font-mono text-xs text-text-muted/70 bg-bg/60 backdrop-blur-sm px-2 py-1 rounded-md border border-white/5">
+            <span className="font-mono text-xs text-text-muted/70 bg-bg/60 backdrop-blur-sm px-2 py-1 rounded-md border border-overlay/5">
               0{index + 2}
             </span>
           </div>
@@ -296,7 +296,7 @@ function PublicationCard({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <SpotlightCard className="group relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 rounded-xl transition-all duration-500 hover:glow-gold overflow-hidden h-full">
+      <SpotlightCard className="group relative p-6 md:p-8 border border-border bg-bg-card hover:border-accent/20 rounded-xl transition-all duration-500 hover:glow-gold overflow-hidden h-full light-card-shadow">
         {/* Year badge */}
         <div className="flex items-center gap-3 mb-4">
           <span className="inline-flex items-center px-3 py-1 bg-accent/[0.06] border border-accent/15 rounded-full font-mono text-xs text-accent">

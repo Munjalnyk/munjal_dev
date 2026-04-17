@@ -67,7 +67,7 @@ export default function ValueProp() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
             >
-              <SpotlightCard className="group h-full p-6 md:p-7 border border-border bg-bg-card hover:border-accent/20 rounded-lg transition-all duration-500 hover:glow-gold">
+              <SpotlightCard className="group h-full p-6 md:p-7 border border-border bg-bg-card hover:border-accent/20 rounded-lg transition-all duration-500 hover:glow-gold light-card-shadow">
                 <span
                   className="font-mono text-[10px] tracking-[0.2em] uppercase block mb-6"
                   style={{ color: item.accent }}

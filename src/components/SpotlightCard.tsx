@@ -39,7 +39,7 @@ export default function SpotlightCard({ children, className = '' }: SpotlightCar
         <div
           className="absolute inset-0 pointer-events-none z-10 opacity-100 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(200, 169, 110, 0.06), transparent 50%)`,
+            background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgb(var(--c-accent) / 0.06), transparent 50%)`,
           }}
         />
       )}
