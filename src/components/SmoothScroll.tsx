@@ -3,6 +3,9 @@ import Lenis from 'lenis'
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    if (isTouchDevice) return
+
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReduced) return
 

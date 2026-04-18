@@ -44,6 +44,12 @@ export default function App() {
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    if (!showBanner) return
+    const t = setTimeout(() => setShowBanner(false), 3000)
+    return () => clearTimeout(t)
+  }, [showBanner])
+
   if (!isReady) return null
 
   return (
