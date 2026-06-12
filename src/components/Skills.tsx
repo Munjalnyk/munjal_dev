@@ -1,9 +1,7 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
 import { skillCategories } from '@/data'
 import { Cpu, Code2, Server, Shield } from 'lucide-react'
-import TextReveal from './TextReveal'
-import SpotlightCard from './SpotlightCard'
+import Reveal from './Reveal'
+import SectionHeading from './SectionHeading'
 
 const iconMap: Record<string, React.ElementType> = {
   Cpu,
@@ -13,124 +11,85 @@ const iconMap: Record<string, React.ElementType> = {
 }
 
 export default function Skills() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-40px' })
   const allSkills = skillCategories.flatMap((cat) => cat.skills)
 
   return (
-    <section id="skills" className="section-gap relative" ref={ref}>
-      <div className="section-padding">
-        {/* Section label */}
-        <motion.div
-          className="mb-8 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="font-mono text-xs tracking-[0.3em] uppercase text-accent">
-            03 / Skills
-          </span>
-          <motion.div
-            className="mt-3 h-[1px] bg-accent/30 origin-left"
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ maxWidth: '80px' }}
-          />
-        </motion.div>
+    <section id="skills" className="py-section relative">
+      <div className="px-page">
+        <SectionHeading index="03" title="Skills" refCode="MN-S-03" />
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-8 md:mb-16">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
-            <TextReveal text="Technical" delay={0.1} inView={isInView} />
-            <br />
-            <TextReveal text="Arsenal" delay={0.3} inView={isInView} gold />
-          </h2>
-          <motion.p
-            className="max-w-xs font-sans text-sm text-text-muted leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.5 }}
-          >
-            {allSkills.length} skills across {skillCategories.length} core domains — from bare-metal firmware to safety-critical infrastructure.
-          </motion.p>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-10 md:mb-14">
+          <Reveal>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold text-ink leading-[1.05] tracking-tight">
+              Technical
+              <br />
+              <span className="text-accent">arsenal.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="max-w-xs font-mono text-[11px] uppercase tracking-[0.15em] text-ink-faint leading-relaxed">
+              {allSkills.length} skills / {skillCategories.length} domains — bare-metal firmware to
+              safety-critical infrastructure
+            </p>
+          </Reveal>
         </div>
 
-        {/* Skill categories grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-20">
-          {skillCategories.map((cat, i) => {
-            const Icon = iconMap[cat.icon]
-            return (
-              <motion.div
-                key={cat.category}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              >
-                <SpotlightCard className="group relative p-7 md:p-8 border border-border bg-bg-card hover:border-accent/15 rounded-xl transition-all duration-500 overflow-hidden h-full light-card-shadow">
-                  {/* Header */}
-                  <div className="relative flex items-center gap-4 mb-6">
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center"
-                      style={{
-                        backgroundColor: `${cat.color}0a`,
-                        border: `1px solid ${cat.color}18`,
-                      }}
-                    >
-                      {Icon && <Icon size={18} style={{ color: cat.color }} />}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-grotesk text-base font-semibold text-text-primary">
-                        {cat.category}
-                      </h3>
-                    </div>
-                    <span className="font-mono text-[10px] text-text-muted/40">
-                      0{i + 1}
-                    </span>
+        <Reveal delay={0.1}>
+          <div className="cell-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-14 md:mb-20">
+            {skillCategories.map((cat, i) => {
+              const Icon = iconMap[cat.icon]
+              return (
+                <div key={cat.category} className="p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-accent">{Icon && <Icon size={18} strokeWidth={1.5} />}</span>
+                    <span className="font-mono text-[10px] text-ink-faint">0{i + 1}</span>
                   </div>
 
-                  {/* Skills as pills */}
-                  <div className="flex flex-wrap gap-2">
+                  <h3 className="font-display text-base font-bold uppercase tracking-wide text-ink mb-5">
+                    {cat.category}
+                  </h3>
+
+                  <ul>
                     {cat.skills.map((skill, j) => (
-                      <motion.span
+                      <li
                         key={skill}
-                        className="px-3 py-1.5 font-grotesk text-[13px] text-text-secondary border border-border rounded-lg hover:text-text-primary hover:border-accent/20 transition-colors duration-200"
-                        style={{ backgroundColor: `${cat.color}04` }}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ duration: 0.3, delay: 0.3 + i * 0.08 + j * 0.03 }}
+                        className="flex items-baseline gap-3 border-b border-line py-2 last:border-0"
                       >
-                        {skill}
-                      </motion.span>
+                        <span className="font-mono text-[9px] text-ink-faint shrink-0">
+                          {String(j + 1).padStart(2, '0')}
+                        </span>
+                        <span className="font-sans text-[13px] text-ink-soft leading-snug">
+                          {skill}
+                        </span>
+                      </li>
                     ))}
-                  </div>
-
-                  {/* Bottom accent */}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-[1px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
-                    style={{ backgroundColor: cat.color }}
-                  />
-                </SpotlightCard>
-              </motion.div>
-            )
-          })}
-        </div>
-
-        {/* Bottom marquee */}
-        <div className="relative overflow-hidden py-6 border-y border-border/40">
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-bg to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-bg to-transparent z-10" />
-          <div className="animate-marquee whitespace-nowrap flex items-center">
-            {[...allSkills, ...allSkills].map((skill, i) => (
-              <span key={i} className="inline-flex items-center mx-3 md:mx-5">
-                <span className="font-grotesk text-xs md:text-sm text-text-secondary/50">{skill}</span>
-                <span className="mx-3 md:mx-5 text-accent/30 text-xs">&#9670;</span>
-              </span>
-            ))}
+                  </ul>
+                </div>
+              )
+            })}
           </div>
-        </div>
-      </div>
+        </Reveal>
 
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
+        {/* Skills ticker */}
+        <Reveal delay={0.1}>
+          <div className="relative overflow-hidden border-y border-line py-3">
+            <div className="animate-ticker flex w-max items-center whitespace-nowrap">
+              {[0, 1].map((dup) => (
+                <div key={dup} className="flex items-center" aria-hidden={dup === 1}>
+                  {allSkills.map((skill, i) => (
+                    <span key={`${dup}-${i}`} className="inline-flex items-center">
+                      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-faint mx-4 select-none">
+                        {skill}
+                      </span>
+                      <span className="text-accent/60 text-[10px] select-none">/</span>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </div>
     </section>
   )
 }

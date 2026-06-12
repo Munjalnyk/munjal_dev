@@ -1,15 +1,37 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { personalInfo } from '@/data'
-import MagneticButton from './MagneticButton'
 
 const navLinks = [
-  { name: 'About', href: '#about' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
+  { index: '01', name: 'About', href: '#about' },
+  { index: '02', name: 'Experience', href: '#experience' },
+  { index: '03', name: 'Skills', href: '#skills' },
+  { index: '04', name: 'Work', href: '#projects' },
+  { index: '06', name: 'Contact', href: '#contact' },
 ]
+
+function ThemeIcon({ theme }: { theme: 'light' | 'dark' }) {
+  return theme === 'dark' ? (
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+      <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2" />
+      <path
+        d="M8 2V3.5M8 12.5V14M2 8H3.5M12.5 8H14M3.76 3.76L4.82 4.82M11.18 11.18L12.24 12.24M12.24 3.76L11.18 4.82M4.82 11.18L3.76 12.24"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+    </svg>
+  ) : (
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+      <path
+        d="M13 9.5A5.5 5.5 0 116.5 3 4 4 0 0013 9.5z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -26,7 +48,7 @@ export default function Navbar() {
     localStorage.setItem('theme', next)
     document.documentElement.classList.toggle('light', next === 'light')
     const meta = document.getElementById('meta-theme-color') as HTMLMetaElement | null
-    if (meta) meta.content = next === 'light' ? '#ffffff' : '#050505'
+    if (meta) meta.content = next === 'light' ? '#f6f5f0' : '#111110'
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         document.documentElement.classList.remove('no-transitions')
@@ -35,7 +57,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50)
+    const handleScroll = () => setIsScrolled(window.scrollY > 40)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -47,7 +69,7 @@ export default function Navbar() {
           if (entry.isIntersecting) setActiveSection(entry.target.id)
         })
       },
-      { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' }
+      { threshold: 0.2, rootMargin: '-72px 0px -40% 0px' }
     )
     const sections = document.querySelectorAll('section[id]')
     sections.forEach((s) => observer.observe(s))
@@ -61,163 +83,137 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'glass py-3' : 'py-5 bg-transparent'
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 border-b border-line bg-bg/95 backdrop-blur-sm transition-all duration-300 ${
+          isScrolled ? 'py-0' : 'py-1'
         }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.215, 0.61, 0.355, 1] }}
       >
-        <nav className="section-padding flex items-center justify-between">
-          {/* Logo */}
-          <MagneticButton>
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="font-display text-xl font-bold tracking-wider text-text-primary hover:text-accent transition-colors duration-300"
-            >
-              MN<span className="text-accent">.</span>
-            </button>
-          </MagneticButton>
+        <nav className="px-page flex items-stretch justify-between">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="py-4 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-ink hover:text-accent transition-colors duration-200"
+            aria-label="Back to top"
+          >
+            Munjal Nayak<span className="text-accent">.</span>
+          </button>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-stretch">
             {navLinks.map((link) => (
-              <MagneticButton key={link.name} strength={0.15}>
-                <button
-                  onClick={() => handleNavClick(link.href)}
-                  className={`hover-line font-grotesk text-sm tracking-wide transition-colors duration-300 ${
-                    activeSection === link.href.slice(1)
-                      ? 'text-accent'
-                      : 'text-text-secondary hover:text-text-primary'
-                  }`}
-                >
-                  {link.name}
-                </button>
-              </MagneticButton>
+              <button
+                key={link.name}
+                onClick={() => handleNavClick(link.href)}
+                className={`relative px-4 lg:px-5 font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-200 ${
+                  activeSection === link.href.slice(1)
+                    ? 'text-accent'
+                    : 'text-ink-soft hover:text-ink'
+                }`}
+              >
+                <span className="text-ink-faint mr-1.5">{link.index}</span>
+                {link.name}
+                {activeSection === link.href.slice(1) && (
+                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-accent" />
+                )}
+              </button>
             ))}
           </div>
 
-          {/* Resume + Theme Toggle + Mobile Toggle */}
-          <div className="flex items-center gap-3">
-            <MagneticButton>
-              <a
-                href={personalInfo.cvUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden md:inline-flex items-center gap-2 border border-accent/30 px-5 py-2 font-grotesk text-sm text-accent hover:bg-accent/10 transition-all duration-300 rounded-full"
-              >
-                Resume
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-60">
-                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.2" />
-                </svg>
-              </a>
-            </MagneticButton>
+          <div className="flex items-center gap-2.5 py-2.5">
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 border border-line flex items-center justify-center text-ink-soft hover:text-accent hover:border-accent transition-colors duration-200"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              <ThemeIcon theme={theme} />
+            </button>
 
-            <MagneticButton strength={0.15}>
-              <button
-                onClick={toggleTheme}
-                className="w-10 h-10 md:w-9 md:h-9 rounded-full border border-border hover:border-accent/30 flex items-center justify-center text-text-muted hover:text-accent transition-all duration-300"
-                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              >
-                {theme === 'dark' ? (
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2" />
-                    <path d="M8 2V3.5M8 12.5V14M2 8H3.5M12.5 8H14M3.76 3.76L4.82 4.82M11.18 11.18L12.24 12.24M12.24 3.76L11.18 4.82M4.82 11.18L3.76 12.24" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                  </svg>
-                ) : (
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M13 9.5A5.5 5.5 0 116.5 3 4 4 0 0013 9.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
-                  </svg>
-                )}
-              </button>
-            </MagneticButton>
+            <a
+              href={personalInfo.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-2 bg-accent px-4 py-2.5 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--text-on-accent)] hover:bg-accent-alt transition-colors duration-200"
+            >
+              Resume
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </a>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+              className="md:hidden w-9 h-9 border border-line flex flex-col items-center justify-center gap-[5px]"
               aria-label="Toggle menu"
             >
               <motion.span
-                className="block w-6 h-[1.5px] bg-text-primary origin-center"
-                animate={isMobileMenuOpen ? { rotate: 45, y: 4.5 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.3 }}
+                className="block w-4 h-[1.5px] bg-ink origin-center"
+                animate={isMobileMenuOpen ? { rotate: 45, y: 3.25 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
               />
               <motion.span
-                className="block w-4 h-[1.5px] bg-text-primary"
-                animate={isMobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-                transition={{ duration: 0.2 }}
-              />
-              <motion.span
-                className="block w-6 h-[1.5px] bg-text-primary origin-center"
-                animate={isMobileMenuOpen ? { rotate: -45, y: -4.5 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.3 }}
+                className="block w-4 h-[1.5px] bg-ink origin-center"
+                animate={isMobileMenuOpen ? { rotate: -45, y: -3.25 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25 }}
               />
             </button>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-40 bg-bg pt-20 px-page md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.25 }}
           >
-            <nav className="flex flex-col items-center gap-8">
+            <div className="mono-label py-3 border-b border-line">Index</div>
+            <nav className="flex flex-col">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.name}
                   onClick={() => handleNavClick(link.href)}
-                  className="font-display text-3xl font-semibold text-text-primary hover:text-accent transition-colors"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="group flex items-baseline justify-between border-b border-line py-5 text-left"
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
                 >
-                  {link.name}
+                  <span className="font-display text-2xl font-bold uppercase tracking-wide text-ink group-hover:text-accent transition-colors">
+                    {link.name}
+                  </span>
+                  <span className="font-mono text-xs text-ink-faint">{link.index}</span>
                 </motion.button>
               ))}
               <motion.a
                 href={personalInfo.cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 border border-accent/30 px-8 py-3 font-grotesk text-accent hover:bg-accent/10 transition-all rounded-full"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, delay: navLinks.length * 0.08 }}
+                className="flex items-baseline justify-between border-b border-line py-5"
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, delay: navLinks.length * 0.05 }}
               >
-                Resume
+                <span className="font-display text-2xl font-bold uppercase tracking-wide text-accent">
+                  Resume ↗
+                </span>
+                <span className="font-mono text-xs text-ink-faint">PDF</span>
               </motion.a>
               <motion.button
                 onClick={toggleTheme}
-                className="mt-3 flex items-center gap-2.5 font-grotesk text-sm text-text-secondary hover:text-accent transition-colors"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, delay: (navLinks.length + 1) * 0.08 }}
+                className="flex items-center justify-between border-b border-line py-5"
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, delay: (navLinks.length + 1) * 0.05 }}
               >
-                {theme === 'dark' ? (
-                  <>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2" />
-                      <path d="M8 2V3.5M8 12.5V14M2 8H3.5M12.5 8H14M3.76 3.76L4.82 4.82M11.18 11.18L12.24 12.24M12.24 3.76L11.18 4.82M4.82 11.18L3.76 12.24" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                    </svg>
-                    Light Mode
-                  </>
-                ) : (
-                  <>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M13 9.5A5.5 5.5 0 116.5 3 4 4 0 0013 9.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
-                    </svg>
-                    Dark Mode
-                  </>
-                )}
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-ink-soft">
+                  {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                </span>
+                <span className="text-ink-soft">
+                  <ThemeIcon theme={theme} />
+                </span>
               </motion.button>
             </nav>
           </motion.div>

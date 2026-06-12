@@ -2,22 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111110" id="meta-theme-color" />
     <script>
       (function() {
         var saved = localStorage.getItem('theme');
+        var light;
         if (saved) {
-          if (saved === 'light') document.documentElement.classList.add('light');
+          light = saved === 'light';
         } else {
           var h = new Date().getHours();
-          if (h >= 7 && h < 19) document.documentElement.classList.add('light');
+          light = h >= 7 && h < 19;
+        }
+        if (light) {
+          document.documentElement.classList.add('light');
+          var meta = document.getElementById('meta-theme-color');
+          if (meta) meta.setAttribute('content', '#f6f5f0');
         }
       })();
     </script>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050505" id="meta-theme-color" />
     <meta name="description" content="Munjal Nayak — Hardware & Embedded Systems Engineer. Crafting reliable, precise electronic systems." />
     <meta property="og:title" content="Munjal Nayak — Hardware & Embedded Systems Engineer" />
     <meta property="og:description" content="3+ years crafting safety-critical railway signalling, embedded firmware, and IoT systems. Currently pursuing Master's at UNSW Sydney." />
@@ -33,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <title>Munjal Nayak — Hardware & Embedded Systems Engineer</title>
@@ -75,108 +81,107 @@
     }
     </script>
     <style>
-      body { margin: 0; background: var(--bg-hex, #050505); overflow: hidden; }
+      :root {
+        --pl-bg: #111110;
+        --pl-ink: #eceae3;
+        --pl-soft: #717068;
+        --pl-line: #2c2c29;
+        --pl-accent: #ff5722;
+      }
+      .light {
+        --pl-bg: #f6f5f0;
+        --pl-ink: #1c1c1a;
+        --pl-soft: #8e8c83;
+        --pl-line: #d5d2c8;
+        --pl-accent: #d13c0a;
+      }
+      body { margin: 0; background: var(--pl-bg); overflow: hidden; }
       #html-preloader {
         position: fixed; inset: 0; z-index: 10000;
         display: flex; align-items: center; justify-content: center;
-        background: var(--bg-hex, #050505);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+        background: var(--pl-bg);
+        color: var(--pl-ink);
+        font-family: 'IBM Plex Mono', ui-monospace, monospace;
+        transition: opacity 0.5s ease;
       }
-      #html-preloader.fade-out {
+      #html-preloader.fade-out { opacity: 0; }
+      .pl-corner {
+        position: absolute;
+        font-size: 14px;
+        color: var(--pl-soft);
         opacity: 0;
-        transform: translateY(-100%);
+        animation: pl-fadein 0.4s 0.2s forwards;
       }
+      .pl-tl { top: 1.25rem; left: 1.5rem; }
+      .pl-tr { top: 1.25rem; right: 1.5rem; }
+      .pl-bl { bottom: 1.25rem; left: 1.5rem; }
+      .pl-br { bottom: 1.25rem; right: 1.5rem; }
+      .pl-meta {
+        position: absolute;
+        font-size: 9px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--pl-soft);
+        opacity: 0;
+        animation: pl-fadein 0.5s 0.3s forwards;
+      }
+      .pl-meta-top { top: 1.4rem; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+      .pl-meta-bottom { bottom: 1.4rem; left: 50%; transform: translateX(-50%); white-space: nowrap; }
       .pl-wrap { display: flex; flex-direction: column; align-items: center; }
-      .pl-logo {
-        font-family: 'Syne', sans-serif;
-        font-size: clamp(3rem, 8vw, 5rem);
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        color: rgb(var(--c-text-primary, 240 240 240));
-        margin-bottom: 2rem;
-        opacity: 0;
-        animation: pl-fadein 0.5s 0.1s forwards;
-      }
-      .pl-logo span {
-        background: linear-gradient(135deg, var(--accent-hex, #c8a96e) 0%, rgb(var(--c-accent-light, 223 196 155)) 50%, var(--accent-hex, #c8a96e) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      .pl-line {
-        width: 0; height: 1px;
-        background: linear-gradient(90deg, transparent, var(--accent-hex, #c8a96e), transparent);
-        animation: pl-expand 0.6s 0.3s forwards;
-      }
       .pl-counter {
-        margin-top: 2rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: clamp(2rem, 5vw, 3rem);
-        font-weight: 300;
-        color: var(--accent-hex, #c8a96e);
+        font-size: clamp(3rem, 9vw, 5.5rem);
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
         opacity: 0;
-        animation: pl-fadein 0.4s 0.4s forwards;
+        animation: pl-fadein 0.4s 0.1s forwards;
       }
-      .pl-counter small { font-size: 0.5em; color: rgb(var(--c-accent, 200 169 110) / 0.4); }
+      .pl-counter small { font-size: 0.35em; color: var(--pl-accent); margin-left: 0.15em; }
       .pl-bar-wrap {
-        margin-top: 1.5rem; width: 12rem; height: 1px;
-        background: rgb(var(--overlay, 255 255 255) / 0.05);
-        border-radius: 4px; overflow: hidden;
+        margin-top: 2rem; width: 14rem; height: 2px;
+        background: var(--pl-line);
+        overflow: hidden;
         opacity: 0;
-        animation: pl-fadein 0.4s 0.4s forwards;
+        animation: pl-fadein 0.4s 0.3s forwards;
       }
       .pl-bar {
         height: 100%; width: 0%;
-        background: linear-gradient(90deg, rgb(var(--c-accent, 200 169 110) / 0.6), var(--accent-hex, #c8a96e));
-        border-radius: 4px;
+        background: var(--pl-accent);
         transition: width 0.15s ease-out;
       }
       .pl-text {
         margin-top: 1.25rem;
-        font-family: 'JetBrains Mono', monospace;
         font-size: 9px;
         letter-spacing: 0.4em;
         text-transform: uppercase;
-        color: rgb(var(--c-text-muted, 106 106 106) / 0.6);
+        color: var(--pl-soft);
         opacity: 0;
-        animation: pl-fadein 0.4s 0.5s forwards;
+        animation: pl-fadein 0.4s 0.4s forwards;
       }
-      .pl-corner {
-        position: absolute; width: 2rem; height: 2rem;
-        opacity: 0;
-        animation: pl-fadein 0.3s 0.3s forwards;
-      }
-      .pl-tl { top: 1.5rem; left: 1.5rem; border-top: 1px solid rgb(var(--c-accent, 200 169 110) / 0.2); border-left: 1px solid rgb(var(--c-accent, 200 169 110) / 0.2); }
-      .pl-tr { top: 1.5rem; right: 1.5rem; border-top: 1px solid rgb(var(--c-accent, 200 169 110) / 0.2); border-right: 1px solid rgb(var(--c-accent, 200 169 110) / 0.2); }
-      .pl-bl { bottom: 1.5rem; left: 1.5rem; border-bottom: 1px solid rgb(var(--c-accent, 200 169 110) / 0.2); border-left: 1px solid rgb(var(--c-accent, 200 169 110) / 0.2); }
-      .pl-br { bottom: 1.5rem; right: 1.5rem; border-bottom: 1px solid rgb(var(--c-accent, 200 169 110) / 0.2); border-right: 1px solid rgb(var(--c-accent, 200 169 110) / 0.2); }
       @keyframes pl-fadein { to { opacity: 1; } }
-      @keyframes pl-expand { to { width: 120px; } }
     </style>
   </head>
   <body>
-    <!-- Instant preloader - renders before ANY JavaScript loads -->
     <div id="html-preloader">
-      <div class="pl-corner pl-tl"></div>
-      <div class="pl-corner pl-tr"></div>
-      <div class="pl-corner pl-bl"></div>
-      <div class="pl-corner pl-br"></div>
+      <span class="pl-corner pl-tl">+</span>
+      <span class="pl-corner pl-tr">+</span>
+      <span class="pl-corner pl-bl">+</span>
+      <span class="pl-corner pl-br">+</span>
+      <div class="pl-meta pl-meta-top">MN — Technical file</div>
       <div class="pl-wrap">
-        <div class="pl-logo">M<span>N</span></div>
-        <div class="pl-line"></div>
         <div class="pl-counter"><span id="pl-num">000</span><small>%</small></div>
         <div class="pl-bar-wrap"><div class="pl-bar" id="pl-bar"></div></div>
         <div class="pl-text">Loading assets</div>
       </div>
+      <div class="pl-meta pl-meta-bottom">Sydney, AU — 33.87°S / 151.21°E</div>
     </div>
 
     <div id="root"></div>
 
     <script>
-      // Track real loading progress before React even loads
       (function() {
         var images = ['/img/perfil.png', '/img/hero.jpg', '/img/MRTS.jpeg'];
-        var total = images.length + 1; // +1 for the main JS bundle
+        var total = images.length + 1;
         var loaded = 0;
         var numEl = document.getElementById('pl-num');
         var barEl = document.getElementById('pl-bar');
@@ -195,7 +200,6 @@
           img.src = src;
         });
 
-        // Mark JS loaded when this script module executes
         window.__onAppReady = function() {
           update();
         };
