@@ -7,6 +7,7 @@ const contactLinks = [
   { label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
   { label: 'Phone', value: personalInfo.phone, href: `tel:${personalInfo.phone}` },
   { label: 'LinkedIn', value: 'linkedin.com/in/munjalnyk', href: personalInfo.linkedin },
+  { label: 'Website', value: 'munjal.dev', href: 'https://www.munjal.dev' },
   { label: 'GitHub', value: 'github.com/yorocoboy1', href: personalInfo.github },
 ]
 

@@ -43,7 +43,7 @@ export default function ValueProp() {
             {values.map((item) => (
               <div
                 key={item.number}
-                className="group relative p-6 md:p-7 transition-colors duration-300 hover:!bg-bg-card"
+                className="group relative p-6 md:p-7 cell-glow transition-colors duration-300 hover:!bg-bg-card"
               >
                 <div className="flex items-baseline justify-between mb-8">
                   <span className="font-mono text-xs text-accent">{item.number}</span>

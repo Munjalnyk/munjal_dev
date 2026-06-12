@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { motion, useMotionValue, useMotionTemplate } from 'framer-motion'
+import { useState, useEffect, useCallback } from 'react'
 import { personalInfo } from '@/data'
+import Tilt3D from './Tilt3D'
 
 function Typewriter({ words, interval = 3000 }: { words: string[]; interval?: number }) {
   const [index, setIndex] = useState(0)
@@ -44,12 +45,40 @@ const fadeUp = (delay: number) => ({
 })
 
 export default function Hero() {
+  const mouseX = useMotionValue(-1000)
+  const mouseY = useMotionValue(-1000)
+
+  const spotlight = useMotionTemplate`radial-gradient(650px circle at ${mouseX}px ${mouseY}px, rgb(var(--c-accent) / 0.07), transparent 80%)`
+
+  const onPointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (e.pointerType === 'touch') return
+      const rect = e.currentTarget.getBoundingClientRect()
+      mouseX.set(e.clientX - rect.left)
+      mouseY.set(e.clientY - rect.top)
+    },
+    [mouseX, mouseY]
+  )
+
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-end pt-24 md:pt-28">
+    <section
+      id="hero"
+      className="relative min-h-screen flex flex-col justify-end pt-24 md:pt-28"
+      onPointerMove={onPointerMove}
+    >
       <div className="absolute inset-0 blueprint-grid pointer-events-none" />
 
-      <div className="relative px-page flex-1 flex flex-col justify-center py-10">
-        {/* Data line */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-[1]"
+        style={{ background: spotlight }}
+      />
+
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[30%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-accent/[0.03] blur-[120px] animate-float-slow" />
+        <div className="absolute bottom-[10%] -left-[15%] w-[35vw] h-[35vw] rounded-full bg-accent/[0.04] blur-[100px] animate-float-reverse" />
+      </div>
+
+      <div className="relative px-page flex-1 flex flex-col justify-center py-10 z-[2]">
         <motion.div
           {...fadeUp(0.1)}
           className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-line pb-4 mb-8 md:mb-12"
@@ -68,7 +97,6 @@ export default function Hero() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 lg:gap-16 items-end">
           <div>
-            {/* Name */}
             <div className="mb-8 md:mb-10">
               <div className="overflow-hidden">
                 <motion.h1
@@ -92,7 +120,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Role */}
             <motion.div {...fadeUp(0.45)} className="max-w-xl mb-8 md:mb-10">
               <p className="font-sans text-lg md:text-xl text-ink-soft leading-relaxed">
                 {personalInfo.title}
@@ -108,7 +135,6 @@ export default function Hero() {
               </p>
             </motion.div>
 
-            {/* CTAs */}
             <motion.div {...fadeUp(0.6)} className="flex flex-wrap items-center gap-3">
               <a
                 href="#projects"
@@ -133,37 +159,39 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Portrait figure (desktop) */}
-          <motion.figure
-            className="relative hidden lg:block"
+          <motion.div
+            className="hidden lg:block"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <span className="absolute -top-3 -left-2.5 font-mono text-sm text-ink-faint select-none">+</span>
-            <span className="absolute -top-3 -right-2.5 font-mono text-sm text-ink-faint select-none">+</span>
-            <span className="absolute -bottom-3 -left-2.5 font-mono text-sm text-ink-faint select-none">+</span>
-            <span className="absolute -bottom-3 -right-2.5 font-mono text-sm text-ink-faint select-none">+</span>
-            <div className="border border-line-strong bg-bg-card">
-              <div className="aspect-[4/5] overflow-hidden">
-                <img
-                  src={personalInfo.heroimg}
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <figcaption className="fig-caption">
-                <span>Fig. 0.1 — M. Nayak</span>
-                <span>Sydney, AU</span>
-              </figcaption>
-            </div>
-          </motion.figure>
+            <Tilt3D intensity={10} scale={1.03}>
+              <figure className="relative">
+                <span className="absolute -top-3 -left-2.5 font-mono text-sm text-ink-faint select-none">+</span>
+                <span className="absolute -top-3 -right-2.5 font-mono text-sm text-ink-faint select-none">+</span>
+                <span className="absolute -bottom-3 -left-2.5 font-mono text-sm text-ink-faint select-none">+</span>
+                <span className="absolute -bottom-3 -right-2.5 font-mono text-sm text-ink-faint select-none">+</span>
+                <div className="border border-line-strong bg-bg-card">
+                  <div className="aspect-[4/5] overflow-hidden">
+                    <img
+                      src={personalInfo.heroimg}
+                      alt={personalInfo.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <figcaption className="fig-caption">
+                    <span>Fig. 0.1 — M. Nayak</span>
+                    <span>Sydney, AU</span>
+                  </figcaption>
+                </div>
+              </figure>
+            </Tilt3D>
+          </motion.div>
         </div>
       </div>
 
-      {/* Stats strip */}
       <motion.div
-        className="relative border-t border-line"
+        className="relative border-t border-line z-[2]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.75 }}

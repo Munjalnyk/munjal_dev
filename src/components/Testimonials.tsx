@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from 'react'
 import { testimonials } from '@/data'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
+import Tilt3D from './Tilt3D'
 
 export default function Testimonials() {
   const ref = useRef(null)
@@ -37,8 +38,9 @@ export default function Testimonials() {
         </Reveal>
 
         <Reveal delay={0.1}>
+          <Tilt3D className="max-w-4xl" intensity={4} scale={1.01}>
           <div
-            className="relative max-w-4xl border border-line-strong bg-bg-card"
+            className="relative border border-line-strong bg-bg-card"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
@@ -141,6 +143,7 @@ export default function Testimonials() {
               />
             </div>
           </div>
+          </Tilt3D>
         </Reveal>
       </div>
     </section>

@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react'
 import { personalInfo } from '@/data'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
+import Tilt3D from './Tilt3D'
 
 function AnimatedCounter({ value, inView }: { value: string; inView: boolean }) {
   const numMatch = value.match(/(\d+)/)
@@ -48,26 +49,28 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           {/* Portrait figure */}
           <Reveal className="lg:col-span-5" delay={0.1}>
-            <figure className="relative max-w-md mx-auto lg:mx-0">
-              <span className="absolute -top-3 -left-2.5 font-mono text-sm text-ink-faint select-none">+</span>
-              <span className="absolute -top-3 -right-2.5 font-mono text-sm text-ink-faint select-none">+</span>
-              <span className="absolute -bottom-3 -left-2.5 font-mono text-sm text-ink-faint select-none">+</span>
-              <span className="absolute -bottom-3 -right-2.5 font-mono text-sm text-ink-faint select-none">+</span>
-              <div className="border border-line-strong bg-bg-card">
-                <div className="aspect-[3/4] overflow-hidden">
-                  <img
-                    src={personalInfo.profileImg}
-                    alt={personalInfo.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
+            <Tilt3D intensity={6} scale={1.02}>
+              <figure className="relative max-w-md mx-auto lg:mx-0">
+                <span className="absolute -top-3 -left-2.5 font-mono text-sm text-ink-faint select-none">+</span>
+                <span className="absolute -top-3 -right-2.5 font-mono text-sm text-ink-faint select-none">+</span>
+                <span className="absolute -bottom-3 -left-2.5 font-mono text-sm text-ink-faint select-none">+</span>
+                <span className="absolute -bottom-3 -right-2.5 font-mono text-sm text-ink-faint select-none">+</span>
+                <div className="border border-line-strong bg-bg-card">
+                  <div className="aspect-[3/4] overflow-hidden">
+                    <img
+                      src={personalInfo.profileImg}
+                      alt={personalInfo.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <figcaption className="fig-caption">
+                    <span>Fig. 1.0 — Portrait</span>
+                    <span>{personalInfo.name}</span>
+                  </figcaption>
                 </div>
-                <figcaption className="fig-caption">
-                  <span>Fig. 1.0 — Portrait</span>
-                  <span>{personalInfo.name}</span>
-                </figcaption>
-              </div>
-            </figure>
+              </figure>
+            </Tilt3D>
           </Reveal>
 
           {/* Text */}

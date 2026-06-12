@@ -1,72 +1,73 @@
 import { projects, publications } from '@/data'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
+import Tilt3D from './Tilt3D'
 
 function FeaturedProject({ project, total }: { project: (typeof projects)[0]; total: number }) {
   return (
     <Reveal>
-      <div className="group relative border border-line-strong bg-bg-card mb-10 md:mb-14">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          {/* Image */}
-          <figure className="relative border-b lg:border-b-0 lg:border-r border-line">
-            <div className="aspect-[16/10] lg:aspect-auto lg:h-full overflow-hidden bg-bg-subtle">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-            </div>
-            <span className="absolute top-4 left-4 bg-accent px-2.5 py-1 font-mono text-[9px] font-medium uppercase tracking-[0.25em] text-[var(--text-on-accent)]">
-              Featured
-            </span>
-            <figcaption className="fig-caption absolute bottom-0 left-0 right-0">
-              <span>Fig. 4.1 — {project.category}</span>
-              <span>01 / {String(total).padStart(2, '0')}</span>
-            </figcaption>
-          </figure>
+      <Tilt3D intensity={5} scale={1.01}>
+        <div className="group relative border border-line-strong bg-bg-card card-glow mb-10 md:mb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <figure className="relative border-b lg:border-b-0 lg:border-r border-line">
+              <div className="aspect-[16/10] lg:aspect-auto lg:h-full overflow-hidden bg-bg-subtle">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+              </div>
+              <span className="absolute top-4 left-4 bg-accent px-2.5 py-1 font-mono text-[9px] font-medium uppercase tracking-[0.25em] text-[var(--text-on-accent)]">
+                Featured
+              </span>
+              <figcaption className="fig-caption absolute bottom-0 left-0 right-0">
+                <span>Fig. 4.1 — {project.category}</span>
+                <span>01 / {String(total).padStart(2, '0')}</span>
+              </figcaption>
+            </figure>
 
-          {/* Content */}
-          <div className="p-6 md:p-10 lg:p-12 flex flex-col justify-center">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-4">
-              {project.category}
-            </span>
+            <div className="p-6 md:p-10 lg:p-12 flex flex-col justify-center">
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-4">
+                {project.category}
+              </span>
 
-            <h3 className="font-display text-2xl md:text-3xl font-extrabold text-ink leading-tight tracking-tight mb-5">
-              {project.title}
-            </h3>
+              <h3 className="font-display text-2xl md:text-3xl font-extrabold text-ink leading-tight tracking-tight mb-5">
+                {project.title}
+              </h3>
 
-            <p className="font-sans text-sm md:text-base text-ink-soft leading-relaxed mb-7 max-w-lg">
-              {project.description}
-            </p>
+              <p className="font-sans text-sm md:text-base text-ink-soft leading-relaxed mb-7 max-w-lg">
+                {project.description}
+              </p>
 
-            <div className="flex flex-wrap gap-x-4 gap-y-1.5 mb-8">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-faint"
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5 mb-8">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-faint"
+                  >
+                    [{tag}]
+                  </span>
+                ))}
+              </div>
+
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline self-start group/cta"
                 >
-                  [{tag}]
-                </span>
-              ))}
+                  Open Project
+                  <span className="transition-transform duration-200 group-hover/cta:translate-x-1 group-hover/cta:-translate-y-0.5">
+                    ↗
+                  </span>
+                </a>
+              )}
             </div>
-
-            {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline self-start group/cta"
-              >
-                Open Project
-                <span className="transition-transform duration-200 group-hover/cta:translate-x-1 group-hover/cta:-translate-y-0.5">
-                  ↗
-                </span>
-              </a>
-            )}
           </div>
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-      </div>
+      </Tilt3D>
     </Reveal>
   )
 }
@@ -82,65 +83,67 @@ function ProjectCard({
 }) {
   return (
     <Reveal delay={Math.min(index * 0.08, 0.24)} className="h-full">
-      <div className="group relative h-full flex flex-col">
-        <figure className="relative">
-          <div className="aspect-[16/10] overflow-hidden bg-bg-subtle">
-            <img
-              src={project.image}
-              alt={project.title}
-              loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-              onError={(e) => {
-                ;(e.target as HTMLImageElement).style.display = 'none'
-              }}
-            />
-          </div>
-          <figcaption className="fig-caption">
-            <span>Fig. 4.{index + 2}</span>
-            <span>
-              {String(index + 2).padStart(2, '0')} / {String(total).padStart(2, '0')}
-            </span>
-          </figcaption>
-        </figure>
-
-        <div className="flex-1 flex flex-col pt-5 pb-6">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-3">
-            {project.category}
-          </span>
-
-          <h3 className="font-display text-lg font-bold text-ink leading-snug tracking-tight mb-3 group-hover:text-accent transition-colors duration-300">
-            {project.title}
-          </h3>
-
-          <p className="font-sans text-sm text-ink-soft leading-relaxed mb-5 flex-1">
-            {project.description}
-          </p>
-
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex flex-wrap gap-x-3 gap-y-1">
-              {project.tags.slice(0, 3).map((tag) => (
-                <span
-                  key={tag}
-                  className="font-mono text-[9px] uppercase tracking-[0.12em] text-ink-faint"
-                >
-                  [{tag}]
-                </span>
-              ))}
+      <Tilt3D className="h-full" intensity={8} scale={1.03}>
+        <div className="group relative h-full flex flex-col card-glow">
+          <figure className="relative">
+            <div className="aspect-[16/10] overflow-hidden bg-bg-subtle">
+              <img
+                src={project.image}
+                alt={project.title}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                onError={(e) => {
+                  ;(e.target as HTMLImageElement).style.display = 'none'
+                }}
+              />
             </div>
-            {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 font-mono text-xs text-ink-faint group-hover:text-accent transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-label={`Open ${project.title}`}
-              >
-                ↗
-              </a>
-            )}
+            <figcaption className="fig-caption">
+              <span>Fig. 4.{index + 2}</span>
+              <span>
+                {String(index + 2).padStart(2, '0')} / {String(total).padStart(2, '0')}
+              </span>
+            </figcaption>
+          </figure>
+
+          <div className="flex-1 flex flex-col pt-5 pb-6">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-3">
+              {project.category}
+            </span>
+
+            <h3 className="font-display text-lg font-bold text-ink leading-snug tracking-tight mb-3 group-hover:text-accent transition-colors duration-300">
+              {project.title}
+            </h3>
+
+            <p className="font-sans text-sm text-ink-soft leading-relaxed mb-5 flex-1">
+              {project.description}
+            </p>
+
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-wrap gap-x-3 gap-y-1">
+                {project.tags.slice(0, 3).map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-mono text-[9px] uppercase tracking-[0.12em] text-ink-faint"
+                  >
+                    [{tag}]
+                  </span>
+                ))}
+              </div>
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 font-mono text-xs text-ink-faint group-hover:text-accent transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-label={`Open ${project.title}`}
+                >
+                  ↗
+                </a>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </Tilt3D>
     </Reveal>
   )
 }

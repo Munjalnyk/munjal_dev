@@ -41,14 +41,14 @@ export default function Gallery() {
                 {galleryImages.map((img, i) => (
                   <figure
                     key={`${dup}-${i}`}
-                    className="shrink-0 w-[240px] sm:w-[280px] md:w-[340px] border border-line bg-bg-card"
+                    className="shrink-0 min-w-[160px] border border-line bg-bg-card"
                   >
-                    <div className="aspect-[4/3] overflow-hidden bg-bg-subtle">
+                    <div className="h-[200px] sm:h-[240px] md:h-[280px] overflow-hidden bg-bg-subtle flex items-center justify-center">
                       <img
                         src={img.src}
                         alt={img.alt}
                         loading="lazy"
-                        className="w-full h-full object-contain"
+                        className="h-full w-auto max-w-none"
                       />
                     </div>
                     <figcaption className="fig-caption">

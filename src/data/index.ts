@@ -8,14 +8,16 @@ export const personalInfo = {
     'IoT Developer',
     'PCB Design Expert',
   ],
-  bio: "Passionate engineer with 3+ years of experience designing and developing embedded systems, PCB hardware, and IoT solutions. My journey spans from SIL4 safety-critical railway signalling systems at Alstom to innovative IoT product development. Currently pursuing my Master's at UNSW Sydney.",
-  bioShort: 'Building reliable, precise, and innovative electronic systems — from safety-critical railway signalling to smart IoT devices.',
-  location: 'Sydney, NSW, Australia',
+  bio: "Engineers Australia graduate member with a positive Migration Skills Assessment in Electrical Engineering (233311). Two years at Alstom designing SIL4 safety-critical railway signalling systems, plus hands-on IoT product development and embedded firmware. Currently pursuing a Master of Engineering Science at UNSW Sydney, specialising in Embedded Systems.",
+  bioShort:
+    'Building reliable, precise, and innovative electronic systems — from safety-critical railway signalling to smart IoT devices.',
+  location: 'Sydney, NSW 2146',
   status: 'Open to Opportunities',
   email: 'munjal@outlook.in',
   phone: '+61 420 932 011',
   linkedin: 'https://linkedin.com/in/munjalnyk',
   github: 'https://github.com/yorocoboy1',
+  website: 'https://www.munjal.dev',
   cvUrl: '/pdf/CV_Munjal_Nayak.pdf',
   heroimg: '/img/perfil.png',
   profileImg: '/img/hero.jpg',
@@ -32,38 +34,51 @@ export const experiences = [
     role: 'ETCS Application Engineer',
     company: 'Alstom',
     duration: '2023 — 2025',
-    location: 'India',
+    location: 'Bengaluru, India',
     description: 'SIL4 Railway Signalling · Onboard Systems · Data Configuration',
     bullets: [
-      'Developed proficiency in European Vital Computer (EVC) systems — EVC 3, EVC 2 Plus, EVC 2',
-      'Owned onboard data system configuration and validation for MRTS trains in the NCRTC Delhi project',
-      'Prepared and validated SIL4 safety-compliant configuration data for EVC modules',
-      'Conducted system integration testing, structured fault investigation, and root-cause analysis',
+      'Configured and validated onboard ETCS data for 3 European Vital Computer platforms (EVC3, EVC2 Plus, EVC2) with 100% SIL4 compliance',
+      'Reduced data configuration errors across 2 major railway projects serving 50,000+ daily passengers',
+      'Led EVC3 data engineering for NCRTC MRTS Delhi and EVC2/EVC2P integration for Madrid ETCS Programme',
+      'Authored technical documentation and knowledge transfer sessions, reducing engineer onboarding time',
     ],
     tags: ['SIL4', 'ETCS', 'Railway', 'EVC', 'Data Eng'],
+  },
+  {
+    type: 'work' as const,
+    role: 'Data Cable Technician',
+    company: 'GM Cables',
+    duration: 'Dec 2025 — Jan 2026',
+    location: 'Sydney, Australia',
+    description: 'Cat6A · Fiber Optics · Structured Cabling · Network Infrastructure',
+    bullets: [
+      'Installed and certified CAT5e/CAT6/CAT6A and fiber optic cabling for enterprise clients with 100% TIA/EIA compliance',
+      'Deployed structured cabling infrastructure for schools, offices, and telecom facilities across Sydney metro',
+      'Managed cable pathways maintaining optimal bend radii while adhering to safety standards in active construction zones',
+    ],
+    tags: ['Cat6A', 'Fiber Optics', 'Cabling', 'Network'],
   },
   {
     type: 'work' as const,
     role: 'IoT Developer Intern',
     company: 'Eleics Design',
     duration: '2023',
-    location: 'India',
+    location: 'Gandhinagar, India',
     description: 'ESP32 · Firmware · IoT Product Development',
     bullets: [
-      'Designed and developed embedded software for ESP32-based systems using ESP-IDF',
-      "Contributed to 'WiDrive' product with PCB design, firmware, and system integration",
-      'Implemented industrial communication protocols — SPI, UART, MQTT, HTTP, USB',
-      'Collaborated in design reviews and product reliability improvements',
+      'Developed production-ready embedded firmware for ESP32-based IoT products using ESP-IDF, contributing to 2 commercial product releases',
+      "Led firmware development for 'WiDrive' product — PCB design input, protocol implementation, and system integration testing",
+      'Implemented industrial communication protocols (SPI, UART, MQTT, HTTP, USB) with <100ms latency for real-time IIoT applications',
     ],
     tags: ['ESP32', 'ESP-IDF', 'PCB Design', 'MQTT', 'IoT'],
   },
   {
     type: 'education' as const,
-    role: 'Master of Electrical Engineering',
+    role: 'Master of Engineering Science (Electrical)',
     company: 'UNSW Sydney',
-    duration: '2025 — 2027',
+    duration: '2026 — Present',
     location: 'Sydney, Australia',
-    description: 'Specialising in Embedded Systems and Hardware Design',
+    description: 'Specialisation in Embedded Systems · Expected Graduation: 2028',
     bullets: [],
     tags: ['Embedded Systems', 'Hardware Design'],
   },
@@ -73,7 +88,7 @@ export const experiences = [
     company: 'PDEU',
     duration: '2019 — 2023',
     location: 'India',
-    description: 'CGPA 8.71/10 · Final Project 10/10 · 2 Research Papers',
+    description: 'CGPA 8.71/10 · Final Project 10/10 · 2 Research Papers · Washington Accord (NBA)',
     bullets: [],
     tags: ['Power Electronics', 'Signal Processing', 'ML'],
   },
@@ -83,7 +98,6 @@ export const skillCategories = [
   {
     category: 'Core Hardware',
     icon: 'Cpu',
-    color: '#00e5ff',
     skills: [
       'PCB & Schematic Design',
       'Component Selection & Derating',
@@ -91,13 +105,12 @@ export const skillCategories = [
       'SMD Soldering & Rework',
       'Oscilloscope & Mixed-Signal Debug',
       'Power Electronics',
-      'Hardware Bring-up',
+      'Hardware Bring-up & Reverse Eng.',
     ],
   },
   {
     category: 'Embedded Systems',
     icon: 'Code2',
-    color: '#7c3aed',
     skills: [
       'Embedded C (Bare-metal)',
       'ESP32 (ESP-IDF)',
@@ -111,7 +124,6 @@ export const skillCategories = [
   {
     category: 'Systems & Networking',
     icon: 'Server',
-    color: '#10b981',
     skills: [
       'Docker & Proxmox VE',
       'Ubuntu Server & Rocky Linux',
@@ -125,7 +137,6 @@ export const skillCategories = [
   {
     category: 'Safety & Quality',
     icon: 'Shield',
-    color: '#f59e0b',
     skills: [
       'SIL4 Safety Standards',
       'Configuration Management',
@@ -135,6 +146,51 @@ export const skillCategories = [
       'Requirements Traceability',
     ],
   },
+  {
+    category: 'Product & Project',
+    icon: 'ClipboardList',
+    skills: [
+      'Requirements Elicitation',
+      'Technical Specification',
+      'Documentation & Review',
+      'Cross-functional Coordination',
+      'Project Planning & Estimation',
+      'Stakeholder Communication',
+    ],
+  },
+  {
+    category: 'Communication',
+    icon: 'Users',
+    skills: [
+      'Clear Written & Verbal Comm.',
+      'Structured Problem Solving',
+      'Ownership Mindset',
+      'Independent & Team Work',
+      'IELTS Band 7 (English)',
+    ],
+  },
+]
+
+export const certifications = [
+  'IBM — Introduction to Cloud Computing',
+  'Microsoft — ML Models in Azure',
+  'Red Hat — Fundamentals of RHEL',
+  'MathWorks — Power Electronics Simulation',
+  'IBM — Git and GitHub',
+  'Keysight — Essential RF Power Measurements',
+  'IIT Bombay — Incubation & Entrepreneurship',
+  'UC Irvine — Raspberry Pi & Python',
+  'Coursera — Docker for Beginners',
+]
+
+export const licenses = [
+  'Unrestricted Car & Rider License',
+  'First Aid & CPR',
+  'Heavy Rigid (Learner)',
+  'Forklift & Order Picker',
+  'White Card',
+  'Blue Card (WWCC)',
+  'NDISWC',
 ]
 
 export const projects = [
@@ -142,7 +198,7 @@ export const projects = [
     title: 'NCRTC MRTS Delhi — EVC3 Onboard',
     category: 'Professional · Railway',
     description:
-      'Led onboard EVC3 engineering for MRTS trains in the National Capital Region Transport Corporation project — configuration data preparation, validation, and cross-functional coordination.',
+      'Led onboard EVC3 data engineering for MRTS trains in the NCRTC project — configuration data preparation, validation, and cross-functional coordination serving 50,000+ daily passengers.',
     tags: ['Onboard ETCS', 'Data Engineering', 'SIL4', 'EVC3'],
     accent: '#00e5ff',
     image: '/img/MRTS.jpeg',
@@ -164,7 +220,7 @@ export const projects = [
     title: 'IoT Smart Irrigation System',
     category: 'Smart Home · Agriculture',
     description:
-      'ESP32 + Home Assistant based smart irrigation system for soil moisture and temperature monitoring with automated per-plant watering schedules.',
+      'ESP32 + Home Assistant based smart irrigation for soil moisture and temperature monitoring with automated per-plant watering.',
     tags: ['ESP32', 'Home Assistant', 'Sensors', 'Automation'],
     accent: '#10b981',
     image: '/img/portfolio12.png',
@@ -175,7 +231,7 @@ export const projects = [
     title: '5-Level Multilevel Inverter',
     category: 'Power Electronics',
     description:
-      'Implemented a 5-level H-bridge multilevel inverter using 5 MOSFETs with STM32 control, focused on switching strategy optimisation and efficiency.',
+      '5-level H-bridge inverter using 5 MOSFETs with STM32 control. Focused on switching strategy optimisation, efficiency, and safe low-power operation.',
     tags: ['STM32', 'Power Electronics', 'MOSFETs', 'PWM'],
     accent: '#f59e0b',
     image: '/img/portfolio4.jpg',

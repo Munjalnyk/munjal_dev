@@ -36,6 +36,8 @@ export default {
         ticker: 'ticker 32s linear infinite',
         'gallery-scroll': 'ticker 55s linear infinite',
         blink: 'blink 1.1s steps(2, start) infinite',
+        'float-slow': 'float-slow 20s ease-in-out infinite',
+        'float-reverse': 'float-reverse 25s ease-in-out infinite',
       },
       keyframes: {
         ticker: {
@@ -45,6 +47,14 @@ export default {
         blink: {
           '0%, 49%': { opacity: '1' },
           '50%, 100%': { opacity: '0' },
+        },
+        'float-slow': {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(30px, -40px)' },
+        },
+        'float-reverse': {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(-25px, 35px)' },
         },
       },
     },
