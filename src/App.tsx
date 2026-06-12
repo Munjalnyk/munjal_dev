@@ -24,7 +24,7 @@ function dismissHtmlPreloader() {
 
 export default function App() {
   const [isReady, setIsReady] = useState(false)
-  const [showBanner, setShowBanner] = useState(true)
+  const [showBanner, setShowBanner] = useState(false)
 
   useEffect(() => {
     if (typeof window.__onAppReady === 'function') {
