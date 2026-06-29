@@ -13,6 +13,7 @@
     --rowb:#f0f2f4;
     --paper:#ffffff;
     --page:#e9eaec;
+    --paid:#167943;
     --serif:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
     --sans:Helvetica,Arial,sans-serif;
   }
@@ -35,7 +36,7 @@
   .masthead{display:flex;justify-content:space-between;align-items:flex-start;}
   .brand h1{font-size:36px;font-weight:700;letter-spacing:1px;line-height:1;}
   .brand .tagline{font-family:var(--sans);font-size:9px;color:var(--muted);margin-top:7px;letter-spacing:.3px;}
-  .doctype{font-size:40px;font-weight:700;color:var(--hair);letter-spacing:2px;line-height:1;}
+  .doctype{font-size:40px;font-weight:700;color:var(--hair);letter-spacing:2px;line-height:1;text-align:right;}
   .rule{border:0;border-top:1.5px solid var(--ink);margin:22px 0 0;}
 
   /* ---- parties + meta ---- */
@@ -76,6 +77,13 @@
   }
   .total-band .lbl{font-weight:700;letter-spacing:.5px;}
   .total-band .big{font-size:22px;font-weight:700;}
+  .total-band.paid{background:var(--paid);}
+  .paid-stamp{
+    display:inline-block;font-family:var(--sans);font-size:14px;font-weight:700;
+    color:var(--paid);border:2px solid var(--paid);border-radius:5px;
+    padding:3px 10px;letter-spacing:1px;margin-top:8px;
+  }
+  .paid-note{font-family:var(--sans);font-size:10px;color:var(--paid);text-align:right;margin-top:7px;}
 
   /* ---- footer ---- */
   .footer{display:flex;justify-content:space-between;gap:40px;margin-top:54px;}
@@ -126,7 +134,7 @@
       <h1>NAYAK</h1>
       <div class="tagline">Building a Better Future</div>
     </div>
-    <div class="doctype">INVOICE</div>
+    <div class="doctype">INVOICE<br><span class="paid-stamp">PAID</span></div>
   </div>
   <hr class="rule">
 
@@ -178,10 +186,11 @@
     <div class="totals">
       <div class="row"><span>Subtotal</span><span class="amt">$407.00</span></div>
       <div class="row"><span>GST (0%)</span><span class="amt">$0.00</span></div>
-      <div class="total-band">
-        <span class="lbl">TOTAL DUE</span>
+      <div class="total-band paid">
+        <span class="lbl">TOTAL PAID</span>
         <span class="big">$407.00</span>
       </div>
+      <div class="paid-note">Payment received 29 June 2026 &mdash; thank you.</div>
     </div>
   </div>
 
@@ -229,6 +238,7 @@
     </div>
     <div class="thanks">
       Thank you for your business.<br>
+      munjal.dev/invoice/INV-2026-0601
     </div>
     <div class="spacer"></div>
   </div>
