@@ -85,17 +85,42 @@ export default function Skills() {
             </span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-            {certifications.map((cert, i) => (
-              <div
-                key={i}
-                className="flex items-baseline gap-4 border-b border-line py-3 transition-colors duration-200 hover:bg-bg-subtle"
-              >
-                <span className="font-mono text-[9px] text-accent shrink-0">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="font-sans text-sm text-ink-soft">{cert}</span>
-              </div>
-            ))}
+            {certifications.map((cert, i) => {
+              const content = (
+                <>
+                  <span className="font-mono text-[9px] text-accent shrink-0">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-sans text-sm text-ink-soft group-hover:text-ink transition-colors duration-200">
+                    {cert.name}
+                  </span>
+                  {cert.href && (
+                    <span className="ml-auto shrink-0 font-mono text-xs text-ink-faint group-hover:text-accent transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                      ↗
+                    </span>
+                  )}
+                </>
+              )
+
+              return cert.href ? (
+                <a
+                  key={i}
+                  href={cert.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-baseline gap-4 border-b border-line py-3 transition-colors duration-200 hover:bg-bg-subtle"
+                >
+                  {content}
+                </a>
+              ) : (
+                <div
+                  key={i}
+                  className="group flex items-baseline gap-4 border-b border-line py-3 transition-colors duration-200 hover:bg-bg-subtle"
+                >
+                  {content}
+                </div>
+              )
+            })}
           </div>
         </Reveal>
 

@@ -171,16 +171,20 @@ export const skillCategories = [
   },
 ]
 
-export const certifications = [
-  'IBM — Introduction to Cloud Computing',
-  'Microsoft — ML Models in Azure',
-  'Red Hat — Fundamentals of RHEL',
-  'MathWorks — Power Electronics Simulation',
-  'IBM — Git and GitHub',
-  'Keysight — Essential RF Power Measurements',
-  'IIT Bombay — Incubation & Entrepreneurship',
-  'UC Irvine — Raspberry Pi & Python',
-  'Coursera — Docker for Beginners',
+// To make a certificate clickable, fill in `href`:
+//   - external link:   href: 'https://www.credly.com/badges/xxxx'
+//   - uploaded image:  put the file in assets/img/ and use  href: '/img/cert-ibm.jpg'
+// Leave href as '' to keep it as plain (non-clickable) text.
+export const certifications: { name: string; href: string }[] = [
+  { name: 'IBM — Introduction to Cloud Computing', href: '' },
+  { name: 'Microsoft — ML Models in Azure', href: '' },
+  { name: 'Red Hat — Fundamentals of RHEL', href: '' },
+  { name: 'MathWorks — Power Electronics Simulation', href: '' },
+  { name: 'IBM — Git and GitHub', href: '' },
+  { name: 'Keysight — Essential RF Power Measurements', href: '' },
+  { name: 'IIT Bombay — Incubation & Entrepreneurship', href: '' },
+  { name: 'UC Irvine — Raspberry Pi & Python', href: '' },
+  { name: 'Coursera — Docker for Beginners', href: '' },
 ]
 
 export const licenses = [
