@@ -176,7 +176,7 @@ export const skillCategories = [
 //   - uploaded image:  put the file in assets/img/ and use  href: '/img/cert-ibm.jpg'
 // Leave href as '' to keep it as plain (non-clickable) text.
 export const certifications: { name: string; href: string }[] = [
-  { name: 'IBM — Introduction to Cloud Computing', href: '' },
+  { name: 'IBM — Introduction to Cloud Computing', href: 'https://www.coursera.org/account/accomplishments/verify/P5TFJ5VGMZNZ' },
   { name: 'Microsoft — ML Models in Azure', href: '' },
   { name: 'Red Hat — Fundamentals of RHEL', href: '' },
   { name: 'MathWorks — Power Electronics Simulation', href: '' },
