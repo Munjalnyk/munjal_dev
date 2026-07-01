@@ -185,6 +185,13 @@ export const certifications: { name: string; href: string }[] = [
   { name: 'IIT Bombay — Incubation & Entrepreneurship', href: 'https://nptel.ac.in/noc/E_Certificate/NPTEL22DE08S2304054102133049' },
   { name: 'UC Irvine — Raspberry Pi & Python', href: 'https://www.coursera.org/account/accomplishments/verify/X54A2VMJH4KU' },
   { name: 'Coursera — Docker for Beginners', href: 'https://www.coursera.org/account/accomplishments/verify/5SGXHWD6ZSKN' },
+  { name: 'IBM - Introduction to Web Development with HTML, CSS, JavaScript', href: 'https://www.coursera.org/account/accomplishments/verify/95Z75C2F3EUY'},
+  { name:'IBM - Introduction to Cloud Computing', href:'https://www.coursera.org/account/accomplishments/verify/P5TFJ5VGMZNZ'},
+  { name:'MathWorks - Control Design Onramp with Simulink', href:'https://matlabacademy.mathworks.com/progress/share/certificate.html?id=5d659ff9-e483-41f8-97b5-59b59267f3af&'},
+  { name:'MathWorks - Stateflow OnRamp', href:'https://matlabacademy.mathworks.com/progress/share/certificate.html?id=19122f07-7880-43e5-ad55-e6b804767d4c&'},
+  { name:'MathWorks - Circuit Simulation OnRamp', href:'https://matlabacademy.mathworks.com/progress/share/certificate.html?id=e0a53dd3-8dd2-4167-9227-64fe17eccc3d&'},
+  { name:'MathWorks - Simulink OnRamp', href:'https://matlabacademy.mathworks.com/progress/share/certificate.html?id=af09b1b9-a640-4968-b233-5281a48e9306&'},
+
 ]
 
 export const licenses = [
