@@ -177,14 +177,14 @@ export const skillCategories = [
 // Leave href as '' to keep it as plain (non-clickable) text.
 export const certifications: { name: string; href: string }[] = [
   { name: 'IBM — Introduction to Cloud Computing', href: 'https://www.coursera.org/account/accomplishments/verify/P5TFJ5VGMZNZ' },
-  { name: 'Microsoft — ML Models in Azure', href: '' },
-  { name: 'Red Hat — Fundamentals of RHEL', href: '' },
-  { name: 'MathWorks — Power Electronics Simulation', href: '' },
-  { name: 'IBM — Git and GitHub', href: '' },
+  { name: 'Microsoft — ML Models in Azure', href: 'https://www.coursera.org/account/accomplishments/verify/2VP3AR98M2UL' },
+  { name: 'Red Hat — Fundamentals of RHEL', href: 'https://www.coursera.org/account/accomplishments/verify/34CQM3PWCQMC' },
+  { name: 'MathWorks — Power Electronics Simulation', href: 'https://matlabacademy.mathworks.com/progress/share/certificate.html?id=e21ecce9-d9a7-4b68-aeb8-05d5fb55d644&' },
+  { name: 'IBM — Git and GitHub', href: 'https://www.coursera.org/account/accomplishments/verify/FE4RTE243ZZE' },
   { name: 'Keysight — Essential RF Power Measurements', href: '' },
-  { name: 'IIT Bombay — Incubation & Entrepreneurship', href: '' },
-  { name: 'UC Irvine — Raspberry Pi & Python', href: '' },
-  { name: 'Coursera — Docker for Beginners', href: '' },
+  { name: 'IIT Bombay — Incubation & Entrepreneurship', href: 'https://nptel.ac.in/noc/E_Certificate/NPTEL22DE08S2304054102133049' },
+  { name: 'UC Irvine — Raspberry Pi & Python', href: 'https://www.coursera.org/account/accomplishments/verify/X54A2VMJH4KU' },
+  { name: 'Coursera — Docker for Beginners', href: 'https://www.coursera.org/account/accomplishments/verify/5SGXHWD6ZSKN' },
 ]
 
 export const licenses = [
