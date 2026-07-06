@@ -1,0 +1,21 @@
+{
+  "invref": "INV-2026-0602",
+  "issue_iso": "2026-07-05",
+  "net_days": 5,
+  "client_ref": "Ashneil Dutt",
+  "items": [
+    [
+      "Support work assistance \u2014 Client: Ashneil Dutt",
+      13,
+      31.0
+    ],
+    [
+      "Transport cost",
+      3,
+      1.0
+    ]
+  ],
+  "gst_rate": 0,
+  "paid": true,
+  "paid_date": "6 July 2026"
+}
