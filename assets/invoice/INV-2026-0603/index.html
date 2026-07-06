@@ -3,34 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invoice INV-2026-0603 — Nayak</title>
+<title>Invoice INV-2026-0603 — NAYAK</title>
 <meta name="robots" content="noindex">
 <style>
   :root{
-    --ink:#1a1c1e;
-    --muted:#808488;
-    --hair:#dfe1e4;
-    --rowb:#f0f2f4;
-    --paper:#ffffff;
-    --page:#e9eaec;
-    --paid:#167943;
+    --ink:#1a1c1e;--muted:#808488;--hair:#dfe1e4;--rowb:#f0f2f4;
+    --paper:#fff;--page:#e9eaec;--paid:#167943;
     --serif:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
     --sans:Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{
-    background:var(--page);
-    font-family:var(--serif);
-    color:var(--ink);
-    -webkit-font-smoothing:antialiased;
-  }
-  .sheet{
-    background:var(--paper);
-    max-width:820px;
-    margin:32px auto;
-    padding:56px 60px 40px;
-    box-shadow:0 2px 24px rgba(0,0,0,.08);
-  }
+  html,body{background:var(--page);font-family:var(--serif);color:var(--ink);-webkit-font-smoothing:antialiased;}
+  .sheet{background:var(--paper);max-width:820px;margin:32px auto;padding:56px 60px 40px;box-shadow:0 2px 24px rgba(0,0,0,.08);}
   .masthead{display:flex;justify-content:space-between;align-items:flex-start;}
   .brand h1{font-size:36px;font-weight:700;letter-spacing:1px;line-height:1;}
   .brand .tagline{font-family:var(--sans);font-size:9px;color:var(--muted);margin-top:7px;letter-spacing:.3px;}
@@ -40,12 +24,9 @@
   .label{font-family:var(--sans);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;}
   .billed .name{font-weight:700;margin-top:8px;}
   .billed p{margin-top:2px;line-height:1.5;}
-  .meta{margin-left:auto;}
-  .meta table{border-collapse:collapse;}
-  .meta td{padding:3px 0;vertical-align:top;}
-  .meta td.k{padding-right:28px;}
-  .meta td.v{text-align:right;white-space:nowrap;}
-  .meta td.v strong{font-weight:700;}
+  .meta{margin-left:auto;} .meta table{border-collapse:collapse;}
+  .meta td{padding:3px 0;vertical-align:top;} .meta td.k{padding-right:28px;}
+  .meta td.v{text-align:right;white-space:nowrap;} .meta td.v strong{font-weight:700;}
   table.items{width:100%;border-collapse:collapse;margin-top:44px;}
   table.items thead td{font-family:var(--sans);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;padding-bottom:10px;}
   table.items thead{border-bottom:1.5px solid var(--ink);}
@@ -54,18 +35,19 @@
   table.items tbody td{padding:13px 12px;}
   table.items tbody tr td:first-child{padding-left:12px;}
   table.items .num{text-align:right;white-space:nowrap;}
-  table.items tbody{border-bottom:1px solid var(--hair);}
-  .col-desc{width:55%;}
+  table.items tbody{border-bottom:1px solid var(--hair);} .col-desc{width:55%;}
   .totals-wrap{display:flex;justify-content:flex-end;margin-top:26px;}
   .totals{width:320px;}
   .totals .row{display:flex;justify-content:space-between;padding:6px 0;color:var(--muted);}
   .totals .row .amt{color:var(--ink);}
   .total-band{background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:16px 18px;margin-top:10px;}
-  .total-band .lbl{font-weight:700;letter-spacing:.5px;}
-  .total-band .big{font-size:22px;font-weight:700;}
+  .total-band .lbl{font-weight:700;letter-spacing:.5px;} .total-band .big{font-size:22px;font-weight:700;}
+  .total-band.paid{background:var(--paid);}
+  .paid-stamp{display:inline-block;font-family:var(--sans);font-size:14px;font-weight:700;color:var(--paid);border:2px solid var(--paid);border-radius:5px;padding:3px 10px;letter-spacing:1px;margin-top:8px;}
+  .paid-note{font-family:var(--sans);font-size:10px;color:var(--paid);text-align:right;margin-top:7px;}
+  .hidden{display:none;}
   .footer{display:flex;justify-content:space-between;gap:40px;margin-top:54px;}
-  .pay table{border-collapse:collapse;}
-  .pay td{padding:3px 0;vertical-align:middle;}
+  .pay table{border-collapse:collapse;} .pay td{padding:3px 0;vertical-align:middle;}
   .pay td.k{padding-right:18px;color:var(--ink);}
   .copyfield{display:inline-flex;align-items:center;gap:8px;}
   .copybtn{font-family:var(--sans);border:1px solid var(--hair);background:var(--paper);color:var(--muted);font-size:10px;padding:2px 8px;border-radius:4px;cursor:pointer;transition:all .15s ease;line-height:1.6;}
@@ -75,152 +57,104 @@
   .footrule{border:0;border-top:.6px solid var(--hair);margin:48px 0 0;}
   .bottom{display:flex;justify-content:space-between;align-items:center;margin-top:18px;}
   .qr{display:flex;flex-direction:column;align-items:flex-start;gap:5px;}
-  .qr img{width:84px;height:84px;display:block;}
-  .qr .cap{font-family:var(--sans);font-size:7px;color:var(--muted);}
+  .qr img{width:84px;height:84px;display:block;} .qr .cap{font-family:var(--sans);font-size:7px;color:var(--muted);}
   .thanks{flex:1;text-align:center;color:var(--muted);font-size:11px;line-height:1.7;}
   .bottom .spacer{width:84px;}
-  @media print{
-    html,body{background:#fff;}
-    .sheet{box-shadow:none;margin:0;max-width:none;padding:40px;}
-    .copybtn{display:none;}
-  }
+  @media print{html,body{background:#fff;}.sheet{box-shadow:none;margin:0;max-width:none;padding:40px;}.copybtn{display:none;}}
   @media (max-width:640px){
-    .sheet{padding:32px 22px;margin:0;}
-    .masthead{flex-direction:column;gap:14px;}
+    .sheet{padding:32px 22px;margin:0;} .masthead{flex-direction:column;gap:14px;}
     .parties,.footer,.bottom{flex-direction:column;gap:24px;}
-    .meta,.remit{margin-left:0;text-align:left;}
-    .meta td.v{text-align:left;}
-    .totals{width:100%;}
-    .bottom .spacer{display:none;}
-    .thanks{text-align:left;}
+    .meta,.remit{margin-left:0;text-align:left;} .meta td.v{text-align:left;}
+    .totals{width:100%;} .bottom .spacer{display:none;} .thanks{text-align:left;}
   }
 </style>
 </head>
 <body>
 <div class="sheet">
-
   <div class="masthead">
-    <div class="brand">
-      <h1>NAYAK</h1>
-      <div class="tagline">Building a Better Future</div>
-    </div>
-    <div class="doctype">INVOICE</div>
+    <div class="brand"><h1>NAYAK</h1><div class="tagline">Building a Better Future</div></div>
+    <div class="doctype">INVOICE<span id="paidStamp" class="hidden"><br><span class="paid-stamp">PAID</span></span></div>
   </div>
   <hr class="rule">
-
   <div class="parties">
     <div class="billed">
       <div class="label">Billed To</div>
       <div class="name">Western Sydney Community Support Services</div>
-      <p>Attn: Riaz Azam</p>
-      <p>2/29&ndash;33 Joyce Street, Pendle Hill</p>
-      <p>Sydney NSW 2145</p>
+      <p>Attn: Riaz Azam</p><p>2/29&ndash;33 Joyce Street, Pendle Hill</p><p>Sydney NSW 2145</p>
     </div>
-    <div class="meta">
-      <table>
-        <tr><td class="k label">Invoice No</td><td class="v">INV-2026-0603</td></tr>
-        <tr><td class="k label">Issue Date</td><td class="v">5 July 2026</td></tr>
-        <tr><td class="k label">Due Date</td><td class="v"><strong>10 July 2026</strong></td></tr>
-        <tr><td class="k label">Terms</td><td class="v">Net 5</td></tr>
-        <tr><td class="k label">Client Ref</td><td class="v">Dhruv Sadasivam</td></tr>
-      </table>
-    </div>
+    <div class="meta"><table>
+      <tr><td class="k label">Invoice No</td><td class="v">INV-2026-0603</td></tr>
+      <tr><td class="k label">Issue Date</td><td class="v">5 July 2026</td></tr>
+      <tr><td class="k label">Due Date</td><td class="v"><strong>10 July 2026</strong></td></tr>
+      <tr><td class="k label">Terms</td><td class="v">Net 5</td></tr>
+      <tr><td class="k label">Client Ref</td><td class="v">Dhruv Sadasivam</td></tr>
+    </table></div>
   </div>
-
   <table class="items">
-    <thead>
-      <tr>
-        <td class="col-desc">Description</td>
-        <td class="num">Qty</td>
-        <td class="num">Rate</td>
-        <td class="num">Amount</td>
-      </tr>
-    </thead>
+    <thead><tr>
+      <td class="col-desc">Description</td><td class="num">Qty</td>
+      <td class="num">Rate</td><td class="num">Amount</td>
+    </tr></thead>
     <tbody>
-      <tr>
-        <td>Support work assistance &mdash; Client: Dhruv Sadasivam</td>
-        <td class="num">5</td>
-        <td class="num">$35.00</td>
-        <td class="num">$175.00</td>
-      </tr>
+      <tr><td>Support work assistance &mdash; Client: Dhruv Sadasivam</td><td class="num">5</td><td class="num">$35.00</td><td class="num">$175.00</td></tr>
     </tbody>
   </table>
-
-  <div class="totals-wrap">
-    <div class="totals">
-      <div class="row"><span>Subtotal</span><span class="amt">$175.00</span></div>
-      <div class="row"><span>GST (0%)</span><span class="amt">$0.00</span></div>
-      <div class="total-band">
-        <span class="lbl">TOTAL DUE</span>
-        <span class="big">$175.00</span>
-      </div>
+  <div class="totals-wrap"><div class="totals">
+    <div class="row"><span>Subtotal</span><span class="amt">$175.00</span></div>
+    <div class="row"><span>GST (0%)</span><span class="amt">$0.00</span></div>
+    <div class="total-band" id="totalBand">
+      <span class="lbl" id="totalLabel">TOTAL DUE</span>
+      <span class="big">$175.00</span>
     </div>
-  </div>
-
+    <div class="paid-note hidden" id="paidNote"></div>
+  </div></div>
   <div class="footer">
     <div class="pay">
       <div class="label">Payment Details</div>
       <table style="margin-top:8px;">
         <tr><td class="k">Bank</td><td>Macquarie Bank</td></tr>
-        <tr>
-          <td class="k">BSB</td>
-          <td><span class="copyfield"><span>182-182</span>
-            <button class="copybtn" data-copy="182182">Copy</button></span></td>
-        </tr>
-        <tr>
-          <td class="k">Account</td>
-          <td><span class="copyfield"><span>030828875</span>
-            <button class="copybtn" data-copy="030828875">Copy</button></span></td>
-        </tr>
-        <tr>
-          <td class="k">Name</td>
-          <td><span class="copyfield"><span>Munjal Jitendra Nayak</span>
-            <button class="copybtn" data-copy="Munjal Jitendra Nayak">Copy</button></span></td>
-        </tr>
+        <tr><td class="k">BSB</td><td><span class="copyfield"><span>182-182</span><button class="copybtn" data-copy="182182">Copy</button></span></td></tr>
+        <tr><td class="k">Account</td><td><span class="copyfield"><span>030828875</span><button class="copybtn" data-copy="030828875">Copy</button></span></td></tr>
+        <tr><td class="k">Name</td><td><span class="copyfield"><span>Munjal Jitendra Nayak</span><button class="copybtn" data-copy="Munjal Jitendra Nayak">Copy</button></span></td></tr>
         <tr><td class="k">Reference</td><td>INV-2026-0603</td></tr>
       </table>
     </div>
     <div class="remit">
       <div class="label">Remit To</div>
       <div style="margin-top:8px;">
-        Nayak<br>
-        13 Binalong Rd<br>
-        Pendle Hill, Sydney<br>
-        NSW 2145<br>
-        ABN 58 154 162 568<br>
-        munjal@outlook.in
+        Nayak<br>13 Binalong Rd<br>Pendle Hill, Sydney<br>NSW 2145<br>ABN 58 154 162 568<br>munjal@outlook.in
       </div>
     </div>
   </div>
-
   <hr class="footrule">
   <div class="bottom">
     <div class="qr">
-      <img src="data:image/png;base64,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" alt="QR code to invoice online" width="84" height="84">
+      <img src="data:image/png;base64,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" alt="QR code to invoice online" width="84" height="84">
       <div class="cap">Scan to view invoice online</div>
     </div>
-    <div class="thanks">
-      Thank you for your business.<br>
-      ABN 58 154 162 568
-    </div>
+    <div class="thanks">Thank you for your business.<br>ABN 58 154 162 568</div>
     <div class="spacer"></div>
   </div>
-
 </div>
-
 <script>
+  /* PAID STATUS is set by the generator: paid=true, date below. */
+  var INVOICE = { paid: true, paidDate: "6 July 2026" };
+  (function(){
+    if(!INVOICE.paid) return;
+    document.getElementById('paidStamp').classList.remove('hidden');
+    var b=document.getElementById('totalBand'); b.classList.add('paid');
+    document.getElementById('totalLabel').textContent='TOTAL PAID';
+    var n=document.getElementById('paidNote'); n.classList.remove('hidden');
+    n.innerHTML='Payment received '+INVOICE.paidDate+' &mdash; thank you.';
+  })();
   document.querySelectorAll('.copybtn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var text = btn.getAttribute('data-copy');
-      navigator.clipboard.writeText(text).then(function(){
-        var original = btn.textContent;
-        btn.textContent = 'Copied';
-        btn.classList.add('copied');
-        setTimeout(function(){ btn.textContent = original; btn.classList.remove('copied'); }, 1400);
-      }).catch(function(){ btn.textContent = 'Press Ctrl+C'; });
+    btn.addEventListener('click',function(){
+      navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function(){
+        var o=btn.textContent;btn.textContent='Copied';btn.classList.add('copied');
+        setTimeout(function(){btn.textContent=o;btn.classList.remove('copied');},1400);
+      }).catch(function(){btn.textContent='Press Ctrl+C';});
     });
   });
 </script>
-
 </body>
 </html>
