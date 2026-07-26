@@ -60,7 +60,23 @@
   .qr img{width:84px;height:84px;display:block;} .qr .cap{font-family:var(--sans);font-size:7px;color:var(--muted);}
   .thanks{flex:1;text-align:center;color:var(--muted);font-size:11px;line-height:1.7;}
   .bottom .spacer{width:84px;}
-  @media print{html,body{background:#fff;}.sheet{box-shadow:none;margin:0;max-width:none;padding:40px;}.copybtn{display:none;}}
+  /* ---- top toolbar (Download / Print) ---- */
+  .toolbar{
+    position:sticky;top:0;z-index:10;
+    display:flex;justify-content:flex-end;gap:10px;
+    background:var(--ink);padding:10px 20px;
+    box-shadow:0 1px 6px rgba(0,0,0,.25);
+  }
+  .tbtn{
+    font-family:var(--sans);font-size:13px;font-weight:600;
+    display:inline-flex;align-items:center;gap:7px;
+    background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);
+    padding:8px 14px;border-radius:7px;cursor:pointer;text-decoration:none;
+    transition:all .15s ease;
+  }
+  .tbtn:hover{background:#fff;color:var(--ink);border-color:#fff;}
+  .tbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media print{html,body{background:#fff;}.sheet{box-shadow:none;margin:0;max-width:none;padding:40px;}.copybtn{display:none;}.toolbar{display:none;}}
   @media (max-width:640px){
     .sheet{padding:32px 22px;margin:0;} .masthead{flex-direction:column;gap:14px;}
     .parties,.footer,.bottom{flex-direction:column;gap:24px;}
@@ -70,6 +86,16 @@
 </style>
 </head>
 <body>
+<div class="toolbar">
+  <a class="tbtn" href="INV-2026-0604.pdf" download="INV-2026-0604.pdf" id="dlBtn">
+    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download PDF
+  </a>
+  <button class="tbtn" id="printBtn">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Print
+  </button>
+</div>
 <div class="sheet">
   <div class="masthead">
     <div class="brand"><h1>NAYAK</h1><div class="tagline">Building a Better Future</div></div>
@@ -139,8 +165,26 @@
   </div>
 </div>
 <script>
-  /* PAID STATUS is set by the generator: paid=false, date below. */
-  var INVOICE = { paid: false, paidDate: "" };
+  /* PAID STATUS is set by the generator: paid=true, date below. */
+  var INVOICE = { paid: true, paidDate: "26 July 2026", pdf: "INV-2026-0604.pdf" };
+
+  /* Hide the Download button if the PDF isn't on the server. */
+  fetch(INVOICE.pdf, {method:'HEAD'}).then(function(r){
+    if(!r.ok) document.getElementById('dlBtn').style.display='none';
+  }).catch(function(){ document.getElementById('dlBtn').style.display='none'; });
+
+  /* Print: prefer the LaTeX PDF (crisper output); fall back to printing the page. */
+  document.getElementById('printBtn').addEventListener('click', function(){
+    fetch(INVOICE.pdf, {method:'HEAD'}).then(function(r){
+      if(!r.ok) throw 0;
+      var f=document.createElement('iframe');
+      f.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
+      f.src=INVOICE.pdf;
+      f.onload=function(){ try{ f.contentWindow.focus(); f.contentWindow.print(); }
+                            catch(e){ window.print(); } };
+      document.body.appendChild(f);
+    }).catch(function(){ window.print(); });
+  });
   (function(){
     if(!INVOICE.paid) return;
     document.getElementById('paidStamp').classList.remove('hidden');
