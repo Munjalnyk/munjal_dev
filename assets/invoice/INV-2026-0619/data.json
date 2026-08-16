@@ -1,0 +1,26 @@
+{
+  "invref": "INV-2026-0619",
+  "issue_iso": "2026-08-16",
+  "net_days": 5,
+  "client_ref": "Sumitha Suganthaseelan",
+  "items": [
+    [
+      "Support work assistance \u2014 14 Aug 2026 \u2014 Client: Sumitha Suganthaseelan",
+      3,
+      31.0
+    ],
+    [
+      "Transport \u2014 14 Aug 2026",
+      76,
+      1.0
+    ],
+    [
+      "Shift associated cost",
+      1,
+      69.0
+    ]
+  ],
+  "gst_rate": 0,
+  "paid": false,
+  "paid_date": ""
+}
