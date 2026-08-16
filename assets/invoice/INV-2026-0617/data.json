@@ -1,0 +1,36 @@
+{
+  "invref": "INV-2026-0617",
+  "issue_iso": "2026-08-16",
+  "net_days": 5,
+  "client_ref": "Dhruv Sadasivam",
+  "items": [
+    [
+      "Support work assistance \u2014 11 Aug 2026 \u2014 Client: Dhruv Sadasivam",
+      2,
+      31.0
+    ],
+    [
+      "Support work assistance \u2014 12 Aug 2026 \u2014 Client: Dhruv Sadasivam",
+      4,
+      31.0
+    ],
+    [
+      "Transport \u2014 12 Aug 2026",
+      6,
+      1.0
+    ],
+    [
+      "Support work assistance \u2014 13 Aug 2026 \u2014 Client: Dhruv Sadasivam",
+      3,
+      31.0
+    ],
+    [
+      "Support work assistance \u2014 14 Aug 2026 \u2014 Client: Dhruv Sadasivam",
+      3,
+      31.0
+    ]
+  ],
+  "gst_rate": 0,
+  "paid": false,
+  "paid_date": ""
+}
